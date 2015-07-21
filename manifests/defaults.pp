@@ -1,6 +1,6 @@
 # apply defaults
 #
-class logrotate::defaults{
+class logrotate::defaults {
 
   case $::osfamily {
     'Debian': {

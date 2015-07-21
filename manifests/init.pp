@@ -4,7 +4,8 @@ class logrotate (
   $hieramerge        = false,
   $manage_cron_daily = true,
   $package           = 'logrotate',
-  $rules             = {}
+  $rules             = {},
+  $config            = {}
 ) {
 
   case $ensure {
@@ -33,6 +34,10 @@ class logrotate (
         mode   => '0555',
         source => 'puppet:///modules/logrotate/etc/cron.daily/logrotate',
     }
+  }
+  if $config {
+    $custom_config = {'/etc/logrotate.conf' => $config}
+    create_resources('logrotate::conf', $custom_config)
   }
 
   include ::logrotate::defaults
