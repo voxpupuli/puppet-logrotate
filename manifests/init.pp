@@ -5,7 +5,7 @@ class logrotate (
   $manage_cron_daily = true,
   $package           = 'logrotate',
   $rules             = {},
-  $config            = {}
+  $config            = undef,
 ) {
 
   case $ensure {
@@ -35,7 +35,8 @@ class logrotate (
         source => 'puppet:///modules/logrotate/etc/cron.daily/logrotate',
     }
   }
-  if $config {
+
+  if is_hash($config) {
     $custom_config = {'/etc/logrotate.conf' => $config}
     create_resources('logrotate::conf', $custom_config)
   }
