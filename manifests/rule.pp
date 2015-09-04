@@ -295,7 +295,7 @@ define logrotate::rule(
   }
 
   # Interpolate any variables that might be integers into strings for futer parser compatibility
-  # Add an arbitrary character to the string to stop puppet-lint complaining
+  # Add an arbitrary character to the string to stop puppet-lint complaining
   # Any better ideas greatfully received
   validate_re("X${maxage}", ['^Xundef$', '^X\d+$'], "Logrotate::Conf[${name}]: maxage must be an integer")
   validate_re("X${minsize}", ['^Xundef$', '^X\d+[kMG]?$'], "Logrotate::Conf[${name}]: minsize must match /\\d+[kMG]?/")
