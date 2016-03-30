@@ -4,8 +4,8 @@ group :test do
   gem "rake"
   gem "puppet", ENV['PUPPET_VERSION'] || '~> 4.2.0'
   gem "rspec", '< 3.2.0'
-  gem "rspec-puppet", :git => 'https://github.com/rodjek/rspec-puppet.git'
-  gem "puppetlabs_spec_helper"
+  gem "rspec-puppet", '>= 2.1.0'
+  gem "puppetlabs_spec_helper", '>= 0.10'
   gem "metadata-json-lint"
   gem "rspec-puppet-facts"
 end
