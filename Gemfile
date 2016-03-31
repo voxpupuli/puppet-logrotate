@@ -1,7 +1,11 @@
 source "https://rubygems.org"
 
 group :test do
-  gem "rake"
+  if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('1.9.3') then
+    gem "rake"
+  else
+    gem "rake", "< 11.0.0"
+  end
   gem "puppet", ENV['PUPPET_VERSION'] || '~> 4.2.0'
   gem "rspec", '< 3.2.0'
   gem "rspec-puppet", '>= 2.1.0'
