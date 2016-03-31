@@ -27,16 +27,20 @@ class logrotate::defaults{
         rotate       => '1',
       }
 
-      logrotate::rule {
-        'wtmp':
-          path        => '/var/log/wtmp',
-          create_mode => '0664',
-          rotate      => '1',
+      if !defined(Logrotate::Rule['wtmp']) {
+        logrotate::rule {
+          'wtmp':
+            path        => '/var/log/wtmp',
+            create_mode => '0664',
+            rotate      => '1',
+        }
       }
-      logrotate::rule {
-        'btmp':
-          path        => '/var/log/btmp',
-          create_mode => '0600',
+      if !defined(Logrotate::Rule['btmp']) {
+        logrotate::rule {
+          'btmp':
+            path        => '/var/log/btmp',
+            create_mode => '0600',
+        }
       }
     }
     'RedHat': {
@@ -53,16 +57,22 @@ class logrotate::defaults{
         rotate       => '1',
       }
 
-      logrotate::rule {
-        'wtmp':
-          path        => '/var/log/wtmp',
-          create_mode => '0664',
-          missingok   => false,
-          minsize     => '1M';
-        'btmp':
-          path        => '/var/log/btmp',
-          create_mode => '0600',
-          minsize     => '1M';
+      if !defined(Logrotate::Rule['wtmp']) {
+        logrotate::rule {
+          'wtmp':
+            path        => '/var/log/wtmp',
+            create_mode => '0664',
+            missingok   => false,
+            minsize     => '1M';
+        }
+      }
+      if !defined(Logrotate::Rule['btmp']) {
+        logrotate::rule {
+          'btmp':
+            path        => '/var/log/btmp',
+            create_mode => '0600',
+            minsize     => '1M';
+        }
       }
     }
     'SuSE': {
@@ -81,15 +91,21 @@ class logrotate::defaults{
         size         => '400k'
       }
 
-      logrotate::rule {
-        'wtmp':
-          path         => '/var/log/wtmp',
-          create_mode  => '0664',
-          missingok    => false;
-        'btmp':
-          path         => '/var/log/btmp',
-          create_mode  => '0600',
-          create_group => 'root';
+      if !defined(Logrotate::Rule['wtmp']) {
+        logrotate::rule {
+          'wtmp':
+            path         => '/var/log/wtmp',
+            create_mode  => '0664',
+            missingok    => false;
+        }
+      }
+      if !defined(Logrotate::Rule['btmp']) {
+        logrotate::rule {
+          'btmp':
+            path         => '/var/log/btmp',
+            create_mode  => '0600',
+            create_group => 'root';
+        }
       }
     }
     default: {
