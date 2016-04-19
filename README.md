@@ -154,6 +154,14 @@ class { '::logrotate':
 }
 ```
 
+This example loads an [SELinux](http://selinuxproject.org/page/Main_Page) policy that may avoid permissions issues on Red Hat systems where SELinux is in Enforcing mode. This feature depends on [jfryman/selinux](https://forge.puppet.com/jfryman/selinux). Defaults to `false`.
+
+```puppet
+class { '::logrotate':
+  ensure  => present,
+  selinux => true,
+}
+```
 
 ## Examples
 

@@ -6,12 +6,17 @@ class logrotate (
   $package           = 'logrotate',
   $rules             = {},
   $config            = undef,
+  $selinux           = false,
 ) {
 
   include ::logrotate::install
   include ::logrotate::config
   include ::logrotate::rules
   include ::logrotate::defaults
+
+  if ($selinux) {
+    include ::logrotate::selinux
+  }
 
   anchor{'logrotate_begin':}->
   Class['::logrotate::install']->
