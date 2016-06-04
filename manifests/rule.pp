@@ -161,7 +161,8 @@ define logrotate::rule(
                         $su              = 'UNDEFINED',
                         $su_owner        = 'UNDEFINED',
                         $su_group        = 'UNDEFINED',
-                        $uncompresscmd   = 'UNDEFINED'
+                        $uncompresscmd   = 'UNDEFINED',
+                        $use_concat      = undef,
                         ) {
 
   #############################################################################
@@ -370,6 +371,12 @@ define logrotate::rule(
 
   include ::logrotate
 
+  if $use_concat != undef {
+    $_use_concat = $use_concat
+  } else {
+    $_use_concat = $logrotate::use_concat
+  }
+
   case $rotate_every {
     'hour', 'hourly': {
       include ::logrotate::hourly
@@ -388,12 +395,32 @@ define logrotate::rule(
     }
   }
 
-  file { $rule_path:
-    ensure  => $ensure,
-    owner   => $logrotate::root_user,
-    group   => $logrotate::root_group,
-    mode    => '0444',
-    content => template('logrotate/etc/logrotate.d/rule.erb'),
-    require => Class['::logrotate::config'],
+  if $_use_concat {
+    concat { $rule_path:
+      ensure         => $ensure,
+      owner          => $logrotate::root_user,
+      group          => $logrotate::root_group,
+      mode           => '0444',
+      ensure_newline => false,
+    }
+    concat::fragment { "${rule_path}_header":
+      target  => $rule_path,
+      order   => '00',
+      content => "# THIS FILE IS AUTOMATICALLY DISTRIBUTED BY PUPPET.  ANY CHANGES WILL BE\n# OVERWRITTEN.\n\n",
+    }
+    concat::fragment { "${rule_path}_body":
+      target  => $rule_path,
+      order   => '99',
+      content => template('logrotate/etc/logrotate.d/rule.erb'),
+    }
+  } else {
+    file { $rule_path:
+      ensure  => $ensure,
+      owner   => $logrotate::root_user,
+      group   => $logrotate::root_group,
+      mode    => '0444',
+      content => template('logrotate/etc/logrotate.d/rule.erb'),
+      require => Class['::logrotate::config'],
+    }
   }
 }
