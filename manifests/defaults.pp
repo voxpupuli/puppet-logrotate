@@ -5,15 +5,15 @@ class logrotate::defaults{
   case $::osfamily {
     'Debian': {
 
-      if !defined( Logrotate::Conf['/etc/logrotate.conf'] ) {
+      if !defined( Logrotate::Conf[$logrotate::logrotate_conf] ) {
         case $::lsbdistcodename {
           'trusty': {
-            logrotate::conf {'/etc/logrotate.conf':
+            logrotate::conf {$logrotate::logrotate_conf:
               su_group => 'syslog',
             }
           }
           default: {
-            logrotate::conf {'/etc/logrotate.conf': }
+            logrotate::conf {$logrotate::logrotate_conf: }
           }
         }
       }
@@ -41,8 +41,8 @@ class logrotate::defaults{
       }
     }
     'Gentoo': {
-      if !defined( Logrotate::Conf['/etc/logrotate.conf'] ) {
-        logrotate::conf {'/etc/logrotate.conf':
+      if !defined( Logrotate::Conf[$logrotate::logrotate_conf] ) {
+        logrotate::conf {$logrotate::logrotate_conf:
           dateext  => true,
           compress => true,
           ifempty  => false,
@@ -76,8 +76,8 @@ class logrotate::defaults{
       }
     }
     'RedHat': {
-      if !defined( Logrotate::Conf['/etc/logrotate.conf'] ) {
-        logrotate::conf {'/etc/logrotate.conf': }
+      if !defined( Logrotate::Conf[$logrotate::logrotate_conf] ) {
+        logrotate::conf {$logrotate::logrotate_conf: }
       }
 
       Logrotate::Rule {
@@ -106,8 +106,8 @@ class logrotate::defaults{
       }
     }
     'SuSE': {
-      if !defined( Logrotate::Conf['/etc/logrotate.conf'] ) {
-        logrotate::conf {'/etc/logrotate.conf': }
+      if !defined( Logrotate::Conf[$logrotate::logrotate_conf] ) {
+        logrotate::conf {$logrotate::logrotate_conf: }
       }
 
       Logrotate::Rule {
@@ -138,8 +138,8 @@ class logrotate::defaults{
       }
     }
     default: {
-      if !defined( Logrotate::Conf['/etc/logrotate.conf'] ) {
-        logrotate::conf {'/etc/logrotate.conf': }
+      if !defined( Logrotate::Conf[$logrotate::logrotate_conf] ) {
+        logrotate::conf {$logrotate::logrotate_conf: }
       }
     }
   }
