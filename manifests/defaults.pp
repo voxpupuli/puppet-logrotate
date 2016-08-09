@@ -7,7 +7,7 @@ class logrotate::defaults{
 
       if !defined( Logrotate::Conf['/etc/logrotate.conf'] ) {
         case $::lsbdistcodename {
-          'trusty': {
+          'trusty', 'xenial': {
             logrotate::conf {'/etc/logrotate.conf':
               su_group => 'syslog',
             }
