@@ -6,7 +6,7 @@ describe 'logrotate::conf' do
       {
         osfamily: 'Debian',
         operatingsystem: 'Debian',
-        lsbdistcodename: 'Imaginary'
+        lsbdistrelease: 'Imaginary'
       }
     end
     context 'with an alphanumeric title' do

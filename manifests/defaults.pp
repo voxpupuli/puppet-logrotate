@@ -6,15 +6,12 @@ class logrotate::defaults{
     'Debian': {
 
       if !defined( Logrotate::Conf['/etc/logrotate.conf'] ) {
-        case $::lsbdistcodename {
-          'trusty': {
-            logrotate::conf {'/etc/logrotate.conf':
-              su_group => 'syslog',
-            }
+        if versioncmp($::lsbdistrelease, '14.04') >= 0 {
+          logrotate::conf {'/etc/logrotate.conf':
+            su_group => 'syslog',
           }
-          default: {
-            logrotate::conf {'/etc/logrotate.conf': }
-          }
+        } else {
+          logrotate::conf {'/etc/logrotate.conf': }
         }
       }
 
