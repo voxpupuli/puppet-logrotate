@@ -373,16 +373,16 @@ define logrotate::rule(
   case $rotate_every {
     'hour', 'hourly': {
       include ::logrotate::hourly
-      $rule_path = "/etc/logrotate.d/hourly/${name}"
+      $rule_path = "${logrotate::rules_configdir}/hourly/${name}"
 
-      file { "/etc/logrotate.d/${name}":
+      file { "${logrotate::rules_configdir}/${name}":
         ensure => absent,
       }
     }
     default: {
-      $rule_path = "/etc/logrotate.d/${name}"
+      $rule_path = "${logrotate::rules_configdir}/${name}"
 
-      file { "/etc/logrotate.d/hourly/${name}":
+      file { "${logrotate::rules_configdir}/hourly/${name}":
         ensure => absent,
       }
     }
@@ -390,8 +390,8 @@ define logrotate::rule(
 
   file { $rule_path:
     ensure  => $ensure,
-    owner   => 'root',
-    group   => 'root',
+    owner   => $logrotate::root_user,
+    group   => $logrotate::root_group,
     mode    => '0444',
     content => template('logrotate/etc/logrotate.d/rule.erb'),
     require => Class['::logrotate::config'],

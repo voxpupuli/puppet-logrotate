@@ -210,9 +210,9 @@ define logrotate::conf (
 
   if ($su_user != 'UNDEFINED') and ($su_group == 'UNDEFINED') {
     $_su_user  = $_su_user
-    $_su_group = 'root'
+    $_su_group = $logrotate::root_group
   } elsif ($su_user == 'UNDEFINED') and ($su_group != 'UNDEFINED') {
-    $_su_user  = 'root'
+    $_su_user  = $logrotate::root_user
     $_su_group = $su_group
   } else {
     $_su_user  = $su_user
@@ -238,8 +238,8 @@ define logrotate::conf (
 
   file { $name:
       ensure  => $ensure,
-      owner   => 'root',
-      group   => 'root',
+      owner   => $logrotate::root_user,
+      group   => $logrotate::root_group,
       mode    => '0444',
       content => template('logrotate/etc/logrotate.conf.erb'),
       require => Package['logrotate'],
