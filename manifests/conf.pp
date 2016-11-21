@@ -239,7 +239,7 @@ define logrotate::conf (
   file { $name:
       ensure  => $ensure,
       owner   => 'root',
-      group   => 'root',
+      group   => $::logrotate::rootgroup,
       mode    => '0444',
       content => template('logrotate/etc/logrotate.conf.erb'),
       require => Package['logrotate'],

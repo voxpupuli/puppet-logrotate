@@ -7,7 +7,7 @@ class logrotate::config{
   file{'/etc/logrotate.d':
     ensure => directory,
     owner  => 'root',
-    group  => 'root',
+    group  => $::logrotate::rootgroup,
     mode   => '0755',
   }
 
@@ -15,7 +15,7 @@ class logrotate::config{
     file{'/etc/cron.daily/logrotate':
       ensure => file,
       owner  => 'root',
-      group  => 'root',
+      group  => $::logrotate::rootgroup,
       mode   => '0555',
       source => 'puppet:///modules/logrotate/etc/cron.daily/logrotate',
     }
