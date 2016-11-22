@@ -8,6 +8,15 @@ class logrotate (
   $config            = undef,
 ) {
 
+  case $::osfamily {
+    'FreeBSD': {
+      $rootgroup = 'wheel'
+    }
+    default: {
+      $rootgroup = 'root'
+    }
+  }
+
   include ::logrotate::install
   include ::logrotate::config
   include ::logrotate::rules

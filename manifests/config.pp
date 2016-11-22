@@ -7,17 +7,30 @@ class logrotate::config{
   file{'/etc/logrotate.d':
     ensure => directory,
     owner  => 'root',
-    group  => 'root',
+    group  => $::logrotate::rootgroup,
     mode   => '0755',
   }
 
   if $manage_cron_daily {
-    file{'/etc/cron.daily/logrotate':
-      ensure => file,
-      owner  => 'root',
-      group  => 'root',
-      mode   => '0555',
-      source => 'puppet:///modules/logrotate/etc/cron.daily/logrotate',
+    case $::osfamily {
+      'FreeBSD': {
+        # FreeBSD does not have /etc/cron.daily
+        cron { 'logrotate_daily':
+          minute  => '1',
+          hour    => '0',
+          command => '/usr/local/sbin/logrotate /etc/logrotate.conf 2>&1',
+          user    => 'root',
+        }
+      }
+      default: {
+        file{'/etc/cron.daily/logrotate':
+          ensure => file,
+          owner  => 'root',
+          group  => $::logrotate::rootgroup,
+          mode   => '0555',
+          source => 'puppet:///modules/logrotate/etc/cron.daily/logrotate',
+        }
+      }
     }
   }
 

@@ -37,6 +37,35 @@ class logrotate::defaults{
         }
       }
     }
+    'FreeBSD': {
+      if !defined( Logrotate::Conf['/etc/logrotate.conf'] ) {
+        logrotate::conf {'/etc/logrotate.conf':
+          dateext  => true,
+          compress => true,
+          ifempty  => false,
+          mail     => false,
+          olddir   => false,
+        }
+      }
+
+      Logrotate::Rule {
+        missingok    => true,
+        rotate_every => 'week',
+        create       => true,
+        create_owner => 'root',
+        create_group => 'wheel',
+        rotate       => '5',
+      }
+
+      if !defined( Logrotate::Rule['wtmp'] ) {
+        logrotate::rule { 'wtmp':
+            path        => '/var/log/wtmp',
+            missingok   => false,
+            create_mode => '0664',
+            minsize     => '1M',
+        }
+      }
+    }
     'Gentoo': {
       if !defined( Logrotate::Conf['/etc/logrotate.conf'] ) {
         logrotate::conf {'/etc/logrotate.conf':
