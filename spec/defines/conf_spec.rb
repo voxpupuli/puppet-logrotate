@@ -16,16 +16,16 @@ describe 'logrotate::conf' do
         let(:params) { { ensure: 'absent' } }
 
         it do
-          should contain_file('/etc/logrotate.conf').with_ensure('absent')
+          is_expected.to contain_file('/etc/logrotate.conf').with_ensure('absent')
         end
       end
 
       it do
-        should contain_class('logrotate')
-        should contain_file('/etc/logrotate.conf').with('owner' => 'root',
-                                                        'group'   => 'root',
-                                                        'ensure'  => 'present',
-                                                        'mode'    => '0444').with_content(%r{\ninclude \/etc\/logrotate.d\n})
+        is_expected.to contain_class('logrotate')
+        is_expected.to contain_file('/etc/logrotate.conf').with('owner' => 'root',
+                                                                'group'   => 'root',
+                                                                'ensure'  => 'present',
+                                                                'mode'    => '0444').with_content(%r{\ninclude \/etc\/logrotate.d\n})
       end
 
       ###########################################################################
@@ -36,7 +36,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^compress$})
         end
       end
@@ -47,7 +47,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^nocompress$})
         end
       end
@@ -59,7 +59,7 @@ describe 'logrotate::conf' do
 
         it do
           expect do
-            should contain_file('/etc/logrotate.conf')
+            is_expected.to contain_file('/etc/logrotate.conf')
           end.to raise_error(Puppet::Error, %r{compress must be a boolean})
         end
       end
@@ -72,7 +72,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^compresscmd bzip2$})
         end
       end
@@ -85,7 +85,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^compressext .bz2$})
         end
       end
@@ -98,7 +98,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^compressoptions -9$})
         end
       end
@@ -111,7 +111,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf').with_content(%r{^copy$})
+          is_expected.to contain_file('/etc/logrotate.conf').with_content(%r{^copy$})
         end
       end
 
@@ -121,7 +121,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf').with_content(%r{^nocopy$})
+          is_expected.to contain_file('/etc/logrotate.conf').with_content(%r{^nocopy$})
         end
       end
 
@@ -132,7 +132,7 @@ describe 'logrotate::conf' do
 
         it do
           expect do
-            should contain_file('/etc/logrotate.conf')
+            is_expected.to contain_file('/etc/logrotate.conf')
           end.to raise_error(Puppet::Error, %r{copy must be a boolean})
         end
       end
@@ -145,7 +145,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^copytruncate$})
         end
       end
@@ -156,7 +156,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^nocopytruncate$})
         end
       end
@@ -168,7 +168,7 @@ describe 'logrotate::conf' do
 
         it do
           expect do
-            should contain_file('/etc/logrotate.conf')
+            is_expected.to contain_file('/etc/logrotate.conf')
           end.to raise_error(Puppet::Error, %r{copytruncate must be a boolean})
         end
       end
@@ -181,7 +181,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^create$})
         end
 
@@ -194,7 +194,7 @@ describe 'logrotate::conf' do
           end
 
           it do
-            should contain_file('/etc/logrotate.conf'). \
+            is_expected.to contain_file('/etc/logrotate.conf'). \
               with_content(%r{^create 0777$})
           end
 
@@ -208,7 +208,7 @@ describe 'logrotate::conf' do
             end
 
             it do
-              should contain_file('/etc/logrotate.conf'). \
+              is_expected.to contain_file('/etc/logrotate.conf'). \
                 with_content(%r{^create 0777 www-data})
             end
 
@@ -223,7 +223,7 @@ describe 'logrotate::conf' do
               end
 
               it do
-                should contain_file('/etc/logrotate.conf'). \
+                is_expected.to contain_file('/etc/logrotate.conf'). \
                   with_content(%r{^create 0777 www-data admin$})
               end
             end
@@ -240,7 +240,7 @@ describe 'logrotate::conf' do
 
             it do
               expect do
-                should contain_file('/etc/logrotate.conf')
+                is_expected.to contain_file('/etc/logrotate.conf')
               end.to raise_error(Puppet::Error, %r{create_group requires create_owner})
             end
           end
@@ -256,7 +256,7 @@ describe 'logrotate::conf' do
 
           it do
             expect do
-              should contain_file('/etc/logrotate.conf')
+              is_expected.to contain_file('/etc/logrotate.conf')
             end.to raise_error(Puppet::Error, %r{create_owner requires create_mode})
           end
         end
@@ -268,7 +268,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^nocreate$})
         end
 
@@ -282,7 +282,7 @@ describe 'logrotate::conf' do
 
           it do
             expect do
-              should contain_file('/etc/logrotate.conf')
+              is_expected.to contain_file('/etc/logrotate.conf')
             end.to raise_error(Puppet::Error, %r{create_mode requires create})
           end
         end
@@ -295,7 +295,7 @@ describe 'logrotate::conf' do
 
         it do
           expect do
-            should contain_file('/etc/logrotate.conf')
+            is_expected.to contain_file('/etc/logrotate.conf')
           end.to raise_error(Puppet::Error, %r{create must be a boolean})
         end
       end
@@ -308,7 +308,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^dateext$})
         end
       end
@@ -319,7 +319,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^nodateext$})
         end
       end
@@ -331,7 +331,7 @@ describe 'logrotate::conf' do
 
         it do
           expect do
-            should contain_file('/etc/logrotate.conf')
+            is_expected.to contain_file('/etc/logrotate.conf')
           end.to raise_error(Puppet::Error, %r{dateext must be a boolean})
         end
       end
@@ -344,7 +344,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^dateformat -%Y%m%d$})
         end
       end
@@ -357,7 +357,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^delaycompress$})
         end
       end
@@ -368,7 +368,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^nodelaycompress$})
         end
       end
@@ -380,7 +380,7 @@ describe 'logrotate::conf' do
 
         it do
           expect do
-            should contain_file('/etc/logrotate.conf')
+            is_expected.to contain_file('/etc/logrotate.conf')
           end.to raise_error(Puppet::Error, %r{delaycompress must be a boolean})
         end
       end
@@ -393,7 +393,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^extension \.foo$})
         end
       end
@@ -406,7 +406,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^ifempty$})
         end
       end
@@ -417,7 +417,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^notifempty$})
         end
       end
@@ -429,7 +429,7 @@ describe 'logrotate::conf' do
 
         it do
           expect do
-            should contain_file('/etc/logrotate.conf')
+            is_expected.to contain_file('/etc/logrotate.conf')
           end.to raise_error(Puppet::Error, %r{ifempty must be a boolean})
         end
       end
@@ -442,7 +442,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^mail test@example.com$})
         end
 
@@ -455,7 +455,7 @@ describe 'logrotate::conf' do
           end
 
           it do
-            should contain_file('/etc/logrotate.conf'). \
+            is_expected.to contain_file('/etc/logrotate.conf'). \
               with_content(%r{^mailfirst$})
           end
 
@@ -470,7 +470,7 @@ describe 'logrotate::conf' do
 
             it do
               expect do
-                should contain_file('/etc/logrotate.conf')
+                is_expected.to contain_file('/etc/logrotate.conf')
               end.to raise_error(Puppet::Error, %r{set both mailfirst and maillast})
             end
           end
@@ -485,7 +485,7 @@ describe 'logrotate::conf' do
           end
 
           it do
-            should contain_file('/etc/logrotate.conf'). \
+            is_expected.to contain_file('/etc/logrotate.conf'). \
               with_content(%r{^maillast$})
           end
         end
@@ -497,7 +497,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^nomail$})
         end
       end
@@ -510,7 +510,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^maxage 3$})
         end
       end
@@ -522,7 +522,7 @@ describe 'logrotate::conf' do
 
         it do
           expect do
-            should contain_file('/etc/logrotate.conf')
+            is_expected.to contain_file('/etc/logrotate.conf')
           end.to raise_error(Puppet::Error, %r{maxage must be an integer})
         end
       end
@@ -535,7 +535,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^minsize 100$})
         end
       end
@@ -546,7 +546,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^minsize 100k$})
         end
       end
@@ -557,7 +557,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^minsize 100M$})
         end
       end
@@ -568,7 +568,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^minsize 100G$})
         end
       end
@@ -580,7 +580,7 @@ describe 'logrotate::conf' do
 
         it do
           expect do
-            should contain_file('/etc/logrotate.conf')
+            is_expected.to contain_file('/etc/logrotate.conf')
           end.to raise_error(Puppet::Error, %r{minsize must match})
         end
       end
@@ -593,7 +593,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^missingok$})
         end
       end
@@ -604,7 +604,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^nomissingok$})
         end
       end
@@ -616,7 +616,7 @@ describe 'logrotate::conf' do
 
         it do
           expect do
-            should contain_file('/etc/logrotate.conf')
+            is_expected.to contain_file('/etc/logrotate.conf')
           end.to raise_error(Puppet::Error, %r{missingok must be a boolean})
         end
       end
@@ -629,7 +629,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^olddir \/var\/log\/old$})
         end
       end
@@ -640,7 +640,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^noolddir$})
         end
       end
@@ -653,7 +653,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{postrotate\n\s{2}\/bin\/true\nendscript})
         end
       end
@@ -666,7 +666,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{prerotate\n\s{2}\/bin\/true\nendscript})
         end
       end
@@ -679,7 +679,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{firstaction\n\s{2}\/bin\/true\nendscript})
         end
       end
@@ -692,7 +692,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{lastaction\n\s{2}\/bin\/true\nendscript})
         end
       end
@@ -705,7 +705,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^rotate 3$})
         end
       end
@@ -717,7 +717,7 @@ describe 'logrotate::conf' do
 
         it do
           expect do
-            should contain_file('/etc/logrotate.conf')
+            is_expected.to contain_file('/etc/logrotate.conf')
           end.to raise_error(Puppet::Error, %r{rotate must be an integer})
         end
       end
@@ -730,7 +730,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^daily$})
         end
       end
@@ -741,7 +741,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^weekly$})
         end
       end
@@ -752,7 +752,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^monthly$})
         end
       end
@@ -763,7 +763,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^yearly$})
         end
       end
@@ -775,7 +775,7 @@ describe 'logrotate::conf' do
 
         it do
           expect do
-            should contain_file('/etc/logrotate.conf')
+            is_expected.to contain_file('/etc/logrotate.conf')
           end.to raise_error(Puppet::Error, %r{invalid rotate_every value})
         end
       end
@@ -788,7 +788,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^size 100$})
         end
       end
@@ -799,7 +799,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^size 100k$})
         end
       end
@@ -810,7 +810,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^size 100M$})
         end
       end
@@ -821,7 +821,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^size 100G$})
         end
       end
@@ -833,7 +833,7 @@ describe 'logrotate::conf' do
 
         it do
           expect do
-            should contain_file('/etc/logrotate.conf')
+            is_expected.to contain_file('/etc/logrotate.conf')
           end.to raise_error(Puppet::Error, %r{size must match})
         end
       end
@@ -846,7 +846,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^sharedscripts$})
         end
       end
@@ -857,7 +857,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^nosharedscripts$})
         end
       end
@@ -869,7 +869,7 @@ describe 'logrotate::conf' do
 
         it do
           expect do
-            should contain_file('/etc/logrotate.conf')
+            is_expected.to contain_file('/etc/logrotate.conf')
           end.to raise_error(Puppet::Error, %r{sharedscripts must be a boolean})
         end
       end
@@ -882,7 +882,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^shred$})
         end
 
@@ -892,7 +892,7 @@ describe 'logrotate::conf' do
           end
 
           it do
-            should contain_file('/etc/logrotate.conf'). \
+            is_expected.to contain_file('/etc/logrotate.conf'). \
               with_content(%r{^shredcycles 3$})
           end
         end
@@ -904,7 +904,7 @@ describe 'logrotate::conf' do
 
           it do
             expect do
-              should contain_file('/etc/logrotate.conf')
+              is_expected.to contain_file('/etc/logrotate.conf')
             end.to raise_error(Puppet::Error, %r{shredcycles must be an integer})
           end
         end
@@ -916,7 +916,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^noshred$})
         end
       end
@@ -928,7 +928,7 @@ describe 'logrotate::conf' do
 
         it do
           expect do
-            should contain_file('/etc/logrotate.conf')
+            is_expected.to contain_file('/etc/logrotate.conf')
           end.to raise_error(Puppet::Error, %r{shred must be a boolean})
         end
       end
@@ -941,7 +941,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^start 0$})
         end
       end
@@ -953,7 +953,7 @@ describe 'logrotate::conf' do
 
         it do
           expect do
-            should contain_file('/etc/logrotate.conf')
+            is_expected.to contain_file('/etc/logrotate.conf')
           end.to raise_error(Puppet::Error, %r{start must be an integer})
         end
       end
@@ -966,7 +966,7 @@ describe 'logrotate::conf' do
         end
 
         it do
-          should contain_file('/etc/logrotate.conf'). \
+          is_expected.to contain_file('/etc/logrotate.conf'). \
             with_content(%r{^uncompresscmd bunzip2$})
         end
       end
@@ -977,7 +977,7 @@ describe 'logrotate::conf' do
 
       it do
         expect do
-          should contain_file('/etc/logrotate.d/foo bar')
+          is_expected.to contain_file('/etc/logrotate.d/foo bar')
         end.to raise_error(Puppet::Error, %r{namevar must be alphanumeric})
       end
     end
