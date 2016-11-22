@@ -33,12 +33,26 @@ class logrotate::hourly($ensure='present') {
       group  => $::logrotate::rootgroup,
       mode   => '0755',
   }
-  file { '/etc/cron.hourly/logrotate':
-      ensure  => $ensure,
-      owner   => 'root',
-      group   => $::logrotate::rootgroup,
-      mode    => '0555',
-      source  => 'puppet:///modules/logrotate/etc/cron.hourly/logrotate',
-      require => [ File['/etc/logrotate.d/hourly'], Package['logrotate'], ],
+
+  case $::osfamily {
+    'FreeBSD': {
+      # FreeBSD does not have /etc/cron.hourly
+      cron { 'logrotate_hourly':
+        minute  => '01',
+        hour    => '*',
+        command => '/usr/local/sbin/logrotate /etc/logrotate.d/hourly 2>&1',
+        user    => 'root',
+      }
+    }
+    default: {
+      file { '/etc/cron.hourly/logrotate':
+        ensure  => $ensure,
+        owner   => 'root',
+        group   => $::logrotate::rootgroup,
+        mode    => '0555',
+        source  => 'puppet:///modules/logrotate/etc/cron.hourly/logrotate',
+        require => [ File['/etc/logrotate.d/hourly'], Package['logrotate'], ],
+      }
+    }
   }
 }
