@@ -1,6 +1,8 @@
 # logrotate config
 class logrotate::config{
 
+  assert_private()
+
   $manage_cron_daily = $::logrotate::manage_cron_daily
   $config            = $::logrotate::config
 
