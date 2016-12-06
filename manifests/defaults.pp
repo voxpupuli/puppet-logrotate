@@ -2,16 +2,18 @@
 #
 class logrotate::defaults{
 
+  include ::logrotate::params
+
   case $::osfamily {
     'Debian': {
 
-      if !defined( Logrotate::Conf['/etc/logrotate.conf'] ) {
+      if !defined( Logrotate::Conf[$logrotate::logrotate_conf] ) {
         if versioncmp($::lsbdistrelease, '14.04') >= 0 {
-          logrotate::conf {'/etc/logrotate.conf':
+          logrotate::conf {$logrotate::logrotate_conf:
             su_group => 'syslog',
           }
         } else {
-          logrotate::conf {'/etc/logrotate.conf': }
+          logrotate::conf {$logrotate::logrotate_conf: }
         }
       }
 
@@ -26,8 +28,8 @@ class logrotate::defaults{
 
       if !defined( Logrotate::Rule['wtmp'] ) {
         logrotate::rule { 'wtmp':
-            path        => '/var/log/wtmp',
-            create_mode => '0664',
+          path        => '/var/log/wtmp',
+          create_mode => '0664',
         }
       }
       if !defined( Logrotate::Rule['btmp'] ) {
@@ -38,8 +40,8 @@ class logrotate::defaults{
       }
     }
     'Gentoo': {
-      if !defined( Logrotate::Conf['/etc/logrotate.conf'] ) {
-        logrotate::conf {'/etc/logrotate.conf':
+      if !defined( Logrotate::Conf[$logrotate::logrotate_conf] ) {
+        logrotate::conf {$logrotate::logrotate_conf:
           dateext  => true,
           compress => true,
           ifempty  => false,
@@ -59,22 +61,22 @@ class logrotate::defaults{
 
       if !defined( Logrotate::Rule['wtmp'] ) {
         logrotate::rule { 'wtmp':
-            path        => '/var/log/wtmp',
-            missingok   => false,
-            create_mode => '0664',
-            minsize     => '1M',
+          path        => '/var/log/wtmp',
+          missingok   => false,
+          create_mode => '0664',
+          minsize     => '1M',
         }
       }
       if !defined( Logrotate::Rule['btmp'] ) {
         logrotate::rule { 'btmp':
-            path        => '/var/log/btmp',
-            create_mode => '0600',
+          path        => '/var/log/btmp',
+          create_mode => '0600',
         }
       }
     }
     'RedHat': {
-      if !defined( Logrotate::Conf['/etc/logrotate.conf'] ) {
-        logrotate::conf {'/etc/logrotate.conf': }
+      if !defined( Logrotate::Conf[$logrotate::logrotate_conf] ) {
+        logrotate::conf {$logrotate::logrotate_conf: }
       }
 
       Logrotate::Rule {
@@ -88,23 +90,23 @@ class logrotate::defaults{
 
       if !defined( Logrotate::Rule['wtmp'] ) {
         logrotate::rule { 'wtmp':
-            path        => '/var/log/wtmp',
-            create_mode => '0664',
-            missingok   => false,
-            minsize     => '1M',
+          path        => '/var/log/wtmp',
+          create_mode => '0664',
+          missingok   => false,
+          minsize     => '1M',
         }
       }
       if !defined( Logrotate::Rule['btmp'] ) {
         logrotate::rule { 'btmp':
-            path        => '/var/log/btmp',
-            create_mode => '0600',
-            minsize     => '1M',
+          path        => '/var/log/btmp',
+          create_mode => '0600',
+          minsize     => '1M';
         }
       }
     }
     'SuSE': {
-      if !defined( Logrotate::Conf['/etc/logrotate.conf'] ) {
-        logrotate::conf {'/etc/logrotate.conf': }
+      if !defined( Logrotate::Conf[$logrotate::logrotate_conf] ) {
+        logrotate::conf {$logrotate::logrotate_conf: }
       }
 
       Logrotate::Rule {
@@ -120,23 +122,23 @@ class logrotate::defaults{
 
       if !defined( Logrotate::Rule['wtmp'] ) {
         logrotate::rule { 'wtmp':
-            path        => '/var/log/wtmp',
-            create_mode => '0664',
-            missingok   => false,
+          path        => '/var/log/wtmp',
+          create_mode => '0664',
+          missingok   => false;
         }
       }
 
       if !defined( Logrotate::Rule['btmp'] ) {
         logrotate::rule { 'btmp':
-            path         => '/var/log/btmp',
-            create_mode  => '0600',
-            create_group => 'root',
+          path         => '/var/log/btmp',
+          create_mode  => '0600',
+          create_group => 'root',
         }
       }
     }
     default: {
-      if !defined( Logrotate::Conf['/etc/logrotate.conf'] ) {
-        logrotate::conf {'/etc/logrotate.conf': }
+      if !defined( Logrotate::Conf[$logrotate::logrotate_conf] ) {
+        logrotate::conf {$logrotate::logrotate_conf: }
       }
     }
   }
