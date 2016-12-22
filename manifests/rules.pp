@@ -1,15 +1,8 @@
 # apply user-defined rules
-class logrotate::rules{
+class logrotate::rules ($rules = $::logrotate::rules){
 
-  $hieramerge = $::logrotate::hieramerge
-  $rules      = $::logrotate::rules
+  assert_private()
 
-  if $hieramerge {
-    $_rules = hiera_hash('logrotate::rules', $rules)
-  } else {
-    $_rules = $rules
-  }
-
-  create_resources('logrotate::rule', $_rules)
+  create_resources('logrotate::rule', $rules)
 
 }

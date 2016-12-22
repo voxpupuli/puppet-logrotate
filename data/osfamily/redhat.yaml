@@ -1,0 +1,11 @@
+---
+logrotate::defaults::rules:
+  wtmp:
+    path: '/var/log/wtmp'
+    missingok: false
+    create_mode: '0664'
+    minsize: '1M'
+  btmp:
+    path: '/var/log/btmp'
+    create_mode: '0600'
+    minsize: '1M'

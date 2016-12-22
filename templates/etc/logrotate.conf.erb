@@ -9,56 +9,59 @@
     rpath = @path
   end
 
-  if scope.to_hash.has_key?('_create')
-    if @_create == 'create'
-      opts << [@_create, @create_mode, @create_owner, @create_group].reject { |r|
-        r == 'UNDEFINED'
-      }.join(' ')
-    else
-      opts << @_create
+  if @create
+    opts << ['create', @create_mode, @create_owner, @create_group].reject { |r|
+      r == nil
+    }.join(' ')
+  elsif @create == false
+    opts << 'nocreate'
+  end
+
+  %w(compress copy copytruncate delaycompress
+  dateext missingok sharedscripts shred).each do |bool_opt|
+    if (scope.to_hash.has_key?(bool_opt) && scope.to_hash[bool_opt] != nil)
+      opts << (scope.to_hash[bool_opt] == true ? '':'no') + bool_opt
     end
   end
 
-  [
-    '_compress', '_copy', '_copytruncate', '_delaycompress', '_dateext',
-    '_mail', '_missingok', '_olddir', '_sharedscripts', '_ifempty', '_maillast',
-    '_mailfirst', '_shred', '_rotate_every'
-  ].each do |bool|
-    opts << scope.to_hash[bool] if scope.to_hash.has_key?(bool)
+  if (scope.to_hash.has_key?('ifempty') && scope.to_hash['ifempty'] != nil)
+    opts << (scope.to_hash['ifempty'] == true ? '':'not') + 'ifempty'
   end
 
-  [
-    'compresscmd', 'compressext', 'compressoptions', 'dateformat', 'extension',
-    'maxage', 'minsize', 'rotate', 'size', 'shredcycles', 'start',
-    'uncompresscmd'
-  ].each do |key|
-    value = scope.to_hash[key]
-    opts << "#{key} #{value}" if value != 'UNDEFINED'
+  %w(_mail _olddir mail_when _rotate_every).each do |param|
+    opts << scope.to_hash[param] if scope.to_hash.has_key?(param)
   end
+
+  %w(compresscmd compressext compressoptions dateformat extension maxage minsize rotate size shredcycles start uncompresscmd).each do |key|
+    value = scope.to_hash[key]
+    opts << "#{key} #{value}" if value != nil
+  end
+
+  opts.sort!
 -%>
 
 <% opts.each do |opt| -%>
 <%= opt %>
 <% end -%>
-<% if @_su_user != 'UNDEFINED' and @_su_group != 'UNDEFINED' -%>
+<% if @_su_user != nil and @_su_group != nil -%>
 su <%= @_su_user %> <%= @_su_group %>
 <% end -%>
-<% if @postrotate != 'UNDEFINED' -%>
+<% if @postrotate != nil -%>
 postrotate
   <%= @postrotate %>
 endscript
 <% end -%>
-<% if @prerotate != 'UNDEFINED' -%>
+<% if @prerotate != nil -%>
 prerotate
   <%= @prerotate %>
 endscript
 <% end -%>
-<% if @firstaction != 'UNDEFINED' -%>
+<% if @firstaction != nil -%>
 firstaction
   <%= @firstaction %>
 endscript
 <% end -%>
-<% if @lastaction != 'UNDEFINED' -%>
+<% if @lastaction != nil -%>
 lastaction
   <%= @lastaction %>
 endscript
