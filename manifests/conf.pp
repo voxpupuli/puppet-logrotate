@@ -28,6 +28,7 @@ define logrotate::conf (
     $mailfirst       = 'UNDEFINED',
     $maillast        = 'UNDEFINED',
     $maxage          = 'UNDEFINED',
+    $maxsize         = 'UNDEFINED',
     $minsize         = 'UNDEFINED',
     $missingok       = 'UNDEFINED',
     $olddir          = 'UNDEFINED',
@@ -175,6 +176,7 @@ define logrotate::conf (
   # Add an arbitrary character to the string to stop puppet-lint complaining
   # Any better ideas greatfully received
   validate_re("X${maxage}", ['^XUNDEFINED$', '^X\d+$'], "Logrotate::Conf[${name}]: maxage must be an integer")
+  validate_re("X${maxsize}", ['^XUNDEFINED$', '^X\d+[kMG]?$'], "Logrotate::Conf[${name}]: maxsize must match /\\d+[kMG]?/")
   validate_re("X${minsize}", ['^XUNDEFINED$', '^X\d+[kMG]?$'], "Logrotate::Conf[${name}]: minsize must match /\\d+[kMG]?/")
   validate_re("X${rotate}", ['^XUNDEFINED$', '^X\d+$'], "Logrotate::Conf[${name}]: rotate must be an integer")
   validate_re("X${size}", ['^XUNDEFINED$', '^X\d+[kMG]?$'], "Logrotate::Conf[${name}]: size must match /\\d+[kMG]?/")
