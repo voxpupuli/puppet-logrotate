@@ -14,7 +14,7 @@ exceptions:
 
  * Booleans are now used instead of the `<something>`/`no<something>` pattern.
    e.g. `copy` == `copy => true`, `nocopy` == `copy => false`.
- * `create` and it's three optional arguments have been split into seperate
+ * `create` and its three optional arguments have been split into seperate
    parameters documented below.
  * Instead of 'daily', 'weekly', 'monthly' or 'yearly', there is a
    `rotate_every` parameter (see documentation below).
