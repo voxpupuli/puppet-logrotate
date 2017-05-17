@@ -65,4 +65,6 @@ endscript
 <% end -%>
 
 # configurable file rotations
-include <%= @rules_configdir %>
+<% @rules_configdir.each do |dir| -%>
+include <%= dir %>
+<% end -%>
