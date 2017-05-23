@@ -2,8 +2,8 @@
 class logrotate::selinux {
   if $::osfamily == 'RedHat' {
     selinux::module { 'site-logrotate':
-      ensure => 'present',
-      source => 'puppet:///modules/logrotate/site-logrotate.te',
+      ensure    => 'present',
+      source_te => 'puppet:///modules/logrotate/site-logrotate.te',
     }
   }
 }
