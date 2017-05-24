@@ -14,7 +14,7 @@ exceptions:
 
  * Booleans are now used instead of the `<something>`/`no<something>` pattern.
    e.g. `copy` == `copy => true`, `nocopy` == `copy => false`.
- * `create` and it's three optional arguments have been split into seperate
+ * `create` and its three optional arguments have been split into seperate
    parameters documented below.
  * Instead of 'daily', 'weekly', 'monthly' or 'yearly', there is a
    `rotate_every` parameter (see documentation below).
@@ -139,7 +139,7 @@ Further details about these options can be found by reading `man 8 logrotate`.
 ## logrotate
 
 You may, optionally, declare the main `::logrotate` class to adjust some of the
-defaults that are used when intalling the logrotate package and creating the
+defaults that are used when installing the logrotate package and creating the
 main `/etc/logrotate.conf` configuration file.
 
 This example will ensure that the logrotate package is latest and that the `dateext` and `compress` options are added to the defaults for a node.

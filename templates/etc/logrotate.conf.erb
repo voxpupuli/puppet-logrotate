@@ -12,7 +12,7 @@
   if scope.to_hash.has_key?('_create')
     if @_create == 'create'
       opts << [@_create, @create_mode, @create_owner, @create_group].reject { |r|
-        r == 'undef'
+        r == 'UNDEFINED'
       }.join(' ')
     else
       opts << @_create
@@ -29,40 +29,40 @@
 
   [
     'compresscmd', 'compressext', 'compressoptions', 'dateformat', 'extension',
-    'maxage', 'minsize', 'rotate', 'size', 'shredcycles', 'start',
+    'maxage', 'minsize', 'maxsize', 'rotate', 'size', 'shredcycles', 'start',
     'uncompresscmd'
   ].each do |key|
     value = scope.to_hash[key]
-    opts << "#{key} #{value}" if value != 'undef'
+    opts << "#{key} #{value}" if value != 'UNDEFINED'
   end
 -%>
 
 <% opts.each do |opt| -%>
 <%= opt %>
 <% end -%>
-<% if @_su_user != 'undef' and @_su_group != 'undef' -%>
+<% if @_su_user != 'UNDEFINED' and @_su_group != 'UNDEFINED' -%>
 su <%= @_su_user %> <%= @_su_group %>
 <% end -%>
-<% if @postrotate != 'undef' -%>
+<% if @postrotate != 'UNDEFINED' -%>
 postrotate
   <%= @postrotate %>
 endscript
 <% end -%>
-<% if @prerotate != 'undef' -%>
+<% if @prerotate != 'UNDEFINED' -%>
 prerotate
   <%= @prerotate %>
 endscript
 <% end -%>
-<% if @firstaction != 'undef' -%>
+<% if @firstaction != 'UNDEFINED' -%>
 firstaction
   <%= @firstaction %>
 endscript
 <% end -%>
-<% if @lastaction != 'undef' -%>
+<% if @lastaction != 'UNDEFINED' -%>
 lastaction
   <%= @lastaction %>
 endscript
 <% end -%>
 
 # configurable file rotations
-include /etc/logrotate.d
+include <%= @rules_configdir %>

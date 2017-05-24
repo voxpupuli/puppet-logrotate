@@ -4,25 +4,19 @@ class logrotate::config{
   $manage_cron_daily = $::logrotate::manage_cron_daily
   $config            = $::logrotate::config
 
-  file{'/etc/logrotate.d':
+  file{ $::logrotate::rules_configdir:
     ensure => directory,
-    owner => 'root',
-    group => 'root',
+    owner  => $logrotate::root_user,
+    group  => $logrotate::root_group,
     mode   => '0755',
   }
 
   if $manage_cron_daily {
-    file{'/etc/cron.daily/logrotate':
-      ensure => file,
-      owner => 'root',
-      group => 'root',
-      mode   => '0555',
-      source => 'puppet:///modules/logrotate/etc/cron.daily/logrotate',
-    }
+    logrotate::cron { 'daily': }
   }
 
   if is_hash($config) {
-    $custom_config = {'/etc/logrotate.conf' => $config}
+    $custom_config = {"${logrotate::logrotate_conf}" => $config}
     create_resources('logrotate::conf', $custom_config)
   }
 

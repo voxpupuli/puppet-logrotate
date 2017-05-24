@@ -1,3 +1,9 @@
+2016-05-30 Release 1.4.0
+- workaround for bug PUP-6336
+- add ability to override default btmp and/or wtmp
+- add puppet 4 support, drop puppet 2.7 support
+- minor cleanups
+
 2015-11-05 Release 1.3.0
 - set default package version to "present" rather than "latest" (#11) (natemccurdy)
 - add documentation for setting class defaults (natemccurdy)

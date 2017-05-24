@@ -9,42 +9,43 @@
 #
 define logrotate::conf (
     $ensure          = 'present',
-    $compress        = 'undef',
-    $compresscmd     = 'undef',
-    $compressext     = 'undef',
-    $compressoptions = 'undef',
-    $copy            = 'undef',
-    $copytruncate    = 'undef',
+    $compress        = 'UNDEFINED',
+    $compresscmd     = 'UNDEFINED',
+    $compressext     = 'UNDEFINED',
+    $compressoptions = 'UNDEFINED',
+    $copy            = 'UNDEFINED',
+    $copytruncate    = 'UNDEFINED',
     $create          = true,
-    $create_mode     = 'undef',
-    $create_owner    = 'undef',
-    $create_group    = 'undef',
-    $dateext         = 'undef',
-    $dateformat      = 'undef',
-    $delaycompress   = 'undef',
-    $extension       = 'undef',
-    $ifempty         = 'undef',
-    $mail            = 'undef',
-    $mailfirst       = 'undef',
-    $maillast        = 'undef',
-    $maxage          = 'undef',
-    $minsize         = 'undef',
-    $missingok       = 'undef',
-    $olddir          = 'undef',
-    $postrotate      = 'undef',
-    $prerotate       = 'undef',
-    $firstaction     = 'undef',
-    $lastaction      = 'undef',
+    $create_mode     = 'UNDEFINED',
+    $create_owner    = 'UNDEFINED',
+    $create_group    = 'UNDEFINED',
+    $dateext         = 'UNDEFINED',
+    $dateformat      = 'UNDEFINED',
+    $delaycompress   = 'UNDEFINED',
+    $extension       = 'UNDEFINED',
+    $ifempty         = 'UNDEFINED',
+    $mail            = 'UNDEFINED',
+    $mailfirst       = 'UNDEFINED',
+    $maillast        = 'UNDEFINED',
+    $maxage          = 'UNDEFINED',
+    $maxsize         = 'UNDEFINED',
+    $minsize         = 'UNDEFINED',
+    $missingok       = 'UNDEFINED',
+    $olddir          = 'UNDEFINED',
+    $postrotate      = 'UNDEFINED',
+    $prerotate       = 'UNDEFINED',
+    $firstaction     = 'UNDEFINED',
+    $lastaction      = 'UNDEFINED',
     $rotate          = '4',
     $rotate_every    = 'weekly',
-    $size            = 'undef',
-    $sharedscripts   = 'undef',
-    $shred           = 'undef',
-    $shredcycles     = 'undef',
-    $start           = 'undef',
-    $su_user         = 'undef',
-    $su_group        = 'undef',
-    $uncompresscmd   = 'undef'
+    $size            = 'UNDEFINED',
+    $sharedscripts   = 'UNDEFINED',
+    $shred           = 'UNDEFINED',
+    $shredcycles     = 'UNDEFINED',
+    $start           = 'UNDEFINED',
+    $su_user         = 'UNDEFINED',
+    $su_group        = 'UNDEFINED',
+    $uncompresscmd   = 'UNDEFINED'
 ) {
 
 #############################################################################
@@ -54,7 +55,7 @@ define logrotate::conf (
   validate_re($ensure, '^(?:absent|present|file)$', "Logrotate::Conf[${name}]: invalid ensure value")
 
   case $compress {
-    'undef': {}
+    'UNDEFINED': {}
     true: { $_compress = 'compress' }
     false: { $_compress = 'nocompress' }
     default: {
@@ -63,7 +64,7 @@ define logrotate::conf (
   }
 
   case $copy {
-    'undef': {}
+    'UNDEFINED': {}
     true: { $_copy = 'copy' }
     false: { $_copy = 'nocopy' }
     default: {
@@ -72,7 +73,7 @@ define logrotate::conf (
   }
 
   case $copytruncate {
-    'undef': {}
+    'UNDEFINED': {}
     true: { $_copytruncate = 'copytruncate' }
     false: { $_copytruncate = 'nocopytruncate' }
     default: {
@@ -81,7 +82,7 @@ define logrotate::conf (
   }
 
   case $create {
-    'undef': {}
+    'UNDEFINED': {}
     true: { $_create = 'create' }
     false: { $_create = 'nocreate' }
     default: {
@@ -90,7 +91,7 @@ define logrotate::conf (
   }
 
   case $delaycompress {
-    'undef': {}
+    'UNDEFINED': {}
     true: { $_delaycompress = 'delaycompress' }
     false: { $_delaycompress = 'nodelaycompress' }
     default: {
@@ -99,7 +100,7 @@ define logrotate::conf (
   }
 
   case $dateext {
-    'undef': {}
+    'UNDEFINED': {}
     true: { $_dateext = 'dateext' }
     false: { $_dateext = 'nodateext' }
     default: {
@@ -108,7 +109,7 @@ define logrotate::conf (
   }
 
   case $mail {
-    'undef': {}
+    'UNDEFINED': {}
     false: { $_mail = 'nomail' }
     default: {
       $_mail = "mail ${mail}"
@@ -116,7 +117,7 @@ define logrotate::conf (
   }
 
   case $missingok {
-    'undef': {}
+    'UNDEFINED': {}
     true: { $_missingok = 'missingok' }
     false: { $_missingok = 'nomissingok' }
     default: {
@@ -125,7 +126,7 @@ define logrotate::conf (
   }
 
   case $olddir {
-    'undef': {}
+    'UNDEFINED': {}
     false: { $_olddir = 'noolddir' }
     default: {
       $_olddir = "olddir ${olddir}"
@@ -133,7 +134,7 @@ define logrotate::conf (
   }
 
   case $sharedscripts {
-    'undef': {}
+    'UNDEFINED': {}
     true: { $_sharedscripts = 'sharedscripts' }
     false: { $_sharedscripts = 'nosharedscripts' }
     default: {
@@ -142,7 +143,7 @@ define logrotate::conf (
   }
 
   case $shred {
-    'undef': {}
+    'UNDEFINED': {}
     true: { $_shred = 'shred' }
     false: { $_shred = 'noshred' }
     default: {
@@ -151,7 +152,7 @@ define logrotate::conf (
   }
 
   case $ifempty {
-    'undef': {}
+    'UNDEFINED': {}
     true: { $_ifempty = 'ifempty' }
     false: { $_ifempty = 'notifempty' }
     default: {
@@ -160,7 +161,7 @@ define logrotate::conf (
   }
 
   case $rotate_every {
-    'undef': {}
+    'UNDEFINED': {}
     'day': { $_rotate_every = 'daily' }
     'week': { $_rotate_every = 'weekly' }
     'month': { $_rotate_every = 'monthly' }
@@ -174,18 +175,19 @@ define logrotate::conf (
   # Interpolate any variables that might be integers into strings for futer parser compatibility
   # Add an arbitrary character to the string to stop puppet-lint complaining
   # Any better ideas greatfully received
-  validate_re("X${maxage}", ['^Xundef$', '^X\d+$'], "Logrotate::Conf[${name}]: maxage must be an integer")
-  validate_re("X${minsize}", ['^Xundef$', '^X\d+[kMG]?$'], "Logrotate::Conf[${name}]: minsize must match /\\d+[kMG]?/")
-  validate_re("X${rotate}", ['^Xundef$', '^X\d+$'], "Logrotate::Conf[${name}]: rotate must be an integer")
-  validate_re("X${size}", ['^Xundef$', '^X\d+[kMG]?$'], "Logrotate::Conf[${name}]: size must match /\\d+[kMG]?/")
-  validate_re("X${shredcycles}", ['^Xundef$', '^X\d+$'], "Logrotate::Conf[${name}]: shredcycles must be an integer")
-  validate_re("X${start}", ['^Xundef$', '^X\d+$'], "Logrotate::Conf[${name}]: start must be an integer")
+  validate_re("X${maxage}", ['^XUNDEFINED$', '^X\d+$'], "Logrotate::Conf[${name}]: maxage must be an integer")
+  validate_re("X${maxsize}", ['^XUNDEFINED$', '^X\d+[kMG]?$'], "Logrotate::Conf[${name}]: maxsize must match /\\d+[kMG]?/")
+  validate_re("X${minsize}", ['^XUNDEFINED$', '^X\d+[kMG]?$'], "Logrotate::Conf[${name}]: minsize must match /\\d+[kMG]?/")
+  validate_re("X${rotate}", ['^XUNDEFINED$', '^X\d+$'], "Logrotate::Conf[${name}]: rotate must be an integer")
+  validate_re("X${size}", ['^XUNDEFINED$', '^X\d+[kMG]?$'], "Logrotate::Conf[${name}]: size must match /\\d+[kMG]?/")
+  validate_re("X${shredcycles}", ['^XUNDEFINED$', '^X\d+$'], "Logrotate::Conf[${name}]: shredcycles must be an integer")
+  validate_re("X${start}", ['^XUNDEFINED$', '^X\d+$'], "Logrotate::Conf[${name}]: start must be an integer")
 
-  validate_re($su_user, ['^undef$', '^[a-z_][a-z0-9_]{0,30}$'], "Logrotate::Conf[${name}]: su_user must match /^[a-z_][a-z0-9_]{0,30}$/")
-  validate_re($su_group, ['^undef$', '^[a-z_][a-z0-9_]{0,30}$'], "Logrotate::Conf[${name}]: su_group must match /^[a-z_][a-z0-9_]{0,30}$/")
+  validate_re($su_user, ['^UNDEFINED$', '^[a-z_][a-z0-9_]{0,30}$'], "Logrotate::Conf[${name}]: su_user must match /^[a-z_][a-z0-9_]{0,30}$/")
+  validate_re($su_group, ['^UNDEFINED$', '^[a-z_][a-z0-9_]{0,30}$'], "Logrotate::Conf[${name}]: su_group must match /^[a-z_][a-z0-9_]{0,30}$/")
 
   case $mailfirst {
-    'undef',false: {}
+    'UNDEFINED',false: {}
     true: {
       if $maillast == true {
         fail("Logrotate::Conf[${name}]: Can't set both mailfirst and maillast")
@@ -199,7 +201,7 @@ define logrotate::conf (
   }
 
   case $maillast {
-    'undef',false: {}
+    'UNDEFINED',false: {}
     true: {
       $_maillast = 'maillast'
     }
@@ -208,26 +210,26 @@ define logrotate::conf (
     }
   }
 
-  if ($su_user != 'undef') and ($su_group == 'undef') {
+  if ($su_user != 'UNDEFINED') and ($su_group == 'UNDEFINED') {
     $_su_user  = $_su_user
-    $_su_group = 'root'
-  } elsif ($su_user == 'undef') and ($su_group != 'undef') {
-    $_su_user  = 'root'
+    $_su_group = $logrotate::root_group
+  } elsif ($su_user == 'UNDEFINED') and ($su_group != 'UNDEFINED') {
+    $_su_user  = $logrotate::root_user
     $_su_group = $su_group
   } else {
     $_su_user  = $su_user
     $_su_group = $su_group
   }
 
-  if ($create_group != 'undef') and ($create_owner == 'undef') {
+  if ($create_group != 'UNDEFINED') and ($create_owner == 'UNDEFINED') {
     fail("Logrotate::Conf[${name}]: create_group requires create_owner")
   }
 
-  if ($create_owner != 'undef') and ($create_mode == 'undef') {
+  if ($create_owner != 'UNDEFINED') and ($create_mode == 'UNDEFINED') {
     fail("Logrotate::Conf[${name}]: create_owner requires create_mode")
   }
 
-  if ($create_mode != 'undef') and ($create != true) {
+  if ($create_mode != 'UNDEFINED') and ($create != true) {
     fail("Logrotate::Conf[${name}]: create_mode requires create")
   }
 
@@ -236,10 +238,12 @@ define logrotate::conf (
 
   include ::logrotate
 
+  $rules_configdir = $::logrotate::rules_configdir
+
   file { $name:
       ensure  => $ensure,
-      owner   => 'root',
-      group   => 'root',
+      owner   => $logrotate::root_user,
+      group   => $logrotate::root_group,
       mode    => '0444',
       content => template('logrotate/etc/logrotate.conf.erb'),
       require => Package['logrotate'],

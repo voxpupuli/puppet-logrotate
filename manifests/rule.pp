@@ -122,46 +122,46 @@
 #     postrotate   => '/etc/init.d/nginx restart',
 #   }
 define logrotate::rule(
-                        $path            = 'undef',
+                        $path            = 'UNDEFINED',
                         $ensure          = 'present',
-                        $compress        = 'undef',
-                        $compresscmd     = 'undef',
-                        $compressext     = 'undef',
-                        $compressoptions = 'undef',
-                        $copy            = 'undef',
-                        $copytruncate    = 'undef',
-                        $create          = 'undef',
-                        $create_mode     = 'undef',
-                        $create_owner    = 'undef',
-                        $create_group    = 'undef',
-                        $dateext         = 'undef',
-                        $dateformat      = 'undef',
-                        $delaycompress   = 'undef',
-                        $extension       = 'undef',
-                        $ifempty         = 'undef',
-                        $mail            = 'undef',
-                        $mailfirst       = 'undef',
-                        $maillast        = 'undef',
-                        $maxage          = 'undef',
-                        $minsize         = 'undef',
-                        $maxsize         = 'undef',
-                        $missingok       = 'undef',
-                        $olddir          = 'undef',
-                        $postrotate      = 'undef',
-                        $prerotate       = 'undef',
-                        $firstaction     = 'undef',
-                        $lastaction      = 'undef',
-                        $rotate          = 'undef',
-                        $rotate_every    = 'undef',
-                        $size            = 'undef',
-                        $sharedscripts   = 'undef',
-                        $shred           = 'undef',
-                        $shredcycles     = 'undef',
-                        $start           = 'undef',
-                        $su              = 'undef',
-                        $su_owner        = 'undef',
-                        $su_group        = 'undef',
-                        $uncompresscmd   = 'undef'
+                        $compress        = 'UNDEFINED',
+                        $compresscmd     = 'UNDEFINED',
+                        $compressext     = 'UNDEFINED',
+                        $compressoptions = 'UNDEFINED',
+                        $copy            = 'UNDEFINED',
+                        $copytruncate    = 'UNDEFINED',
+                        $create          = 'UNDEFINED',
+                        $create_mode     = 'UNDEFINED',
+                        $create_owner    = 'UNDEFINED',
+                        $create_group    = 'UNDEFINED',
+                        $dateext         = 'UNDEFINED',
+                        $dateformat      = 'UNDEFINED',
+                        $delaycompress   = 'UNDEFINED',
+                        $extension       = 'UNDEFINED',
+                        $ifempty         = 'UNDEFINED',
+                        $mail            = 'UNDEFINED',
+                        $mailfirst       = 'UNDEFINED',
+                        $maillast        = 'UNDEFINED',
+                        $maxage          = 'UNDEFINED',
+                        $minsize         = 'UNDEFINED',
+                        $maxsize         = 'UNDEFINED',
+                        $missingok       = 'UNDEFINED',
+                        $olddir          = 'UNDEFINED',
+                        $postrotate      = 'UNDEFINED',
+                        $prerotate       = 'UNDEFINED',
+                        $firstaction     = 'UNDEFINED',
+                        $lastaction      = 'UNDEFINED',
+                        $rotate          = 'UNDEFINED',
+                        $rotate_every    = 'UNDEFINED',
+                        $size            = 'UNDEFINED',
+                        $sharedscripts   = 'UNDEFINED',
+                        $shred           = 'UNDEFINED',
+                        $shredcycles     = 'UNDEFINED',
+                        $start           = 'UNDEFINED',
+                        $su              = 'UNDEFINED',
+                        $su_owner        = 'UNDEFINED',
+                        $su_group        = 'UNDEFINED',
+                        $uncompresscmd   = 'UNDEFINED'
                         ) {
 
   #############################################################################
@@ -171,7 +171,7 @@ define logrotate::rule(
 
   case $ensure {
     'present': {
-      if $path == 'undef' {
+      if $path == 'UNDEFINED' {
         fail("Logrotate::Rule[${name}]: path not specified")
       }
     }
@@ -182,7 +182,7 @@ define logrotate::rule(
   }
 
   case $compress {
-    'undef': {}
+    'UNDEFINED': {}
     true: { $sane_compress = 'compress' }
     false: { $sane_compress = 'nocompress' }
     default: {
@@ -191,7 +191,7 @@ define logrotate::rule(
   }
 
   case $copy {
-    'undef': {}
+    'UNDEFINED': {}
     true: { $sane_copy = 'copy' }
     false: { $sane_copy = 'nocopy' }
     default: {
@@ -200,7 +200,7 @@ define logrotate::rule(
   }
 
   case $copytruncate {
-    'undef': {}
+    'UNDEFINED': {}
     true: { $sane_copytruncate = 'copytruncate' }
     false: { $sane_copytruncate = 'nocopytruncate' }
     default: {
@@ -209,7 +209,7 @@ define logrotate::rule(
   }
 
   case $create {
-    'undef': {}
+    'UNDEFINED': {}
     true: { $sane_create = 'create' }
     false: { $sane_create = 'nocreate' }
     default: {
@@ -218,7 +218,7 @@ define logrotate::rule(
   }
 
   case $delaycompress {
-    'undef': {}
+    'UNDEFINED': {}
     true: { $sane_delaycompress = 'delaycompress' }
     false: { $sane_delaycompress = 'nodelaycompress' }
     default: {
@@ -227,7 +227,7 @@ define logrotate::rule(
   }
 
   case $dateext {
-    'undef': {}
+    'UNDEFINED': {}
     true: { $sane_dateext = 'dateext' }
     false: { $sane_dateext = 'nodateext' }
     default: {
@@ -236,7 +236,7 @@ define logrotate::rule(
   }
 
   case $mail {
-    'undef': {}
+    'UNDEFINED': {}
     false: { $sane_mail = 'nomail' }
     default: {
       $sane_mail = "mail ${mail}"
@@ -244,7 +244,7 @@ define logrotate::rule(
   }
 
   case $missingok {
-    'undef': {}
+    'UNDEFINED': {}
     true: { $sane_missingok = 'missingok' }
     false: { $sane_missingok = 'nomissingok' }
     default: {
@@ -253,7 +253,7 @@ define logrotate::rule(
   }
 
   case $olddir {
-    'undef': {}
+    'UNDEFINED': {}
     false: { $sane_olddir = 'noolddir' }
     default: {
       $sane_olddir = "olddir ${olddir}"
@@ -261,7 +261,7 @@ define logrotate::rule(
   }
 
   case $sharedscripts {
-    'undef': {}
+    'UNDEFINED': {}
     true: { $sane_sharedscripts = 'sharedscripts' }
     false: { $sane_sharedscripts = 'nosharedscripts' }
     default: {
@@ -270,7 +270,7 @@ define logrotate::rule(
   }
 
   case $shred {
-    'undef': {}
+    'UNDEFINED': {}
     true: { $sane_shred = 'shred' }
     false: { $sane_shred = 'noshred' }
     default: {
@@ -279,7 +279,7 @@ define logrotate::rule(
   }
 
   case $ifempty {
-    'undef': {}
+    'UNDEFINED': {}
     true: { $sane_ifempty = 'ifempty' }
     false: { $sane_ifempty = 'notifempty' }
     default: {
@@ -288,7 +288,7 @@ define logrotate::rule(
   }
 
   case $rotate_every {
-    'undef': {}
+    'UNDEFINED': {}
     'hour', 'hourly': {}
     'day': { $sane_rotate_every = 'daily' }
     'week': { $sane_rotate_every = 'weekly' }
@@ -303,16 +303,16 @@ define logrotate::rule(
   # Interpolate any variables that might be integers into strings for futer parser compatibility
   # Add an arbitrary character to the string to stop puppet-lint complaining
   # Any better ideas greatfully received
-  validate_re("X${maxage}", ['^Xundef$', '^X\d+$'], "Logrotate::Conf[${name}]: maxage must be an integer")
-  validate_re("X${minsize}", ['^Xundef$', '^X\d+[kMG]?$'], "Logrotate::Conf[${name}]: minsize must match /\\d+[kMG]?/")
-  validate_re("X${maxsize}", ['^Xundef$', '^X\d+[kMG]?$'], "Logrotate::Conf[${name}]: maxsize must match /\\d+[kMG]?/")
-  validate_re("X${rotate}", ['^Xundef$', '^X\d+$'], "Logrotate::Conf[${name}]: rotate must be an integer")
-  validate_re("X${size}", ['^Xundef$', '^X\d+[kMG]?$'], "Logrotate::Conf[${name}]: size must match /\\d+[kMG]?/")
-  validate_re("X${shredcycles}", ['^Xundef$', '^X\d+$'], "Logrotate::Conf[${name}]: shredcycles must be an integer")
-  validate_re("X${start}", ['^Xundef$', '^X\d+$'], "Logrotate::Conf[${name}]: start must be an integer")
+  validate_re("X${maxage}", ['^XUNDEFINED$', '^X\d+$'], "Logrotate::Conf[${name}]: maxage must be an integer")
+  validate_re("X${minsize}", ['^XUNDEFINED$', '^X\d+[kMG]?$'], "Logrotate::Conf[${name}]: minsize must match /\\d+[kMG]?/")
+  validate_re("X${maxsize}", ['^XUNDEFINED$', '^X\d+[kMG]?$'], "Logrotate::Conf[${name}]: maxsize must match /\\d+[kMG]?/")
+  validate_re("X${rotate}", ['^XUNDEFINED$', '^X\d+$'], "Logrotate::Conf[${name}]: rotate must be an integer")
+  validate_re("X${size}", ['^XUNDEFINED$', '^X\d+[kMG]?$'], "Logrotate::Conf[${name}]: size must match /\\d+[kMG]?/")
+  validate_re("X${shredcycles}", ['^XUNDEFINED$', '^X\d+$'], "Logrotate::Conf[${name}]: shredcycles must be an integer")
+  validate_re("X${start}", ['^XUNDEFINED$', '^X\d+$'], "Logrotate::Conf[${name}]: start must be an integer")
 
   case $su {
-    'undef',false: {}
+    'UNDEFINED',false: {}
     true: { $sane_su = 'su' }
     default: {
       fail("Logrotate::Rule[${name}]: su must be a boolean")
@@ -320,7 +320,7 @@ define logrotate::rule(
   }
 
   case $mailfirst {
-    'undef',false: {}
+    'UNDEFINED',false: {}
     true: {
       if $maillast == true {
         fail("Logrotate::Rule[${name}]: Can't set both mailfirst and maillast")
@@ -334,7 +334,7 @@ define logrotate::rule(
   }
 
   case $maillast {
-    'undef',false: {}
+    'UNDEFINED',false: {}
     true: {
       $sane_maillast = 'maillast'
     }
@@ -343,25 +343,25 @@ define logrotate::rule(
     }
   }
 
-  if ($create_group != 'undef') and ($create_owner == 'undef') {
+  if ($create_group != 'UNDEFINED') and ($create_owner == 'UNDEFINED') {
     fail("Logrotate::Rule[${name}]: create_group requires create_owner")
   }
 
-  if ($create_owner != 'undef') and ($create_mode == 'undef') {
+  if ($create_owner != 'UNDEFINED') and ($create_mode == 'UNDEFINED') {
     fail("Logrotate::Rule[${name}]: create_owner requires create_mode")
   }
 
-  if ($create_mode != 'undef') and ($create != true) {
+  if ($create_mode != 'UNDEFINED') and ($create != true) {
     fail("Logrotate::Rule[${name}]: create_mode requires create")
   }
 
   # su requires at least su_owner
-  if ($su == true) and ($su_owner == 'undef') {
+  if ($su == true) and ($su_owner == 'UNDEFINED') {
     fail("Logrotate::Rule[${name}]: su requires su_owner and optional su_group")
   }
 
   # su should be set to true if su_owner exists
-  if ($su_owner != 'undef') and ($su != true) {
+  if ($su_owner != 'UNDEFINED') and ($su != true) {
     fail("Logrotate::Rule[${name}]: su_owner requires su")
   }
 
@@ -373,16 +373,16 @@ define logrotate::rule(
   case $rotate_every {
     'hour', 'hourly': {
       include ::logrotate::hourly
-      $rule_path = "/etc/logrotate.d/hourly/${name}"
+      $rule_path = "${logrotate::rules_configdir}/hourly/${name}"
 
-      file { "/etc/logrotate.d/${name}":
+      file { "${logrotate::rules_configdir}/${name}":
         ensure => absent,
       }
     }
     default: {
-      $rule_path = "/etc/logrotate.d/${name}"
+      $rule_path = "${logrotate::rules_configdir}/${name}"
 
-      file { "/etc/logrotate.d/hourly/${name}":
+      file { "${logrotate::rules_configdir}/hourly/${name}":
         ensure => absent,
       }
     }
@@ -390,8 +390,8 @@ define logrotate::rule(
 
   file { $rule_path:
     ensure  => $ensure,
-    owner   => 'root',
-    group   => 'root',
+    owner   => $logrotate::root_user,
+    group   => $logrotate::root_group,
     mode    => '0444',
     content => template('logrotate/etc/logrotate.d/rule.erb'),
     require => Class['::logrotate::config'],
