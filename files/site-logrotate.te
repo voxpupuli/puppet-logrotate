@@ -1,0 +1,10 @@
+module site-logrotate 1.0;
+
+require {
+	type logrotate_t;
+	type var_lib_t;
+	class file { write rename create unlink setattr };
+}
+
+#============= logrotate_t ==============
+allow logrotate_t var_lib_t:file { write rename create unlink setattr };

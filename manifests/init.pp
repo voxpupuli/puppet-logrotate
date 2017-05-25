@@ -6,6 +6,7 @@ class logrotate (
   $package            = 'logrotate',
   $rules              = {},
   $config             = undef,
+  $selinux            = false,
   $cron_daily_hour    = $logrotate::params::cron_daily_hour,
   $cron_daily_minute  = $logrotate::params::cron_daily_minute,
   $cron_hourly_minute = $logrotate::params::cron_hourly_minute,
@@ -21,6 +22,10 @@ class logrotate (
   include ::logrotate::config
   include ::logrotate::rules
   include ::logrotate::defaults
+
+  if ($selinux) {
+    include ::logrotate::selinux
+  }
 
   anchor{'logrotate_begin':}->
   Class['::logrotate::install']->
