@@ -167,7 +167,7 @@ define logrotate::rule(
   #############################################################################
   # SANITY CHECK VALUES
 
-  validate_re($name, '^[a-zA-Z0-9\._-]+$', "Logrotate::Rule[${name}]: namevar must be alphanumeric")
+  validate_re($name, '^[a-zA-Z0-9\._-]+$', "Logrotate::Rule[${name}]: namevar must be only alphanumeric and .-_ characters")
 
   case $ensure {
     'present': {
