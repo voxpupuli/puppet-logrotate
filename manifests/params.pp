@@ -18,5 +18,5 @@ class logrotate::params {
   $cron_hourly_minute = '01'
   $logrotate_conf     = "${configdir}/logrotate.conf"
   $root_user          = 'root'
-  $rules_configdir    = "${configdir}/logrotate.d"
+  $rules_configdir    = [ "${configdir}/logrotate.d" ]
 }
