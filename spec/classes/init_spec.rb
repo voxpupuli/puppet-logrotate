@@ -41,6 +41,24 @@ describe 'logrotate' do
             is_expected.to contain_class('logrotate::defaults')
           end
         end
+
+        context 'when other module installs logrotate' do
+          let(:pre_condition) { 'ensure_packages("logrotate")' }
+          it { is_expected.to compile.with_all_deps }
+          it { should contain_package('logrotate').with_ensure('present') }
+        end
+
+        context 'with ensure => latest' do
+          let(:params) { { ensure: 'latest' } }
+          it { is_expected.to compile.with_all_deps }
+          it { should contain_package('logrotate').with_ensure('latest') }
+        end
+
+        context 'when other module installs logrotate and we want to remove it' do
+          let(:params) { { ensure: 'absent' } }
+          let(:pre_condition) { 'package { "logrotate": ensure => present }' }
+          it { is_expected.to raise_error(Puppet::Error, %r{Duplicate declaration}) }
+        end
       end
     end
   end
