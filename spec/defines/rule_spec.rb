@@ -1229,8 +1229,9 @@ describe 'logrotate::rule' do
         operatingsystemmajrelease: 7
       }
     end
+
     it do
-      should contain_file('/etc/logrotate.d/btmp').without_content(%r{/ifempty/})
+      is_expected.to contain_file('/etc/logrotate.d/btmp').without_content(%r{/ifempty/})
     end
   end
 end
