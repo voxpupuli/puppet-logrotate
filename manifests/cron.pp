@@ -8,6 +8,7 @@ define logrotate::cron (
   }
 
   $logrotate_path = $::logrotate::logrotate_bin
+  $logrotate_state = $::logrotate::logrotate_state
 
   if $name == 'hourly' {
     $logrotate_arg = "${::logrotate::rules_configdir}/hourly"
