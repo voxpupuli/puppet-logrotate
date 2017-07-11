@@ -2,7 +2,12 @@
 # THIS FILE IS AUTOMATICALLY DISTRIBUTED BY PUPPET.  ANY CHANGES WILL BE
 # OVERWRITTEN.
 
+<% if @logrotate_state %>
+OUTPUT=$(<%= @logrotate_path -%> -s <%= @logrotate_state -%> <%= @logrotate_arg -%> 2>&1)
+<% else %>
 OUTPUT=$(<%= @logrotate_path -%> <%= @logrotate_arg -%> 2>&1)
+<% end %>
+
 EXITVALUE=$?
 if [ $EXITVALUE != 0 ]; then
     /usr/bin/logger -t logrotate "ALERT exited abnormally with [$EXITVALUE]"
