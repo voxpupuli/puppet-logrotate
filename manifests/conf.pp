@@ -45,7 +45,8 @@ define logrotate::conf (
     $start           = 'UNDEFINED',
     $su_user         = 'UNDEFINED',
     $su_group        = 'UNDEFINED',
-    $uncompresscmd   = 'UNDEFINED'
+    $uncompresscmd   = 'UNDEFINED',
+    $logrotate_state = undef
 ) {
 
 #############################################################################

@@ -10,7 +10,6 @@ class logrotate::params {
       $configdir     = '/etc'
       $root_group    = 'root'
       $logrotate_bin = '/usr/sbin/logrotate'
-      $logrotate_state = '/var/lib/logrotate/logrotate.status'
     }
   }
 
@@ -20,4 +19,5 @@ class logrotate::params {
   $logrotate_conf     = "${configdir}/logrotate.conf"
   $root_user          = 'root'
   $rules_configdir    = "${configdir}/logrotate.d"
+  $logrotate_state = undef
 }

@@ -11,6 +11,7 @@ class logrotate (
   $cron_hourly_minute = $logrotate::params::cron_hourly_minute,
   $configdir          = $logrotate::params::configdir,
   $logrotate_bin      = $logrotate::params::logrotate_bin,
+  $logrotate_state    = $logrotate::params::logrotate_state,
   $logrotate_conf     = $logrotate::params::logrotate_conf,
   $rules_configdir    = $logrotate::params::rules_configdir,
   $root_user          = $logrotate::params::root_user,
@@ -23,7 +24,7 @@ class logrotate (
   contain ::logrotate::defaults
 
   Class['::logrotate::install']
-  -> Class['::logrotate::config']
+  -> Class['::logrotate::config' ]
   -> Class['::logrotate::rules']
   -> Class['::logrotate::defaults']
 
