@@ -19,7 +19,7 @@
   end
 
   %w(compress copy copytruncate delaycompress
-  dateext missingok sharedscripts shred).each do |bool_opt|
+  dateext missingok sharedscripts shred dateyesterday).each do |bool_opt|
     if (scope.to_hash.has_key?(bool_opt) && scope.to_hash[bool_opt] != nil)
       opts << (scope.to_hash[bool_opt] == true ? '' : 'no') + bool_opt
     end
