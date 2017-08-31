@@ -205,42 +205,6 @@ describe 'logrotate::rule' do
     end
 
     ###########################################################################
-    # DATEYESTERDAY
-    context 'and dateyesterday => true' do
-      let(:params) {
-        {:path => '/var/log/foo.log', :dateyesterday => true}
-      }
-
-      it do
-        should contain_file('/etc/logrotate.d/test') \
-          .with_content(/^  dateyesterday$/)
-      end
-    end
-
-    context 'and dateyesterday => false' do
-      let(:params) {
-        {:path => '/var/log/foo.log', :dateyesterday => false}
-      }
-
-      it do
-        should contain_file('/etc/logrotate.d/test') \
-          .without_content(/^  dateyesterday$/)
-      end
-    end
-
-    context 'and dateyesterday => foo' do
-      let(:params) {
-        {:path => '/var/log/foo.log', :dateyesterday => 'foo'}
-      }
-
-      it do
-        expect {
-          should contain_file('/etc/logrotate.d/test')
-        }.to raise_error(Puppet::Error, /dateyesterday must be a boolean/)
-      end
-    end
-
-    ###########################################################################
     # EXTENSION
     context 'and extension => foo' do
       let(:params) { { path: '/var/log/foo.log', extension: '.foo' } }
@@ -625,7 +589,7 @@ describe 'logrotate::rule' do
     %w[minsize maxsize size].each do |param|
       it_behaves_like 'logrotate::size', param
     end
-    %w[compress copy copytruncate create dateext delaycompress ifempty missingok sharedscripts shred].each do |param|
+    %w[compress copy copytruncate create dateext delaycompress ifempty missingok sharedscripts shred dateyesterday].each do |param|
       it_behaves_like 'boolean flag', param
     end
     %w[maxage rotate shredcycles start].each do |param|
