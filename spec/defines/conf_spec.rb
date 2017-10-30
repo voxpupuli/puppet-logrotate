@@ -130,6 +130,7 @@ describe 'logrotate::conf' do
           { su_user: 'root',
             su_group: 'root' }
         end
+
         it {
           is_expected.to contain_file('/etc/logrotate.conf').
             with_content(%r{^su root root$})
@@ -143,6 +144,7 @@ describe 'logrotate::conf' do
           { su_user: :undef,
             su_group: 'root' }
         end
+
         it {
           is_expected.to contain_file('/etc/logrotate.conf').
             with_content(%r{^su root root$})
@@ -156,6 +158,7 @@ describe 'logrotate::conf' do
           { su_user: 'root',
             su_group: :undef }
         end
+
         it {
           is_expected.to contain_file('/etc/logrotate.conf').
             with_content(%r{^su root root$})
