@@ -138,7 +138,7 @@ describe 'logrotate::conf' do
     end
 
     context 'su_user => undef' do
-      conext 'su_group => root' do
+      context 'su_group => root' do
         let(:params) do
           {
             su_user: :undef,
@@ -153,7 +153,7 @@ describe 'logrotate::conf' do
     end
 
     context 'su_user => root' do
-      conext 'su_group => undef' do
+      context 'su_group => undef' do
         let(:params) do
           {
             su_user: 'root',
