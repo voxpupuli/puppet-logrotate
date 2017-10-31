@@ -44,8 +44,8 @@
   <%= opt %>
 <% end -%>
 <% if @_su == true -%>
-<% if @_su_owner != nil and @_su_group != nil -%>
-  su <%= @_su_owner %> <%= @_su_group %>
+<% if @_su_user != nil and @_su_group != nil -%>
+  su <%= @_su_user %> <%= @_su_group %>
 <% end -%>
 <% end -%>
 <% if @postrotate != nil -%>
