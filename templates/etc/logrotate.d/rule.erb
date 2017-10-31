@@ -43,8 +43,10 @@
 <% opts.each do |opt| -%>
   <%= opt %>
 <% end -%>
-<% if @su_owner != nil or @su_group != nil -%>
+<% if @_su == true -%>
+<% if @_su_owner != nil and @_su_group != nil -%>
   su <%= @_su_owner %> <%= @_su_group %>
+<% end -%>
 <% end -%>
 <% if @postrotate != nil -%>
   postrotate
