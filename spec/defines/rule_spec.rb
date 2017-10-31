@@ -536,24 +536,12 @@ describe 'logrotate::rule' do
 
     ###########################################################################
     # SU / SU_OWNER / SU_GROUP
-    context 'and su => true' do
-      context 'and su_owner => www-data' do
-        let(:params) do
-          {
-            path: '/var/log/foo.log',
-            su_owner: 'www-data'
-          }
-        end
-
-        it {
-          is_expected.to contain_file('/etc/logrotate.d/test').
-            with_content(%r{^  su www-data})
-        }
-      end
+    context 'su => true' do
       context 'su_owner => www-data and su_group => admin' do
         let(:params) do
           {
             path: '/var/log/foo.log',
+            su: true,
             su_owner: 'www-data',
             su_group: 'admin'
           }
@@ -566,8 +554,22 @@ describe 'logrotate::rule' do
       end
     end
 
-    context 'and no su_x settings' do
-      let(:params) { { path: '/var/log/foo.log' } }
+    context 'su => false' do
+      let(:params) { { su: false } }
+
+      it {
+        is_expected.to contain_file('/etc/logrotate.d/test').
+          without_content(%r{^\s+su\s})
+      }
+    end
+
+    context 'su => undef' do
+      let(:params) do
+        {
+          path: '/var/log/foo.log',
+          su: :undef
+        }
+      end
 
       it {
         is_expected.to contain_file('/etc/logrotate.d/test').
