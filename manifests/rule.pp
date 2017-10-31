@@ -161,6 +161,7 @@ define logrotate::rule(
   Optional[Boolean] $shred                          = undef,
   Optional[Integer] $shredcycles                    = undef,
   Optional[Integer] $start                          = undef,
+  Optional[Boolean] $su                             = undef,
   Optional[Logrotate::UserOrGroup] $su_owner        = undef,
   Optional[Logrotate::UserOrGroup] $su_group        = undef,
   Optional[String] $uncompresscmd                   = undef
@@ -208,6 +209,11 @@ define logrotate::rule(
 
   if ($create_mode != undef) and ($create != true) {
     fail("Logrotate::Rule[${rulename}]: create_mode requires create")
+  }
+
+  $_su = $su ? {
+    undef   => false,
+    default => $su,
   }
 
   $_su_user = $su_user ? {
