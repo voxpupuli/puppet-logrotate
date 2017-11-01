@@ -587,6 +587,8 @@ describe 'logrotate::rule' do
         }
       end
 
+    end
+
     # su is false doesn't matter if user or group params are passed
     context 'su => false' do
       let(:params) { { su: false } }
