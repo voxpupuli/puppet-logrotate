@@ -537,12 +537,14 @@ describe 'logrotate::rule' do
     ###########################################################################
     # SU / SU_OWNER / SU_GROUP
     context 'su => true' do
-      context 'su_owner => www-data and su_group => admin' do
+
+      # su is true and both user and group params are passed
+      context 'su_user => www-data and su_group => admin' do
         let(:params) do
           {
             path: '/var/log/foo.log',
             su: true,
-            su_owner: 'www-data',
+            su_user: 'www-data',
             su_group: 'admin'
           }
         end
@@ -552,8 +554,40 @@ describe 'logrotate::rule' do
             with_content(%r{^  su www-data admin$})
         }
       end
-    end
 
+      # su is true and only user param is passed
+      context 'su_user => www-data' do
+        let(:params) do
+          {
+            path: '/var/log/foo.log',
+            su: true,
+            su_user: 'www-data',
+          }
+        end
+
+        it {
+          is_expected.to contain_file('/etc/logrotate.d/test').
+            with_content(%r{^\s+su www-data root$})
+        }
+      end
+
+      # su is true and only group param is passed
+      context 'su_group => admin' do
+        let(:params) do
+          {
+            path: '/var/log/foo.log',
+            su: true,
+            su_group: 'admin',
+          }
+        end
+
+        it {
+          is_expected.to contain_file('/etc/logrotate.d/test').
+            with_content(%r{^\s+su root admin$})
+        }
+      end
+
+    # su is false doesn't matter if user or group params are passed
     context 'su => false' do
       let(:params) { { su: false } }
 
@@ -563,6 +597,7 @@ describe 'logrotate::rule' do
       }
     end
 
+    # su param is not passed
     context 'su => undef' do
       let(:params) do
         {
