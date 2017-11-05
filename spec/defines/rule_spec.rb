@@ -537,7 +537,6 @@ describe 'logrotate::rule' do
     ###########################################################################
     # SU / SU_OWNER / SU_GROUP
     context 'su => true' do
-
       # su is true and both user and group params are passed
       context 'su_user => www-data and su_group => admin' do
         let(:params) do
@@ -561,7 +560,7 @@ describe 'logrotate::rule' do
           {
             path: '/var/log/foo.log',
             su: true,
-            su_user: 'www-data',
+            su_user: 'www-data'
           }
         end
 
@@ -577,7 +576,7 @@ describe 'logrotate::rule' do
           {
             path: '/var/log/foo.log',
             su: true,
-            su_group: 'admin',
+            su_group: 'admin'
           }
         end
 
