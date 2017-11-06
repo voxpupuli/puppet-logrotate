@@ -585,7 +585,6 @@ describe 'logrotate::rule' do
             with_content(%r{^\s+su root admin$})
         }
       end
-
     end
 
     # su is false doesn't matter if user or group params are passed
