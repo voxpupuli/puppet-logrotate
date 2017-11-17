@@ -537,24 +537,13 @@ describe 'logrotate::rule' do
     ###########################################################################
     # SU / SU_OWNER / SU_GROUP
     context 'and su => true' do
-      context 'and su_owner => www-data' do
+      # su is true and both user and group params are passed
+      context 'and su_user => www-data and su_group => admin' do
         let(:params) do
           {
             path: '/var/log/foo.log',
-            su_owner: 'www-data'
-          }
-        end
-
-        it {
-          is_expected.to contain_file('/etc/logrotate.d/test').
-            with_content(%r{^  su www-data})
-        }
-      end
-      context 'su_owner => www-data and su_group => admin' do
-        let(:params) do
-          {
-            path: '/var/log/foo.log',
-            su_owner: 'www-data',
+            su: true,
+            su_user: 'www-data',
             su_group: 'admin'
           }
         end
@@ -564,10 +553,63 @@ describe 'logrotate::rule' do
             with_content(%r{^  su www-data admin$})
         }
       end
+
+      # su is true and only user param is passed
+      context 'and su_user => www-data' do
+        let(:params) do
+          {
+            path: '/var/log/foo.log',
+            su: true,
+            su_user: 'www-data'
+          }
+        end
+
+        it {
+          is_expected.to contain_file('/etc/logrotate.d/test').
+            with_content(%r{^\s+su www-data root$})
+        }
+      end
+
+      # su is true and only group param is passed
+      context 'and su_group => admin' do
+        let(:params) do
+          {
+            path: '/var/log/foo.log',
+            su: true,
+            su_group: 'admin'
+          }
+        end
+
+        it {
+          is_expected.to contain_file('/etc/logrotate.d/test').
+            with_content(%r{^\s+su root admin$})
+        }
+      end
     end
 
-    context 'and no su_x settings' do
-      let(:params) { { path: '/var/log/foo.log' } }
+    # su is false doesn't matter if user or group params are passed
+    context 'and su => false' do
+      let(:params) do
+        {
+          path: '/var/log/foo.log',
+          su: false
+        }
+      end
+
+      it {
+        is_expected.to contain_file('/etc/logrotate.d/test').
+          without_content(%r{^\s+su\s})
+      }
+    end
+
+    # su param is not passed
+    context 'and su => undef' do
+      let(:params) do
+        {
+          path: '/var/log/foo.log',
+          su: :undef
+        }
+      end
 
       it {
         is_expected.to contain_file('/etc/logrotate.d/test').
