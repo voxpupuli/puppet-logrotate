@@ -69,14 +69,14 @@ define logrotate::conf (
     }
   }
 
-  if $su_user and !defined('$su_group') {
-    $_su_user  = $su_user
+  if $su_owner and !defined('$su_group') {
+    $_su_owner  = $su_owner
     $_su_group = 'root'
-  } elsif !defined('$su_user') and $su_group {
-    $_su_user  = 'root'
+  } elsif !defined('$su_owner') and $su_group {
+    $_su_owner  = 'root'
     $_su_group = $su_group
   } else {
-    $_su_user  = $su_user
+    $_su_owner  = $su_owner
     $_su_group = $su_group
   }
 

@@ -31,7 +31,7 @@ class logrotate::params {
       }
     }
     'Debian': {
-      $default_su_user = versioncmp($facts['operatingsystemmajrelease'], '14.00') ? {
+      $default_su_owner = versioncmp($facts['operatingsystemmajrelease'], '14.00') ? {
         1        => 'root',
         default  => undef,
       }
@@ -40,7 +40,7 @@ class logrotate::params {
         default   => undef
       }
       $conf_params = {
-        su_user  => $default_su_user,
+        su_owner  => $default_su_owner,
         su_group => $default_su_group,
       }
       $configdir     = '/etc'

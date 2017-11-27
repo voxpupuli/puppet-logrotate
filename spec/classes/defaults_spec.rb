@@ -17,14 +17,14 @@ describe 'logrotate' do
       if facts[:operatingsystem] == 'Ubuntu' && facts[:operatingsystemmajrelease].to_i >= 14
         it {
           is_expected.to contain_logrotate__conf('/etc/logrotate.conf').with(
-            'su_user' => 'root',
+            'su_owner' => 'root',
             'su_group' => 'syslog'
           )
         }
       else
         it {
           is_expected.to contain_logrotate__conf('/etc/logrotate.conf').with(
-            'su_user' => nil,
+            'su_owner' => nil,
             'su_group' => nil
           )
         }
