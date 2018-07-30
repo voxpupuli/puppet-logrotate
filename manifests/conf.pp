@@ -70,15 +70,13 @@ define logrotate::conf (
     }
   }
 
-  if $su_user and !defined('$su_group') {
-    $_su_user  = $su_user
-    $_su_group = 'root'
-  } elsif !defined('$su_user') and $su_group {
-    $_su_user  = 'root'
-    $_su_group = $su_group
-  } else {
-    $_su_user  = $su_user
-    $_su_group = $su_group
+  $_su_user = $su_user ? {
+    undef    => 'root',
+    default  => $su_user,
+  }
+  $_su_group = $su_group ? {
+    undef   => 'root',
+    default => $su_group,
   }
 
   if $create_group and !$create_owner {
