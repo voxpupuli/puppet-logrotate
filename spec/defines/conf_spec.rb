@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'logrotate::conf' do
   _, facts = on_supported_os.first
-  et(:facts) { facts }
+  let(:facts) { facts }
 
   shared_examples 'error raised' do |param, _|
     context "=> 'foo'" do
