@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'logrotate::conf' do
   _, facts = on_supported_os.first
-  let(:facts) { facts } 
+  et(:facts) { facts }
 
   shared_examples 'error raised' do |param, _|
     context "=> 'foo'" do
@@ -141,11 +141,12 @@ describe 'logrotate::conf' do
         let(:params) do
           { su_user: 'root',
             su_group: :undef }
-       end
-        it {
-          is_expected.to contain_file('/etc/logrotate.conf').
-            with_content(%r{^su root root$})
-        }
+      end
+
+      it {
+        is_expected.to contain_file('/etc/logrotate.conf').
+          with_content(%r{^su root root$})
+      }
       end
     end
 
@@ -166,11 +167,11 @@ describe 'logrotate::conf' do
         let(:params) do
           { su_user: :undef,
             su_group: :undef }
-       end
-        it {
-          is_expected.to contain_file('/etc/logrotate.conf').
-            with_content(%r{^su root root$})
-        }
+      end
+      it {
+        is_expected.to contain_file('/etc/logrotate.conf').
+          with_content(%r{^su root root$})
+      }
       end
     end
 
