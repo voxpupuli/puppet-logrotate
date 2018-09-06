@@ -22,12 +22,12 @@ class logrotate::params {
       }
     }
     'Debian': {
-      $default_su_user = versioncmp($facts['operatingsystemmajrelease'], '14.00') ? {
-        1        => 'root',
+      $default_su_user = $facts['operatingsystem'] ? {
+        'Ubuntu' => 'root',
         default  => undef,
       }
-      $default_su_group = versioncmp($facts['operatingsystemmajrelease'], '14.00') ? {
-        1         => 'syslog',
+      $default_su_group = $facts['operatingsystem'] ? {
+        'Ubuntu'  => 'syslog',
         default   => undef
       }
       $conf_params = {
