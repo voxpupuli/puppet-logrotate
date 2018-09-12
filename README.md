@@ -208,3 +208,5 @@ Puppet-logrotate has been maintained by VoxPupuli since version 2.0.0.
 It was migrated from https://forge.puppet.com/yo61/logrotate.
 yo61's version was a fork of https://github.com/rodjek/puppet-logrotate.
 It is licensed under the MIT license.
+
+THIS SHOULD NOT HAVE A BROKEN BUILD, IT'S JUST A DAMN README EDIT
