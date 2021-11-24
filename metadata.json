@@ -64,6 +64,13 @@
       "operatingsystemrelease": [
         "18.04"
       ]
+    },
+    {
+      "operatingsystem": "FreeBSD",
+      "operatingsystemrelease": [
+        "12",
+        "13"
+      ]
     }
   ]
 }
