@@ -28,6 +28,7 @@ class logrotate::hourly (
     ensure => $dir_ensure,
     owner  => 'root',
     group  => 'root',
+    force  => true,
     mode   => $logrotate::rules_configdir_mode,
   }
 
