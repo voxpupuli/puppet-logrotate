@@ -27,7 +27,7 @@ class logrotate::hourly (
   file { "${logrotate::rules_configdir}/hourly":
     ensure => $dir_ensure,
     owner  => 'root',
-    group  => 'root',
+    group  => 0,
     mode   => $logrotate::rules_configdir_mode,
   }
 
