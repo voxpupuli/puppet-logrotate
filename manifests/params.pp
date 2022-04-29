@@ -9,7 +9,7 @@ class logrotate::params {
       $root_group    = 'wheel'
       $logrotate_bin = '/usr/local/sbin/logrotate'
       $conf_params = {
-        su_group => undef,
+        su_group => 'wheel',
       }
       $base_rules = {}
       $rule_default = {

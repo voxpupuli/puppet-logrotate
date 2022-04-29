@@ -103,5 +103,31 @@ describe 'logrotate' do
         )
       }
     end
+    context os, if: facts[:osfamily] == 'FreeBSD' do
+      let(:facts) { facts }
+
+      it {
+        is_expected.to contain_logrotate__conf('/usr/local/etc/logrotate.conf')
+      }
+      it {
+        is_expected.to contain_logrotate__conf('/usr/local/etc/logrotate.conf').with(
+          'su_user' => 'root',
+          'su_group' => 'wheel'
+        )
+      }
+    end
+    context os, if: facts[:osfamily] == 'FreeBSD' do
+      let(:facts) { facts }
+
+      it {
+        is_expected.to contain_logrotate__conf('/usr/local/etc/logrotate.conf')
+      }
+      it {
+        is_expected.to contain_logrotate__conf('/usr/local/etc/logrotate.conf').with(
+          'su_user' => 'root',
+          'su_group' => 'wheel'
+        )
+      }
+    end
   end
 end

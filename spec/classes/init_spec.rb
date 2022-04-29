@@ -15,48 +15,61 @@ describe 'logrotate' do
             it { is_expected.to contain_class("logrotate::#{classs}") }
           end
 
-          it do
-            is_expected.to contain_file('/etc/logrotate.d/hourly').with(
-              'ensure' => 'directory',
-              'owner'  => 'root',
-              'group'  => 'root',
-              'mode'   => '0755'
-            )
-          end
+          case facts[:operatingsystem]
+          when 'FreeBSD'
+            it do
+              is_expected.to contain_file('/usr/local/etc/logrotate.d/hourly').with(
+                'ensure' => 'directory',
+                'owner'  => 'root',
+                'group'  => 'wheel',
+                'mode'   => '0755'
+              )
+            end
 
-          it do
-            is_expected.to contain_file('/etc/cron.hourly/logrotate').with(
-              'ensure' => 'present',
-              'owner'  => 'root',
-              'group'  => 'root',
-              'mode'   => '0700'
-            )
-          end
+            it do
+              is_expected.to contain_package('logrotate').with_ensure('present')
 
-          it do
-            is_expected.to contain_package('logrotate').with_ensure('present')
+              is_expected.to contain_file('/usr/local/etc/logrotate.d').with('ensure' => 'directory',
+                                                                             'owner'   => 'root',
+                                                                             'group'   => 'wheel',
+                                                                             'mode'    => '0755')
 
-            #    is_expected.to contain_file('/etc/logrotate.conf').with({
-            #      'ensure'  => 'file',
-            #      'owner'   => 'root',
-            #      'group'   => 'root',
-            #      'mode'    => '0644',
-            #      'content' => 'template(\'logrotate/etc/logrotate.conf.erb\')',
-            #      'source'  => 'puppet:///modules/logrotate/etc/logrotate.conf',
-            #      'require' => 'Package[logrotate]',
-            #    })
+              is_expected.to contain_class('logrotate::defaults')
+            end
+          else
+            it do
+              is_expected.to contain_file('/etc/logrotate.d/hourly').with(
+                'ensure' => 'directory',
+                'owner'  => 'root',
+                'group'  => 'root',
+                'mode'   => '0755'
+              )
+            end
 
-            is_expected.to contain_file('/etc/logrotate.d').with('ensure' => 'directory',
-                                                                 'owner'   => 'root',
-                                                                 'group'   => 'root',
-                                                                 'mode'    => '0755')
+            it do
+              is_expected.to contain_file('/etc/cron.hourly/logrotate').with(
+                'ensure' => 'present',
+                'owner'  => 'root',
+                'group'  => 'root',
+                'mode'   => '0700'
+              )
+            end
 
-            is_expected.to contain_file('/etc/cron.daily/logrotate').with('ensure' => 'present',
-                                                                          'owner'   => 'root',
-                                                                          'group'   => 'root',
-                                                                          'mode'    => '0700')
+            it do
+              is_expected.to contain_package('logrotate').with_ensure('present')
 
-            is_expected.to contain_class('logrotate::defaults')
+              is_expected.to contain_file('/etc/logrotate.d').with('ensure' => 'directory',
+                                                                   'owner'   => 'root',
+                                                                   'group'   => 'root',
+                                                                   'mode'    => '0755')
+
+              is_expected.to contain_file('/etc/cron.daily/logrotate').with('ensure' => 'present',
+                                                                            'owner'   => 'root',
+                                                                            'group'   => 'root',
+                                                                            'mode'    => '0700')
+
+              is_expected.to contain_class('logrotate::defaults')
+            end
           end
         end
 
@@ -71,13 +84,25 @@ describe 'logrotate' do
         context 'logrotate class with purge_configdir set to true' do
           let(:params) { { purge_configdir: true } }
 
-          it do
-            is_expected.to contain_file('/etc/logrotate.d').with('ensure'  => 'directory',
-                                                                 'owner'   => 'root',
-                                                                 'group'   => 'root',
-                                                                 'mode'    => '0755',
-                                                                 'purge'   => true,
-                                                                 'recurse' => true)
+          case facts[:operatingsystem]
+          when 'FreeBSD'
+            it do
+              is_expected.to contain_file('/usr/local/etc/logrotate.d').with('ensure'  => 'directory',
+                                                                             'owner'   => 'root',
+                                                                             'group'   => 'wheel',
+                                                                             'mode'    => '0755',
+                                                                             'purge'   => true,
+                                                                             'recurse' => true)
+            end
+          else
+            it do
+              is_expected.to contain_file('/etc/logrotate.d').with('ensure'  => 'directory',
+                                                                   'owner'   => 'root',
+                                                                   'group'   => 'root',
+                                                                   'mode'    => '0755',
+                                                                   'purge'   => true,
+                                                                   'recurse' => true)
+            end
           end
         end
 
@@ -93,18 +118,32 @@ describe 'logrotate' do
         context 'with config => { prerotate => "/usr/bin/test", rotate_every => "daily" }' do
           let(:params) { { config: { prerotate: '/usr/bin/test', rotate_every: 'daily' } } }
 
-          it {
-            is_expected.to contain_logrotate__conf('/etc/logrotate.conf').
-              with_prerotate('/usr/bin/test').
-              with_rotate_every('daily')
-          }
+          case facts[:operatingsystem]
+          when 'FreeBSD'
+            it {
+              is_expected.to contain_logrotate__conf('/usr/local/etc/logrotate.conf').
+                with_prerotate('/usr/bin/test').
+                with_rotate_every('daily')
+            }
+          else
+            it {
+              is_expected.to contain_logrotate__conf('/etc/logrotate.conf').
+                with_prerotate('/usr/bin/test').
+                with_rotate_every('daily')
+            }
+          end
         end
 
         context 'with ensure => absent' do
           let(:params) { { ensure_cron_hourly: 'absent' } }
 
-          it { is_expected.to contain_file('/etc/logrotate.d/hourly').with_ensure('absent') }
-          it { is_expected.to contain_file('/etc/cron.hourly/logrotate').with_ensure('absent') }
+          case facts[:operatingsystem]
+          when 'FreeBSD'
+            it { is_expected.to contain_file('/usr/local/etc/logrotate.d/hourly').with_ensure('absent') }
+          else
+            it { is_expected.to contain_file('/etc/logrotate.d/hourly').with_ensure('absent') }
+            it { is_expected.to contain_file('/etc/cron.hourly/logrotate').with_ensure('absent') }
+          end
         end
       end
     end
