@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'logrotate' do
@@ -11,6 +13,7 @@ describe 'logrotate' do
         context 'logrotate class without any parameters' do
           it { is_expected.to compile.with_all_deps }
           it { is_expected.to contain_class('logrotate') }
+
           %w[install config params rules].each do |classs|
             it { is_expected.to contain_class("logrotate::#{classs}") }
           end
@@ -30,9 +33,9 @@ describe 'logrotate' do
               is_expected.to contain_package('logrotate').with_ensure('present')
 
               is_expected.to contain_file('/usr/local/etc/logrotate.d').with('ensure' => 'directory',
-                                                                             'owner'   => 'root',
-                                                                             'group'   => 'wheel',
-                                                                             'mode'    => '0755')
+                                                                             'owner'  => 'root',
+                                                                             'group'  => 'wheel',
+                                                                             'mode'   => '0755')
 
               is_expected.to contain_class('logrotate::defaults')
             end
@@ -59,14 +62,14 @@ describe 'logrotate' do
               is_expected.to contain_package('logrotate').with_ensure('present')
 
               is_expected.to contain_file('/etc/logrotate.d').with('ensure' => 'directory',
-                                                                   'owner'   => 'root',
-                                                                   'group'   => 'root',
-                                                                   'mode'    => '0755')
+                                                                   'owner'  => 'root',
+                                                                   'group'  => 'root',
+                                                                   'mode'   => '0755')
 
               is_expected.to contain_file('/etc/cron.daily/logrotate').with('ensure' => 'present',
-                                                                            'owner'   => 'root',
-                                                                            'group'   => 'root',
-                                                                            'mode'    => '0700')
+                                                                            'owner'  => 'root',
+                                                                            'group'  => 'root',
+                                                                            'mode'   => '0700')
 
               is_expected.to contain_class('logrotate::defaults')
             end

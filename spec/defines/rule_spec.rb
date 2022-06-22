@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'shared_examples'
 
@@ -87,6 +89,7 @@ describe 'logrotate::rule' do
             with_content(%r{^  create$})
         }
       end
+
       describe 'and create_mode => 0777' do
         let(:params) do
           {
@@ -101,7 +104,7 @@ describe 'logrotate::rule' do
         }
       end
 
-      context 'and create_owner => www-data' do
+      context 'and create_owner => www-data with mode' do
         let(:params) do
           {
             path: '/var/log/foo.log',
@@ -283,7 +286,7 @@ describe 'logrotate::rule' do
 
       it {
         is_expected.to contain_file('/etc/logrotate.d/test').
-          with_content(%r{^  olddir \/var\/log\/old$})
+          with_content(%r{^  olddir /var/log/old$})
       }
     end
 
@@ -308,7 +311,7 @@ describe 'logrotate::rule' do
 
       it {
         is_expected.to contain_file('/etc/logrotate.d/test').
-          with_content(%r{postrotate\n    \/bin\/true\n  endscript})
+          with_content(%r{postrotate\n    /bin/true\n  endscript})
       }
     end
 
@@ -322,7 +325,7 @@ describe 'logrotate::rule' do
 
       it {
         is_expected.to contain_file('/etc/logrotate.d/test').
-          with_content(%r{postrotate\n    \/bin\/true\n    \/bin\/false\n  endscript})
+          with_content(%r{postrotate\n    /bin/true\n    /bin/false\n  endscript})
       }
     end
 
@@ -333,7 +336,7 @@ describe 'logrotate::rule' do
 
       it {
         is_expected.to contain_file('/etc/logrotate.d/test').
-          with_content(%r{prerotate\n    \/bin\/true\n  endscript})
+          with_content(%r{prerotate\n    /bin/true\n  endscript})
       }
     end
 
@@ -342,7 +345,7 @@ describe 'logrotate::rule' do
 
       it {
         is_expected.to contain_file('/etc/logrotate.d/test').
-          with_content(%r{prerotate\n    \/bin\/true\n    \/bin\/false\n  endscript})
+          with_content(%r{prerotate\n    /bin/true\n    /bin/false\n  endscript})
       }
     end
 
@@ -353,7 +356,7 @@ describe 'logrotate::rule' do
 
       it {
         is_expected.to contain_file('/etc/logrotate.d/test').
-          with_content(%r{firstaction\n    \/bin\/true\n  endscript})
+          with_content(%r{firstaction\n    /bin/true\n  endscript})
       }
     end
 
@@ -362,7 +365,7 @@ describe 'logrotate::rule' do
 
       it {
         is_expected.to contain_file('/etc/logrotate.d/test').
-          with_content(%r{firstaction\n    \/bin\/true\n    \/bin\/false\n  endscript})
+          with_content(%r{firstaction\n    /bin/true\n    /bin/false\n  endscript})
       }
     end
 
@@ -373,7 +376,7 @@ describe 'logrotate::rule' do
 
       it {
         is_expected.to contain_file('/etc/logrotate.d/test').
-          with_content(%r{lastaction\n    \/bin\/true\n  endscript})
+          with_content(%r{lastaction\n    /bin/true\n  endscript})
       }
     end
 
@@ -382,7 +385,7 @@ describe 'logrotate::rule' do
 
       it {
         is_expected.to contain_file('/etc/logrotate.d/test').\
-          with_content(%r{lastaction\n    \/bin\/true\n    \/bin\/false\n  endscript})
+          with_content(%r{lastaction\n    /bin/true\n    /bin/false\n  endscript})
       }
     end
 
