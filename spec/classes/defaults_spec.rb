@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'logrotate' do
@@ -10,6 +12,7 @@ describe 'logrotate' do
       is_expected.to contain_logrotate__conf('/etc/logrotate.conf')
     }
   end
+
   on_supported_os.each do |os, facts|
     context os, if: facts[:osfamily] == 'Debian' do
       let(:facts) { facts }
@@ -39,6 +42,7 @@ describe 'logrotate' do
           'missingok' => true
         )
       }
+
       it {
         is_expected.to contain_logrotate__rule('btmp').with(
           'rotate_every' => 'monthly',
@@ -51,12 +55,14 @@ describe 'logrotate' do
         )
       }
     end
+
     context os, if: facts[:osfamily] == 'RedHat' do
       let(:facts) { facts }
 
       it {
         is_expected.to contain_logrotate__conf('/etc/logrotate.conf')
       }
+
       it {
         is_expected.to contain_logrotate__rule('wtmp').with(
           'path' => '/var/log/wtmp',
@@ -70,6 +76,7 @@ describe 'logrotate' do
           'rotate_every' => 'monthly'
         )
       }
+
       it {
         is_expected.to contain_logrotate__rule('btmp').with(
           'path' => '/var/log/btmp',
@@ -83,10 +90,12 @@ describe 'logrotate' do
         )
       }
     end
+
     context os, if: facts[:osfamily] == 'Suse' do
       it {
         is_expected.to contain_logrotate__conf('/etc/logrotate.conf')
       }
+
       it {
         is_expected.to contain_logrotate__rule('wtmp').with(
           'path' => '/var/log/wtmp',
@@ -103,25 +112,14 @@ describe 'logrotate' do
         )
       }
     end
+
     context os, if: facts[:osfamily] == 'FreeBSD' do
       let(:facts) { facts }
 
       it {
         is_expected.to contain_logrotate__conf('/usr/local/etc/logrotate.conf')
       }
-      it {
-        is_expected.to contain_logrotate__conf('/usr/local/etc/logrotate.conf').with(
-          'su_user' => 'root',
-          'su_group' => 'wheel'
-        )
-      }
-    end
-    context os, if: facts[:osfamily] == 'FreeBSD' do
-      let(:facts) { facts }
 
-      it {
-        is_expected.to contain_logrotate__conf('/usr/local/etc/logrotate.conf')
-      }
       it {
         is_expected.to contain_logrotate__conf('/usr/local/etc/logrotate.conf').with(
           'su_user' => 'root',
