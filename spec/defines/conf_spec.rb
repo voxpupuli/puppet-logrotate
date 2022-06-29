@@ -107,18 +107,27 @@ describe 'logrotate::conf' do
           it { is_expected.to contain_file('/etc/logrotate.conf').with_ensure('absent') }
         end
 
-        it {
-          is_expected.to contain_class('logrotate')
-        }
+        it { is_expected.to contain_class('logrotate') }
 
-        it {
-          is_expected.to contain_file('/etc/logrotate.conf').with(
-            'owner' => 'root',
-            'group' => 'root',
-            'ensure' => 'present',
-            'mode' => '0644'
-          ).with_content(%r{\ninclude /etc/logrotate.d\n})
-        }
+        if os_facts[:os]['name'] == 'FreeBSD'
+          it {
+            is_expected.to contain_file('/etc/logrotate.conf').with(
+              'owner' => 'root',
+              'group' => 'wheel',
+              'ensure' => 'present',
+              'mode' => '0644'
+            ).with_content(%r{\ninclude /usr/local/etc/logrotate.d\n})
+          }
+        else
+          it {
+            is_expected.to contain_file('/etc/logrotate.conf').with(
+              'owner' => 'root',
+              'group' => 'root',
+              'ensure' => 'present',
+              'mode' => '0644'
+            ).with_content(%r{\ninclude /etc/logrotate.d\n})
+          }
+        end
 
         context 'compresscmd => bzip2' do
           let(:params) { { compresscmd: 'bzip2' } }
@@ -441,14 +450,25 @@ describe 'logrotate::conf' do
       context '=> /etc/logrotate_custom.config' do
         let(:title) { '/etc/logrotate_custom.config' }
 
-        it {
-          is_expected.to contain_file('/etc/logrotate_custom.config').with(
-            'owner' => 'root',
-            'group' => 'root',
-            'ensure' => 'present',
-            'mode' => '0644'
-          ).with_content(%r{\ninclude /etc/logrotate.d\n})
-        }
+        if os_facts[:os]['name'] == 'FreeBSD'
+          it {
+            is_expected.to contain_file('/etc/logrotate_custom.config').with(
+              'owner' => 'root',
+              'group' => 'wheel',
+              'ensure' => 'present',
+              'mode' => '0644'
+            ).with_content(%r{\ninclude /usr/local/etc/logrotate.d\n})
+          }
+        else
+          it {
+            is_expected.to contain_file('/etc/logrotate_custom.config').with(
+              'owner' => 'root',
+              'group' => 'root',
+              'ensure' => 'present',
+              'mode' => '0644'
+            ).with_content(%r{\ninclude /etc/logrotate.d\n})
+          }
+        end
       end
 
       context 'with a non-path title' do
