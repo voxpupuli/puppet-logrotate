@@ -681,10 +681,14 @@ describe 'logrotate::rule' do
         it do
           is_expected.to contain_file("#{config_path}btmp").
             with_content(%r{
-    /var/log/btmp {
-      daily
-      rotate 10
-    }
+# THIS FILE IS AUTOMATICALLY DISTRIBUTED BY PUPPET.  ANY CHANGES WILL BE
+# OVERWRITTEN.
+
+
+/var/log/btmp {
+  daily
+  rotate 10
+}
     })
         end
       end
@@ -704,10 +708,14 @@ describe 'logrotate::rule' do
         it do
           is_expected.to contain_file("#{config_path}wtmp").
             with_content(%r{
-    /var/log/wtmp {
-      daily
-      rotate 10
-    }
+# THIS FILE IS AUTOMATICALLY DISTRIBUTED BY PUPPET.  ANY CHANGES WILL BE
+# OVERWRITTEN.
+
+
+/var/log/wtmp {
+  daily
+  rotate 10
+}
     })
         end
       end
