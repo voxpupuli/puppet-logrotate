@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'logrotate::conf' do
   _, facts = on_supported_os.first
   let(:facts) { facts }
 
-  shared_examples 'error raised' do |param, _|
+  shared_examples 'error raised' do |param, _os|
     context "=> 'foo'" do
       let(:params) { { param.to_sym => 'foo' } }
 
@@ -16,7 +18,7 @@ describe 'logrotate::conf' do
     end
   end
 
-  shared_examples 'error match' do |param, _|
+  shared_examples 'error match' do |param, _os|
     context "=> 'foo'" do
       let(:params) { { param.to_sym => 'foo' } }
 
@@ -38,6 +40,7 @@ describe 'logrotate::conf' do
           with_content(%r{^no(t|)#{param}$})
       }
     end
+
     context "#{param} => true" do
       let(:params) { { param.to_sym => true } }
 
@@ -106,13 +109,14 @@ describe 'logrotate::conf' do
     it {
       is_expected.to contain_class('logrotate')
     }
+
     it {
       is_expected.to contain_file('/etc/logrotate.conf').with(
         'owner' => 'root',
         'group' => 'root',
         'ensure' => 'present',
         'mode' => '0644'
-      ).with_content(%r{\ninclude \/etc\/logrotate.d\n})
+      ).with_content(%r{\ninclude /etc/logrotate.d\n})
     }
 
     context 'compresscmd => bzip2' do
@@ -319,6 +323,7 @@ describe 'logrotate::conf' do
           is_expected.to contain_file('/etc/logrotate.conf').
             with_content(%r{^mail test@example.com$})
         }
+
         %w[mailfirst maillast].each do |value|
           context "mail_when => #{value}" do
             let(:params) do
@@ -350,7 +355,7 @@ describe 'logrotate::conf' do
 
         it {
           is_expected.to contain_file('/etc/logrotate.conf').
-            with_content(%r{^olddir \/var\/log\/old$})
+            with_content(%r{^olddir /var/log/old$})
         }
       end
 
@@ -370,7 +375,7 @@ describe 'logrotate::conf' do
 
         it {
           is_expected.to contain_file('/etc/logrotate.conf').
-            with_content(%r{#{param}\n\s{2}\/bin\/true\nendscript})
+            with_content(%r{#{param}\n\s{2}/bin/true\nendscript})
         }
       end
     end
@@ -431,6 +436,7 @@ describe 'logrotate::conf' do
       it_behaves_like 'integer', param
     end
   end
+
   context '=> /etc/logrotate_custom.config' do
     let(:title) { '/etc/logrotate_custom.config' }
 
@@ -440,9 +446,10 @@ describe 'logrotate::conf' do
         'group' => 'root',
         'ensure' => 'present',
         'mode' => '0644'
-      ).with_content(%r{\ninclude \/etc\/logrotate.d\n})
+      ).with_content(%r{\ninclude /etc/logrotate.d\n})
     }
   end
+
   context 'with a non-path title' do
     let(:title) { 'foo bar' }
 
