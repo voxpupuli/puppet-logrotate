@@ -720,7 +720,7 @@ describe 'logrotate::rule' do
     end
     let(:facts) do
       {
-        os: { family: 'RedHat' },
+        os: { family: 'RedHat', release: { major: '7' } },
         operatingsystemmajrelease: 7
       }
     end

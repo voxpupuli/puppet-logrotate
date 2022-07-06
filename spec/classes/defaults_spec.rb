@@ -67,7 +67,7 @@ describe 'logrotate' do
         is_expected.to contain_logrotate__rule('wtmp').with(
           'path' => '/var/log/wtmp',
           'create_mode' => '0664',
-          'missingok' => false,
+          'missingok' => facts[:operatingsystemmajrelease].to_i >= 8,
           'minsize' => '1M',
           'create' => true,
           'create_owner' => 'root',
