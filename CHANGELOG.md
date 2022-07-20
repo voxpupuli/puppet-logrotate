@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v6.1.0](https://github.com/voxpupuli/puppet-logrotate/tree/v6.1.0) (2022-07-14)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-logrotate/compare/v6.0.0...v6.1.0)
+
+**Implemented enhancements:**
+
+- Update defaults to match RHEL8/9 [\#195](https://github.com/voxpupuli/puppet-logrotate/pull/195) ([jcpunk](https://github.com/jcpunk))
+
+**Fixed bugs:**
+
+- Fix FreeBSD onwer/group [\#188](https://github.com/voxpupuli/puppet-logrotate/pull/188) ([kapouik](https://github.com/kapouik))
+
+**Merged pull requests:**
+
+- Drop old unused beaker nodesets [\#198](https://github.com/voxpupuli/puppet-logrotate/pull/198) ([ekohl](https://github.com/ekohl))
+
 ## [v6.0.0](https://github.com/voxpupuli/puppet-logrotate/tree/v6.0.0) (2021-09-28)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-logrotate/compare/v5.0.0...v6.0.0)
