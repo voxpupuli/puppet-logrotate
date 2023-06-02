@@ -32,12 +32,6 @@
       ]
     },
     {
-      "operatingsystem": "Debian",
-      "operatingsystemrelease": [
-        "9"
-      ]
-    },
-    {
       "operatingsystem": "Gentoo",
       "operatingsystemrelease": [
         "1.0"
