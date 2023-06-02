@@ -16,7 +16,7 @@ class logrotate::defaults (
   if $create_base_rules {
     $rules.each |$rule_name, $params| {
       if !defined(Logrotate::Rule[$rule_name]) {
-        $_merged_params = merge($rule_default,$params)
+        $_merged_params = stdlib::merge($rule_default,$params)
         logrotate::rule { $rule_name:
           * => $_merged_params,
         }
