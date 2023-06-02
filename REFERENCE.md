@@ -7,25 +7,25 @@
 ### Classes
 
 * [`logrotate`](#logrotate)
-* [`logrotate::config`](#logrotateconfig): logrotate config
-* [`logrotate::defaults`](#logrotatedefaults): apply defaults
-* [`logrotate::hourly`](#logrotatehourly): Internal: Configure a host for hourly logrotate jobs.  ensure - The desired state of hourly logrotate support.  Valid values are          'ab
-* [`logrotate::install`](#logrotateinstall): make sure logrotate is installed
-* [`logrotate::params`](#logrotateparams): == Class: logrotate::params  Params class for logrotate module
-* [`logrotate::rules`](#logrotaterules): apply user-defined rules
+* [`logrotate::config`](#logrotate--config): logrotate config
+* [`logrotate::defaults`](#logrotate--defaults): apply defaults
+* [`logrotate::hourly`](#logrotate--hourly): Internal: Configure a host for hourly logrotate jobs.  ensure - The desired state of hourly logrotate support.  Valid values are          'ab
+* [`logrotate::install`](#logrotate--install): make sure logrotate is installed
+* [`logrotate::params`](#logrotate--params): == Class: logrotate::params  Params class for logrotate module
+* [`logrotate::rules`](#logrotate--rules): apply user-defined rules
 
 ### Defined types
 
-* [`logrotate::conf`](#logrotateconf): Internal: Install and configure logrotate defaults file, usually   /etc/logrotate.conf  see logrotate::Conf for description of options.  Exam
-* [`logrotate::cron`](#logrotatecron)
-* [`logrotate::rule`](#logrotaterule): Public: Configure logrotate to rotate a logfile.  namevar         - The String name of the rule. path            - The path String to the log
+* [`logrotate::conf`](#logrotate--conf): Internal: Install and configure logrotate defaults file, usually   /etc/logrotate.conf  see logrotate::Conf for description of options.  Exam
+* [`logrotate::cron`](#logrotate--cron)
+* [`logrotate::rule`](#logrotate--rule): Public: Configure logrotate to rotate a logfile.  namevar         - The String name of the rule. path            - The path String to the log
 
 ### Data types
 
-* [`Logrotate::Commands`](#logrotatecommands)
-* [`Logrotate::Every`](#logrotateevery)
-* [`Logrotate::Path`](#logrotatepath)
-* [`Logrotate::Size`](#logrotatesize)
+* [`Logrotate::Commands`](#Logrotate--Commands)
+* [`Logrotate::Every`](#Logrotate--Every)
+* [`Logrotate::Path`](#Logrotate--Path)
+* [`Logrotate::Size`](#Logrotate--Size)
 
 ## Classes
 
@@ -37,34 +37,34 @@ The logrotate class.
 
 The following parameters are available in the `logrotate` class:
 
-* [`ensure`](#ensure)
-* [`hieramerge`](#hieramerge)
-* [`manage_cron_daily`](#manage_cron_daily)
-* [`manage_cron_hourly`](#manage_cron_hourly)
-* [`ensure_cron_daily`](#ensure_cron_daily)
-* [`ensure_cron_hourly`](#ensure_cron_hourly)
-* [`create_base_rules`](#create_base_rules)
-* [`purge_configdir`](#purge_configdir)
-* [`package`](#package)
-* [`rules`](#rules)
-* [`config`](#config)
-* [`cron_daily_hour`](#cron_daily_hour)
-* [`cron_daily_minute`](#cron_daily_minute)
-* [`cron_hourly_minute`](#cron_hourly_minute)
-* [`cron_file_mode`](#cron_file_mode)
-* [`configdir`](#configdir)
-* [`logrotate_bin`](#logrotate_bin)
-* [`logrotate_conf`](#logrotate_conf)
-* [`logrotate_conf_mode`](#logrotate_conf_mode)
-* [`manage_package`](#manage_package)
-* [`rules_configdir`](#rules_configdir)
-* [`rules_configdir_mode`](#rules_configdir_mode)
-* [`root_user`](#root_user)
-* [`root_group`](#root_group)
-* [`logrotate_args`](#logrotate_args)
-* [`cron_always_output`](#cron_always_output)
+* [`ensure`](#-logrotate--ensure)
+* [`hieramerge`](#-logrotate--hieramerge)
+* [`manage_cron_daily`](#-logrotate--manage_cron_daily)
+* [`manage_cron_hourly`](#-logrotate--manage_cron_hourly)
+* [`ensure_cron_daily`](#-logrotate--ensure_cron_daily)
+* [`ensure_cron_hourly`](#-logrotate--ensure_cron_hourly)
+* [`create_base_rules`](#-logrotate--create_base_rules)
+* [`purge_configdir`](#-logrotate--purge_configdir)
+* [`package`](#-logrotate--package)
+* [`rules`](#-logrotate--rules)
+* [`config`](#-logrotate--config)
+* [`cron_daily_hour`](#-logrotate--cron_daily_hour)
+* [`cron_daily_minute`](#-logrotate--cron_daily_minute)
+* [`cron_hourly_minute`](#-logrotate--cron_hourly_minute)
+* [`cron_file_mode`](#-logrotate--cron_file_mode)
+* [`configdir`](#-logrotate--configdir)
+* [`logrotate_bin`](#-logrotate--logrotate_bin)
+* [`logrotate_conf`](#-logrotate--logrotate_conf)
+* [`logrotate_conf_mode`](#-logrotate--logrotate_conf_mode)
+* [`manage_package`](#-logrotate--manage_package)
+* [`rules_configdir`](#-logrotate--rules_configdir)
+* [`rules_configdir_mode`](#-logrotate--rules_configdir_mode)
+* [`root_user`](#-logrotate--root_user)
+* [`root_group`](#-logrotate--root_group)
+* [`logrotate_args`](#-logrotate--logrotate_args)
+* [`cron_always_output`](#-logrotate--cron_always_output)
 
-##### <a name="ensure"></a>`ensure`
+##### <a name="-logrotate--ensure"></a>`ensure`
 
 Data type: `String`
 
@@ -72,31 +72,31 @@ Data type: `String`
 
 Default value: `present`
 
-##### <a name="hieramerge"></a>`hieramerge`
+##### <a name="-logrotate--hieramerge"></a>`hieramerge`
 
 Data type: `Boolean`
 
 
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="manage_cron_daily"></a>`manage_cron_daily`
-
-Data type: `Boolean`
-
-
-
-Default value: ``true``
-
-##### <a name="manage_cron_hourly"></a>`manage_cron_hourly`
+##### <a name="-logrotate--manage_cron_daily"></a>`manage_cron_daily`
 
 Data type: `Boolean`
 
 
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="ensure_cron_daily"></a>`ensure_cron_daily`
+##### <a name="-logrotate--manage_cron_hourly"></a>`manage_cron_hourly`
+
+Data type: `Boolean`
+
+
+
+Default value: `true`
+
+##### <a name="-logrotate--ensure_cron_daily"></a>`ensure_cron_daily`
 
 Data type: `Enum[present,absent]`
 
@@ -104,7 +104,7 @@ Data type: `Enum[present,absent]`
 
 Default value: `'present'`
 
-##### <a name="ensure_cron_hourly"></a>`ensure_cron_hourly`
+##### <a name="-logrotate--ensure_cron_hourly"></a>`ensure_cron_hourly`
 
 Data type: `Enum[present,absent]`
 
@@ -112,23 +112,23 @@ Data type: `Enum[present,absent]`
 
 Default value: `'present'`
 
-##### <a name="create_base_rules"></a>`create_base_rules`
+##### <a name="-logrotate--create_base_rules"></a>`create_base_rules`
 
 Data type: `Boolean`
 
 
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="purge_configdir"></a>`purge_configdir`
+##### <a name="-logrotate--purge_configdir"></a>`purge_configdir`
 
 Data type: `Boolean`
 
 
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="package"></a>`package`
+##### <a name="-logrotate--package"></a>`package`
 
 Data type: `String`
 
@@ -136,7 +136,7 @@ Data type: `String`
 
 Default value: `'logrotate'`
 
-##### <a name="rules"></a>`rules`
+##### <a name="-logrotate--rules"></a>`rules`
 
 Data type: `Hash`
 
@@ -144,15 +144,15 @@ Data type: `Hash`
 
 Default value: `{}`
 
-##### <a name="config"></a>`config`
+##### <a name="-logrotate--config"></a>`config`
 
 Data type: `Optional[Hash]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="cron_daily_hour"></a>`cron_daily_hour`
+##### <a name="-logrotate--cron_daily_hour"></a>`cron_daily_hour`
 
 Data type: `Integer[0,23]`
 
@@ -160,7 +160,7 @@ Data type: `Integer[0,23]`
 
 Default value: `$logrotate::params::cron_daily_hour`
 
-##### <a name="cron_daily_minute"></a>`cron_daily_minute`
+##### <a name="-logrotate--cron_daily_minute"></a>`cron_daily_minute`
 
 Data type: `Integer[0,59]`
 
@@ -168,7 +168,7 @@ Data type: `Integer[0,59]`
 
 Default value: `$logrotate::params::cron_daily_minute`
 
-##### <a name="cron_hourly_minute"></a>`cron_hourly_minute`
+##### <a name="-logrotate--cron_hourly_minute"></a>`cron_hourly_minute`
 
 Data type: `Integer[0,59]`
 
@@ -176,7 +176,7 @@ Data type: `Integer[0,59]`
 
 Default value: `$logrotate::params::cron_hourly_minute`
 
-##### <a name="cron_file_mode"></a>`cron_file_mode`
+##### <a name="-logrotate--cron_file_mode"></a>`cron_file_mode`
 
 Data type: `Stdlib::Filemode`
 
@@ -184,7 +184,7 @@ Data type: `Stdlib::Filemode`
 
 Default value: `$logrotate::params::cron_file_mode`
 
-##### <a name="configdir"></a>`configdir`
+##### <a name="-logrotate--configdir"></a>`configdir`
 
 Data type: `String`
 
@@ -192,7 +192,7 @@ Data type: `String`
 
 Default value: `$logrotate::params::configdir`
 
-##### <a name="logrotate_bin"></a>`logrotate_bin`
+##### <a name="-logrotate--logrotate_bin"></a>`logrotate_bin`
 
 Data type: `String`
 
@@ -200,7 +200,7 @@ Data type: `String`
 
 Default value: `$logrotate::params::logrotate_bin`
 
-##### <a name="logrotate_conf"></a>`logrotate_conf`
+##### <a name="-logrotate--logrotate_conf"></a>`logrotate_conf`
 
 Data type: `String`
 
@@ -208,7 +208,7 @@ Data type: `String`
 
 Default value: `$logrotate::params::logrotate_conf`
 
-##### <a name="logrotate_conf_mode"></a>`logrotate_conf_mode`
+##### <a name="-logrotate--logrotate_conf_mode"></a>`logrotate_conf_mode`
 
 Data type: `Stdlib::Filemode`
 
@@ -216,7 +216,7 @@ Data type: `Stdlib::Filemode`
 
 Default value: `$logrotate::params::logrotate_conf_mode`
 
-##### <a name="manage_package"></a>`manage_package`
+##### <a name="-logrotate--manage_package"></a>`manage_package`
 
 Data type: `Boolean`
 
@@ -224,7 +224,7 @@ Data type: `Boolean`
 
 Default value: `$logrotate::params::manage_package`
 
-##### <a name="rules_configdir"></a>`rules_configdir`
+##### <a name="-logrotate--rules_configdir"></a>`rules_configdir`
 
 Data type: `String`
 
@@ -232,7 +232,7 @@ Data type: `String`
 
 Default value: `$logrotate::params::rules_configdir`
 
-##### <a name="rules_configdir_mode"></a>`rules_configdir_mode`
+##### <a name="-logrotate--rules_configdir_mode"></a>`rules_configdir_mode`
 
 Data type: `Stdlib::Filemode`
 
@@ -240,7 +240,7 @@ Data type: `Stdlib::Filemode`
 
 Default value: `$logrotate::params::rules_configdir_mode`
 
-##### <a name="root_user"></a>`root_user`
+##### <a name="-logrotate--root_user"></a>`root_user`
 
 Data type: `String`
 
@@ -248,7 +248,7 @@ Data type: `String`
 
 Default value: `$logrotate::params::root_user`
 
-##### <a name="root_group"></a>`root_group`
+##### <a name="-logrotate--root_group"></a>`root_group`
 
 Data type: `String`
 
@@ -256,7 +256,7 @@ Data type: `String`
 
 Default value: `$logrotate::params::root_group`
 
-##### <a name="logrotate_args"></a>`logrotate_args`
+##### <a name="-logrotate--logrotate_args"></a>`logrotate_args`
 
 Data type: `Array[String[1]]`
 
@@ -264,19 +264,19 @@ Data type: `Array[String[1]]`
 
 Default value: `[]`
 
-##### <a name="cron_always_output"></a>`cron_always_output`
+##### <a name="-logrotate--cron_always_output"></a>`cron_always_output`
 
 Data type: `Boolean`
 
 
 
-Default value: ``false``
+Default value: `false`
 
-### <a name="logrotateconfig"></a>`logrotate::config`
+### <a name="logrotate--config"></a>`logrotate::config`
 
 logrotate config
 
-### <a name="logrotatedefaults"></a>`logrotate::defaults`
+### <a name="logrotate--defaults"></a>`logrotate::defaults`
 
 apply defaults
 
@@ -284,11 +284,11 @@ apply defaults
 
 The following parameters are available in the `logrotate::defaults` class:
 
-* [`create_base_rules`](#create_base_rules)
-* [`rules`](#rules)
-* [`rule_default`](#rule_default)
+* [`create_base_rules`](#-logrotate--defaults--create_base_rules)
+* [`rules`](#-logrotate--defaults--rules)
+* [`rule_default`](#-logrotate--defaults--rule_default)
 
-##### <a name="create_base_rules"></a>`create_base_rules`
+##### <a name="-logrotate--defaults--create_base_rules"></a>`create_base_rules`
 
 Data type: `Any`
 
@@ -296,7 +296,7 @@ Data type: `Any`
 
 Default value: `$logrotate::create_base_rules`
 
-##### <a name="rules"></a>`rules`
+##### <a name="-logrotate--defaults--rules"></a>`rules`
 
 Data type: `Any`
 
@@ -304,7 +304,7 @@ Data type: `Any`
 
 Default value: `$logrotate::params::base_rules`
 
-##### <a name="rule_default"></a>`rule_default`
+##### <a name="-logrotate--defaults--rule_default"></a>`rule_default`
 
 Data type: `Any`
 
@@ -312,7 +312,7 @@ Data type: `Any`
 
 Default value: `$logrotate::params::rule_default`
 
-### <a name="logrotatehourly"></a>`logrotate::hourly`
+### <a name="logrotate--hourly"></a>`logrotate::hourly`
 
 Internal: Configure a host for hourly logrotate jobs.
 
@@ -332,17 +332,17 @@ Examples
     ensure_cron_hourly => absent,
   }
 
-### <a name="logrotateinstall"></a>`logrotate::install`
+### <a name="logrotate--install"></a>`logrotate::install`
 
 make sure logrotate is installed
 
-### <a name="logrotateparams"></a>`logrotate::params`
+### <a name="logrotate--params"></a>`logrotate::params`
 
 == Class: logrotate::params
 
 Params class for logrotate module
 
-### <a name="logrotaterules"></a>`logrotate::rules`
+### <a name="logrotate--rules"></a>`logrotate::rules`
 
 apply user-defined rules
 
@@ -350,9 +350,9 @@ apply user-defined rules
 
 The following parameters are available in the `logrotate::rules` class:
 
-* [`rules`](#rules)
+* [`rules`](#-logrotate--rules--rules)
 
-##### <a name="rules"></a>`rules`
+##### <a name="-logrotate--rules--rules"></a>`rules`
 
 Data type: `Any`
 
@@ -362,7 +362,7 @@ Default value: `$logrotate::rules`
 
 ## Defined types
 
-### <a name="logrotateconf"></a>`logrotate::conf`
+### <a name="logrotate--conf"></a>`logrotate::conf`
 
 Internal: Install and configure logrotate defaults file, usually
   /etc/logrotate.conf
@@ -377,48 +377,48 @@ Examples
 
 The following parameters are available in the `logrotate::conf` defined type:
 
-* [`path`](#path)
-* [`ensure`](#ensure)
-* [`compress`](#compress)
-* [`compresscmd`](#compresscmd)
-* [`compressext`](#compressext)
-* [`compressoptions`](#compressoptions)
-* [`copy`](#copy)
-* [`copytruncate`](#copytruncate)
-* [`create`](#create)
-* [`create_mode`](#create_mode)
-* [`create_owner`](#create_owner)
-* [`create_group`](#create_group)
-* [`dateext`](#dateext)
-* [`dateformat`](#dateformat)
-* [`dateyesterday`](#dateyesterday)
-* [`delaycompress`](#delaycompress)
-* [`extension`](#extension)
-* [`ifempty`](#ifempty)
-* [`mail`](#mail)
-* [`mail_when`](#mail_when)
-* [`maxage`](#maxage)
-* [`minsize`](#minsize)
-* [`maxsize`](#maxsize)
-* [`missingok`](#missingok)
-* [`olddir`](#olddir)
-* [`postrotate`](#postrotate)
-* [`prerotate`](#prerotate)
-* [`firstaction`](#firstaction)
-* [`lastaction`](#lastaction)
-* [`rotate`](#rotate)
-* [`rotate_every`](#rotate_every)
-* [`size`](#size)
-* [`sharedscripts`](#sharedscripts)
-* [`shred`](#shred)
-* [`shredcycles`](#shredcycles)
-* [`start`](#start)
-* [`su`](#su)
-* [`su_user`](#su_user)
-* [`su_group`](#su_group)
-* [`uncompresscmd`](#uncompresscmd)
+* [`path`](#-logrotate--conf--path)
+* [`ensure`](#-logrotate--conf--ensure)
+* [`compress`](#-logrotate--conf--compress)
+* [`compresscmd`](#-logrotate--conf--compresscmd)
+* [`compressext`](#-logrotate--conf--compressext)
+* [`compressoptions`](#-logrotate--conf--compressoptions)
+* [`copy`](#-logrotate--conf--copy)
+* [`copytruncate`](#-logrotate--conf--copytruncate)
+* [`create`](#-logrotate--conf--create)
+* [`create_mode`](#-logrotate--conf--create_mode)
+* [`create_owner`](#-logrotate--conf--create_owner)
+* [`create_group`](#-logrotate--conf--create_group)
+* [`dateext`](#-logrotate--conf--dateext)
+* [`dateformat`](#-logrotate--conf--dateformat)
+* [`dateyesterday`](#-logrotate--conf--dateyesterday)
+* [`delaycompress`](#-logrotate--conf--delaycompress)
+* [`extension`](#-logrotate--conf--extension)
+* [`ifempty`](#-logrotate--conf--ifempty)
+* [`mail`](#-logrotate--conf--mail)
+* [`mail_when`](#-logrotate--conf--mail_when)
+* [`maxage`](#-logrotate--conf--maxage)
+* [`minsize`](#-logrotate--conf--minsize)
+* [`maxsize`](#-logrotate--conf--maxsize)
+* [`missingok`](#-logrotate--conf--missingok)
+* [`olddir`](#-logrotate--conf--olddir)
+* [`postrotate`](#-logrotate--conf--postrotate)
+* [`prerotate`](#-logrotate--conf--prerotate)
+* [`firstaction`](#-logrotate--conf--firstaction)
+* [`lastaction`](#-logrotate--conf--lastaction)
+* [`rotate`](#-logrotate--conf--rotate)
+* [`rotate_every`](#-logrotate--conf--rotate_every)
+* [`size`](#-logrotate--conf--size)
+* [`sharedscripts`](#-logrotate--conf--sharedscripts)
+* [`shred`](#-logrotate--conf--shred)
+* [`shredcycles`](#-logrotate--conf--shredcycles)
+* [`start`](#-logrotate--conf--start)
+* [`su`](#-logrotate--conf--su)
+* [`su_user`](#-logrotate--conf--su_user)
+* [`su_group`](#-logrotate--conf--su_group)
+* [`uncompresscmd`](#-logrotate--conf--uncompresscmd)
 
-##### <a name="path"></a>`path`
+##### <a name="-logrotate--conf--path"></a>`path`
 
 Data type: `Stdlib::Unixpath`
 
@@ -426,7 +426,7 @@ Data type: `Stdlib::Unixpath`
 
 Default value: `$name`
 
-##### <a name="ensure"></a>`ensure`
+##### <a name="-logrotate--conf--ensure"></a>`ensure`
 
 Data type: `Enum['absent','present']`
 
@@ -434,223 +434,223 @@ Data type: `Enum['absent','present']`
 
 Default value: `'present'`
 
-##### <a name="compress"></a>`compress`
+##### <a name="-logrotate--conf--compress"></a>`compress`
 
 Data type: `Optional[Boolean]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="compresscmd"></a>`compresscmd`
-
-Data type: `Optional[String]`
-
-
-
-Default value: ``undef``
-
-##### <a name="compressext"></a>`compressext`
+##### <a name="-logrotate--conf--compresscmd"></a>`compresscmd`
 
 Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="compressoptions"></a>`compressoptions`
+##### <a name="-logrotate--conf--compressext"></a>`compressext`
 
 Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="copy"></a>`copy`
+##### <a name="-logrotate--conf--compressoptions"></a>`compressoptions`
+
+Data type: `Optional[String]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--copy"></a>`copy`
 
 Data type: `Optional[Boolean]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="copytruncate"></a>`copytruncate`
+##### <a name="-logrotate--conf--copytruncate"></a>`copytruncate`
 
 Data type: `Optional[Boolean]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="create"></a>`create`
+##### <a name="-logrotate--conf--create"></a>`create`
 
 Data type: `Boolean`
 
 
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="create_mode"></a>`create_mode`
-
-Data type: `Optional[String]`
-
-
-
-Default value: ``undef``
-
-##### <a name="create_owner"></a>`create_owner`
+##### <a name="-logrotate--conf--create_mode"></a>`create_mode`
 
 Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="create_group"></a>`create_group`
+##### <a name="-logrotate--conf--create_owner"></a>`create_owner`
 
 Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="dateext"></a>`dateext`
+##### <a name="-logrotate--conf--create_group"></a>`create_group`
+
+Data type: `Optional[String]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--dateext"></a>`dateext`
 
 Data type: `Optional[Boolean]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="dateformat"></a>`dateformat`
-
-Data type: `Optional[String]`
-
-
-
-Default value: ``undef``
-
-##### <a name="dateyesterday"></a>`dateyesterday`
-
-Data type: `Optional[Boolean]`
-
-
-
-Default value: ``undef``
-
-##### <a name="delaycompress"></a>`delaycompress`
-
-Data type: `Optional[Boolean]`
-
-
-
-Default value: ``undef``
-
-##### <a name="extension"></a>`extension`
+##### <a name="-logrotate--conf--dateformat"></a>`dateformat`
 
 Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="ifempty"></a>`ifempty`
+##### <a name="-logrotate--conf--dateyesterday"></a>`dateyesterday`
 
 Data type: `Optional[Boolean]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="mail"></a>`mail`
+##### <a name="-logrotate--conf--delaycompress"></a>`delaycompress`
+
+Data type: `Optional[Boolean]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--extension"></a>`extension`
+
+Data type: `Optional[String]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--ifempty"></a>`ifempty`
+
+Data type: `Optional[Boolean]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--mail"></a>`mail`
 
 Data type: `Optional[Variant[String,Boolean]]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="mail_when"></a>`mail_when`
+##### <a name="-logrotate--conf--mail_when"></a>`mail_when`
 
 Data type: `Optional[Enum['mailfirst', 'maillast']]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="maxage"></a>`maxage`
+##### <a name="-logrotate--conf--maxage"></a>`maxage`
 
 Data type: `Optional[Integer]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="minsize"></a>`minsize`
-
-Data type: `Optional[Logrotate::Size]`
-
-
-
-Default value: ``undef``
-
-##### <a name="maxsize"></a>`maxsize`
+##### <a name="-logrotate--conf--minsize"></a>`minsize`
 
 Data type: `Optional[Logrotate::Size]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="missingok"></a>`missingok`
+##### <a name="-logrotate--conf--maxsize"></a>`maxsize`
+
+Data type: `Optional[Logrotate::Size]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--missingok"></a>`missingok`
 
 Data type: `Optional[Boolean]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="olddir"></a>`olddir`
+##### <a name="-logrotate--conf--olddir"></a>`olddir`
 
 Data type: `Optional[Variant[Boolean,String]]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="postrotate"></a>`postrotate`
-
-Data type: `Optional[String]`
-
-
-
-Default value: ``undef``
-
-##### <a name="prerotate"></a>`prerotate`
+##### <a name="-logrotate--conf--postrotate"></a>`postrotate`
 
 Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="firstaction"></a>`firstaction`
-
-Data type: `Optional[String]`
-
-
-
-Default value: ``undef``
-
-##### <a name="lastaction"></a>`lastaction`
+##### <a name="-logrotate--conf--prerotate"></a>`prerotate`
 
 Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="rotate"></a>`rotate`
+##### <a name="-logrotate--conf--firstaction"></a>`firstaction`
+
+Data type: `Optional[String]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--lastaction"></a>`lastaction`
+
+Data type: `Optional[String]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--rotate"></a>`rotate`
 
 Data type: `Integer`
 
@@ -658,7 +658,7 @@ Data type: `Integer`
 
 Default value: `4`
 
-##### <a name="rotate_every"></a>`rotate_every`
+##### <a name="-logrotate--conf--rotate_every"></a>`rotate_every`
 
 Data type: `Logrotate::Every`
 
@@ -666,63 +666,55 @@ Data type: `Logrotate::Every`
 
 Default value: `'weekly'`
 
-##### <a name="size"></a>`size`
+##### <a name="-logrotate--conf--size"></a>`size`
 
 Data type: `Optional[Logrotate::Size]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="sharedscripts"></a>`sharedscripts`
-
-Data type: `Optional[Boolean]`
-
-
-
-Default value: ``undef``
-
-##### <a name="shred"></a>`shred`
+##### <a name="-logrotate--conf--sharedscripts"></a>`sharedscripts`
 
 Data type: `Optional[Boolean]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="shredcycles"></a>`shredcycles`
+##### <a name="-logrotate--conf--shred"></a>`shred`
+
+Data type: `Optional[Boolean]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--shredcycles"></a>`shredcycles`
 
 Data type: `Optional[Integer]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="start"></a>`start`
+##### <a name="-logrotate--conf--start"></a>`start`
 
 Data type: `Optional[Integer]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="su"></a>`su`
+##### <a name="-logrotate--conf--su"></a>`su`
 
 Data type: `Boolean`
 
 
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="su_user"></a>`su_user`
-
-Data type: `String`
-
-
-
-Default value: `'root'`
-
-##### <a name="su_group"></a>`su_group`
+##### <a name="-logrotate--conf--su_user"></a>`su_user`
 
 Data type: `String`
 
@@ -730,15 +722,23 @@ Data type: `String`
 
 Default value: `'root'`
 
-##### <a name="uncompresscmd"></a>`uncompresscmd`
+##### <a name="-logrotate--conf--su_group"></a>`su_group`
+
+Data type: `String`
+
+
+
+Default value: `'root'`
+
+##### <a name="-logrotate--conf--uncompresscmd"></a>`uncompresscmd`
 
 Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-### <a name="logrotatecron"></a>`logrotate::cron`
+### <a name="logrotate--cron"></a>`logrotate::cron`
 
 The logrotate::cron class.
 
@@ -746,9 +746,9 @@ The logrotate::cron class.
 
 The following parameters are available in the `logrotate::cron` defined type:
 
-* [`ensure`](#ensure)
+* [`ensure`](#-logrotate--cron--ensure)
 
-##### <a name="ensure"></a>`ensure`
+##### <a name="-logrotate--cron--ensure"></a>`ensure`
 
 Data type: `Any`
 
@@ -756,7 +756,7 @@ Data type: `Any`
 
 Default value: `'present'`
 
-### <a name="logrotaterule"></a>`logrotate::rule`
+### <a name="logrotate--rule"></a>`logrotate::rule`
 
 Public: Configure logrotate to rotate a logfile.
 
@@ -889,50 +889,50 @@ Examples
 
 The following parameters are available in the `logrotate::rule` defined type:
 
-* [`rulename`](#rulename)
-* [`ensure`](#ensure)
-* [`custom_cfg`](#custom_cfg)
-* [`path`](#path)
-* [`compress`](#compress)
-* [`compresscmd`](#compresscmd)
-* [`compressext`](#compressext)
-* [`compressoptions`](#compressoptions)
-* [`copy`](#copy)
-* [`copytruncate`](#copytruncate)
-* [`create`](#create)
-* [`create_mode`](#create_mode)
-* [`create_owner`](#create_owner)
-* [`create_group`](#create_group)
-* [`dateext`](#dateext)
-* [`dateformat`](#dateformat)
-* [`dateyesterday`](#dateyesterday)
-* [`delaycompress`](#delaycompress)
-* [`extension`](#extension)
-* [`ifempty`](#ifempty)
-* [`mail`](#mail)
-* [`mail_when`](#mail_when)
-* [`maxage`](#maxage)
-* [`minsize`](#minsize)
-* [`maxsize`](#maxsize)
-* [`missingok`](#missingok)
-* [`olddir`](#olddir)
-* [`postrotate`](#postrotate)
-* [`prerotate`](#prerotate)
-* [`firstaction`](#firstaction)
-* [`lastaction`](#lastaction)
-* [`rotate`](#rotate)
-* [`rotate_every`](#rotate_every)
-* [`size`](#size)
-* [`sharedscripts`](#sharedscripts)
-* [`shred`](#shred)
-* [`shredcycles`](#shredcycles)
-* [`start`](#start)
-* [`su`](#su)
-* [`su_user`](#su_user)
-* [`su_group`](#su_group)
-* [`uncompresscmd`](#uncompresscmd)
+* [`rulename`](#-logrotate--rule--rulename)
+* [`ensure`](#-logrotate--rule--ensure)
+* [`custom_cfg`](#-logrotate--rule--custom_cfg)
+* [`path`](#-logrotate--rule--path)
+* [`compress`](#-logrotate--rule--compress)
+* [`compresscmd`](#-logrotate--rule--compresscmd)
+* [`compressext`](#-logrotate--rule--compressext)
+* [`compressoptions`](#-logrotate--rule--compressoptions)
+* [`copy`](#-logrotate--rule--copy)
+* [`copytruncate`](#-logrotate--rule--copytruncate)
+* [`create`](#-logrotate--rule--create)
+* [`create_mode`](#-logrotate--rule--create_mode)
+* [`create_owner`](#-logrotate--rule--create_owner)
+* [`create_group`](#-logrotate--rule--create_group)
+* [`dateext`](#-logrotate--rule--dateext)
+* [`dateformat`](#-logrotate--rule--dateformat)
+* [`dateyesterday`](#-logrotate--rule--dateyesterday)
+* [`delaycompress`](#-logrotate--rule--delaycompress)
+* [`extension`](#-logrotate--rule--extension)
+* [`ifempty`](#-logrotate--rule--ifempty)
+* [`mail`](#-logrotate--rule--mail)
+* [`mail_when`](#-logrotate--rule--mail_when)
+* [`maxage`](#-logrotate--rule--maxage)
+* [`minsize`](#-logrotate--rule--minsize)
+* [`maxsize`](#-logrotate--rule--maxsize)
+* [`missingok`](#-logrotate--rule--missingok)
+* [`olddir`](#-logrotate--rule--olddir)
+* [`postrotate`](#-logrotate--rule--postrotate)
+* [`prerotate`](#-logrotate--rule--prerotate)
+* [`firstaction`](#-logrotate--rule--firstaction)
+* [`lastaction`](#-logrotate--rule--lastaction)
+* [`rotate`](#-logrotate--rule--rotate)
+* [`rotate_every`](#-logrotate--rule--rotate_every)
+* [`size`](#-logrotate--rule--size)
+* [`sharedscripts`](#-logrotate--rule--sharedscripts)
+* [`shred`](#-logrotate--rule--shred)
+* [`shredcycles`](#-logrotate--rule--shredcycles)
+* [`start`](#-logrotate--rule--start)
+* [`su`](#-logrotate--rule--su)
+* [`su_user`](#-logrotate--rule--su_user)
+* [`su_group`](#-logrotate--rule--su_group)
+* [`uncompresscmd`](#-logrotate--rule--uncompresscmd)
 
-##### <a name="rulename"></a>`rulename`
+##### <a name="-logrotate--rule--rulename"></a>`rulename`
 
 Data type: `Pattern[/^[a-zA-Z0-9\._-]+$/]`
 
@@ -940,7 +940,7 @@ Data type: `Pattern[/^[a-zA-Z0-9\._-]+$/]`
 
 Default value: `$title`
 
-##### <a name="ensure"></a>`ensure`
+##### <a name="-logrotate--rule--ensure"></a>`ensure`
 
 Data type: `Enum['present','absent']`
 
@@ -948,7 +948,7 @@ Data type: `Enum['present','absent']`
 
 Default value: `'present'`
 
-##### <a name="custom_cfg"></a>`custom_cfg`
+##### <a name="-logrotate--rule--custom_cfg"></a>`custom_cfg`
 
 Data type: `Array[String[1]]`
 
@@ -956,303 +956,295 @@ Data type: `Array[String[1]]`
 
 Default value: `[]`
 
-##### <a name="path"></a>`path`
+##### <a name="-logrotate--rule--path"></a>`path`
 
 Data type: `Optional[Logrotate::Path]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="compress"></a>`compress`
-
-Data type: `Optional[Boolean]`
-
-
-
-Default value: ``undef``
-
-##### <a name="compresscmd"></a>`compresscmd`
-
-Data type: `Optional[String]`
-
-
-
-Default value: ``undef``
-
-##### <a name="compressext"></a>`compressext`
-
-Data type: `Optional[String]`
-
-
-
-Default value: ``undef``
-
-##### <a name="compressoptions"></a>`compressoptions`
-
-Data type: `Optional[String]`
-
-
-
-Default value: ``undef``
-
-##### <a name="copy"></a>`copy`
+##### <a name="-logrotate--rule--compress"></a>`compress`
 
 Data type: `Optional[Boolean]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="copytruncate"></a>`copytruncate`
-
-Data type: `Optional[Boolean]`
-
-
-
-Default value: ``undef``
-
-##### <a name="create"></a>`create`
-
-Data type: `Optional[Boolean]`
-
-
-
-Default value: ``undef``
-
-##### <a name="create_mode"></a>`create_mode`
+##### <a name="-logrotate--rule--compresscmd"></a>`compresscmd`
 
 Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="create_owner"></a>`create_owner`
-
-Data type: `Optional[String]`
-
-
-
-Default value: ``undef``
-
-##### <a name="create_group"></a>`create_group`
+##### <a name="-logrotate--rule--compressext"></a>`compressext`
 
 Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="dateext"></a>`dateext`
-
-Data type: `Optional[Boolean]`
-
-
-
-Default value: ``undef``
-
-##### <a name="dateformat"></a>`dateformat`
+##### <a name="-logrotate--rule--compressoptions"></a>`compressoptions`
 
 Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="dateyesterday"></a>`dateyesterday`
-
-Data type: `Optional[Boolean]`
-
-
-
-Default value: ``undef``
-
-##### <a name="delaycompress"></a>`delaycompress`
+##### <a name="-logrotate--rule--copy"></a>`copy`
 
 Data type: `Optional[Boolean]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="extension"></a>`extension`
+##### <a name="-logrotate--rule--copytruncate"></a>`copytruncate`
+
+Data type: `Optional[Boolean]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--create"></a>`create`
+
+Data type: `Optional[Boolean]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--create_mode"></a>`create_mode`
 
 Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="ifempty"></a>`ifempty`
+##### <a name="-logrotate--rule--create_owner"></a>`create_owner`
+
+Data type: `Optional[String]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--create_group"></a>`create_group`
+
+Data type: `Optional[String]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--dateext"></a>`dateext`
 
 Data type: `Optional[Boolean]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="mail"></a>`mail`
+##### <a name="-logrotate--rule--dateformat"></a>`dateformat`
+
+Data type: `Optional[String]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--dateyesterday"></a>`dateyesterday`
+
+Data type: `Optional[Boolean]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--delaycompress"></a>`delaycompress`
+
+Data type: `Optional[Boolean]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--extension"></a>`extension`
+
+Data type: `Optional[String]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--ifempty"></a>`ifempty`
+
+Data type: `Optional[Boolean]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--mail"></a>`mail`
 
 Data type: `Optional[Variant[String,Boolean]]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="mail_when"></a>`mail_when`
+##### <a name="-logrotate--rule--mail_when"></a>`mail_when`
 
 Data type: `Optional[Enum['mailfirst','maillast']]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="maxage"></a>`maxage`
+##### <a name="-logrotate--rule--maxage"></a>`maxage`
 
 Data type: `Optional[Integer]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="minsize"></a>`minsize`
-
-Data type: `Optional[Logrotate::Size]`
-
-
-
-Default value: ``undef``
-
-##### <a name="maxsize"></a>`maxsize`
+##### <a name="-logrotate--rule--minsize"></a>`minsize`
 
 Data type: `Optional[Logrotate::Size]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="missingok"></a>`missingok`
+##### <a name="-logrotate--rule--maxsize"></a>`maxsize`
+
+Data type: `Optional[Logrotate::Size]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--missingok"></a>`missingok`
 
 Data type: `Optional[Boolean]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="olddir"></a>`olddir`
+##### <a name="-logrotate--rule--olddir"></a>`olddir`
 
 Data type: `Optional[Variant[Boolean,String]]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="postrotate"></a>`postrotate`
-
-Data type: `Optional[Logrotate::Commands]`
-
-
-
-Default value: ``undef``
-
-##### <a name="prerotate"></a>`prerotate`
+##### <a name="-logrotate--rule--postrotate"></a>`postrotate`
 
 Data type: `Optional[Logrotate::Commands]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="firstaction"></a>`firstaction`
-
-Data type: `Optional[Logrotate::Commands]`
-
-
-
-Default value: ``undef``
-
-##### <a name="lastaction"></a>`lastaction`
+##### <a name="-logrotate--rule--prerotate"></a>`prerotate`
 
 Data type: `Optional[Logrotate::Commands]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="rotate"></a>`rotate`
+##### <a name="-logrotate--rule--firstaction"></a>`firstaction`
+
+Data type: `Optional[Logrotate::Commands]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--lastaction"></a>`lastaction`
+
+Data type: `Optional[Logrotate::Commands]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--rotate"></a>`rotate`
 
 Data type: `Optional[Integer]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="rotate_every"></a>`rotate_every`
+##### <a name="-logrotate--rule--rotate_every"></a>`rotate_every`
 
 Data type: `Optional[Logrotate::Every]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="size"></a>`size`
+##### <a name="-logrotate--rule--size"></a>`size`
 
 Data type: `Optional[Logrotate::Size]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="sharedscripts"></a>`sharedscripts`
-
-Data type: `Optional[Boolean]`
-
-
-
-Default value: ``undef``
-
-##### <a name="shred"></a>`shred`
+##### <a name="-logrotate--rule--sharedscripts"></a>`sharedscripts`
 
 Data type: `Optional[Boolean]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="shredcycles"></a>`shredcycles`
+##### <a name="-logrotate--rule--shred"></a>`shred`
+
+Data type: `Optional[Boolean]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--shredcycles"></a>`shredcycles`
 
 Data type: `Optional[Integer]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="start"></a>`start`
+##### <a name="-logrotate--rule--start"></a>`start`
 
 Data type: `Optional[Integer]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="su"></a>`su`
+##### <a name="-logrotate--rule--su"></a>`su`
 
 Data type: `Boolean`
 
 
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="su_user"></a>`su_user`
-
-Data type: `String`
-
-
-
-Default value: `'root'`
-
-##### <a name="su_group"></a>`su_group`
+##### <a name="-logrotate--rule--su_user"></a>`su_user`
 
 Data type: `String`
 
@@ -1260,53 +1252,45 @@ Data type: `String`
 
 Default value: `'root'`
 
-##### <a name="uncompresscmd"></a>`uncompresscmd`
+##### <a name="-logrotate--rule--su_group"></a>`su_group`
+
+Data type: `String`
+
+
+
+Default value: `'root'`
+
+##### <a name="-logrotate--rule--uncompresscmd"></a>`uncompresscmd`
 
 Data type: `Optional[String]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
 ## Data types
 
-### <a name="logrotatecommands"></a>`Logrotate::Commands`
+### <a name="Logrotate--Commands"></a>`Logrotate::Commands`
 
 The Logrotate::Commands data type.
 
-Alias of
+Alias of `Variant[String, Array[String]]`
 
-```puppet
-Variant[String, Array[String]]
-```
-
-### <a name="logrotateevery"></a>`Logrotate::Every`
+### <a name="Logrotate--Every"></a>`Logrotate::Every`
 
 The Logrotate::Every data type.
 
-Alias of
+Alias of `Pattern['^hour(|ly)$', '^da(|il)y$', '^week(|ly)$', '^month(|ly)$', '^year(|ly)$']`
 
-```puppet
-Pattern['^hour(|ly)$', '^da(|il)y$', '^week(|ly)$', '^month(|ly)$', '^year(|ly)$']
-```
-
-### <a name="logrotatepath"></a>`Logrotate::Path`
+### <a name="Logrotate--Path"></a>`Logrotate::Path`
 
 The Logrotate::Path data type.
 
-Alias of
+Alias of `Variant[Stdlib::UnixPath, Array[Stdlib::UnixPath]]`
 
-```puppet
-Variant[Stdlib::UnixPath, Array[Stdlib::UnixPath]]
-```
-
-### <a name="logrotatesize"></a>`Logrotate::Size`
+### <a name="Logrotate--Size"></a>`Logrotate::Size`
 
 The Logrotate::Size data type.
 
-Alias of
-
-```puppet
-Variant[Integer, Pattern[/^\d+[kMG]?$/]]
-```
+Alias of `Variant[Integer, Pattern[/^\d+[kMG]?$/]]`
 
