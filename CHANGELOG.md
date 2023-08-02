@@ -4,7 +4,24 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [v6.1.0](https://github.com/voxpupuli/puppet-logrotate/tree/v6.1.0) (2022-07-14)
+## [v7.0.0](https://github.com/voxpupuli/puppet-logrotate/tree/v7.0.0) (2023-08-02)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-logrotate/compare/v6.1.0...v7.0.0)
+
+**Breaking changes:**
+
+- Drop Eol Debian 9 Support [\#206](https://github.com/voxpupuli/puppet-logrotate/pull/206) ([traylenator](https://github.com/traylenator))
+
+**Implemented enhancements:**
+
+- Add Puppet 8 support [\#209](https://github.com/voxpupuli/puppet-logrotate/pull/209) ([bastelfreak](https://github.com/bastelfreak))
+- puppetlabs/stdlib: Allow 9.x [\#208](https://github.com/voxpupuli/puppet-logrotate/pull/208) ([bastelfreak](https://github.com/bastelfreak))
+
+**Merged pull requests:**
+
+- convert stdlib merge to + operator [\#207](https://github.com/voxpupuli/puppet-logrotate/pull/207) ([robertc99](https://github.com/robertc99))
+
+## [v6.1.0](https://github.com/voxpupuli/puppet-logrotate/tree/v6.1.0) (2022-07-20)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-logrotate/compare/v6.0.0...v6.1.0)
 
