@@ -300,7 +300,7 @@ describe 'logrotate::conf' do
       let(:params) { { dateformat: '-%Y%m%d' } }
 
       it {
-        is_expected.to contain_file('/etc/logrotate.conf').\
+        is_expected.to contain_file('/etc/logrotate.conf'). \
           with_content(%r{^dateformat -%Y%m%d$})
       }
     end

@@ -175,7 +175,7 @@ describe 'logrotate::rule' do
       let(:params) { { path: '/var/log/foo.log', create: false } }
 
       it do
-        is_expected.to contain_file('/etc/logrotate.d/test').\
+        is_expected.to contain_file('/etc/logrotate.d/test'). \
           with_content(%r{^  nocreate$})
       end
 
@@ -202,7 +202,7 @@ describe 'logrotate::rule' do
       let(:params) { { path: '/var/log/foo.log', custom_cfg: ['hourly'] } }
 
       it {
-        is_expected.to contain_file('/etc/logrotate.d/test').\
+        is_expected.to contain_file('/etc/logrotate.d/test'). \
           with_content(%r{^  hourly$})
       }
     end
@@ -213,7 +213,7 @@ describe 'logrotate::rule' do
       let(:params) { { path: '/var/log/foo.log', dateformat: '-%Y%m%d' } }
 
       it {
-        is_expected.to contain_file('/etc/logrotate.d/test').\
+        is_expected.to contain_file('/etc/logrotate.d/test'). \
           with_content(%r{^  dateformat -%Y%m%d$})
       }
     end
@@ -384,7 +384,7 @@ describe 'logrotate::rule' do
       let(:params) { { path: '/var/log/foo.log', lastaction: ['/bin/true', '/bin/false'] } }
 
       it {
-        is_expected.to contain_file('/etc/logrotate.d/test').\
+        is_expected.to contain_file('/etc/logrotate.d/test'). \
           with_content(%r{lastaction\n    /bin/true\n    /bin/false\n  endscript})
       }
     end
@@ -395,7 +395,7 @@ describe 'logrotate::rule' do
       let(:params) { { path: '/var/log/foo.log', rotate: 3 } }
 
       it {
-        is_expected.to contain_file('/etc/logrotate.d/test').\
+        is_expected.to contain_file('/etc/logrotate.d/test'). \
           with_content(%r{^  rotate 3$})
       }
     end
