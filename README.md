@@ -147,7 +147,7 @@ main `/etc/logrotate.conf` configuration file.
 This example will ensure that the logrotate package is latest and that the `dateext` and `compress` options are added to the defaults for a node.
 
 ```puppet
-class { '::logrotate':
+class { 'logrotate':
   ensure => 'latest',
   config => {
     dateext      => true,
@@ -166,7 +166,7 @@ With parameter `logrotate_args` you can specify additional startup arguments for
 This example tells logrotate to use an alternate state file and which command to use when mailing logs.
 
 ```puppet
-class { '::logrotate':
+class { 'logrotate':
   ensure         => 'latest',
   logrotate_args => ['-s /var/lib/logrotate/logrotate.status', '-m /usr/local/bin/mailer']
 }
@@ -177,7 +177,7 @@ class { '::logrotate':
 By default, the cron output is discarded if there is no error output. To enable this output, when you (for example) enable the verbose startup argument, enable the `cron_always_output` boolean on the logrotate class:
 
 ```puppet
-class { '::logrotate':
+class { 'logrotate':
   ensure              => 'latest',
   cron_always_output  => true,
   config              => {
