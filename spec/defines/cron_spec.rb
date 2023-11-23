@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe 'logrotate::cron' do
   context 'supported operating systems' do
-    let(:pre_condition) { 'class { "::logrotate": }' }
+    let(:pre_condition) { 'class { "logrotate": }' }
 
     on_supported_os.each do |os, facts|
       context "on #{os}" do
@@ -32,7 +32,7 @@ describe 'logrotate::cron' do
         end
 
         context 'With additional arguments' do
-          let(:pre_condition) { 'class {"::logrotate": logrotate_args => ["-s /var/lib/logrotate/logrotate.status", "-m /usr/sbin/mailer"]}' }
+          let(:pre_condition) { 'class {"logrotate": logrotate_args => ["-s /var/lib/logrotate/logrotate.status", "-m /usr/sbin/mailer"]}' }
           let(:title) { 'test' }
           let(:params) { { ensure: 'present' } }
 
@@ -70,7 +70,7 @@ describe 'logrotate::cron' do
       end
 
       context 'With additional arguments and status' do
-        let(:pre_condition) { 'class {"::logrotate": logrotate_args => ["-s /var/lib/logrotate/logrotate.status", "-m /usr/sbin/mailer"]}' }
+        let(:pre_condition) { 'class {"logrotate": logrotate_args => ["-s /var/lib/logrotate/logrotate.status", "-m /usr/sbin/mailer"]}' }
         let(:title) { 'test' }
         let(:params) { { ensure: 'present' } }
 
@@ -82,7 +82,7 @@ describe 'logrotate::cron' do
       end
 
       context 'With additional arguments' do
-        let(:pre_condition) { 'class {"::logrotate": cron_always_output => true}' }
+        let(:pre_condition) { 'class {"logrotate": cron_always_output => true}' }
         let(:title) { 'test' }
         let(:params) { { ensure: 'present' } }
 

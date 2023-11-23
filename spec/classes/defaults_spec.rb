@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe 'logrotate' do
-  let(:pre_condition) { 'class { "::logrotate": }' }
+  let(:pre_condition) { 'class { "logrotate": }' }
 
   context 'no osfamily' do
     let(:facts) { { os: { family: 'fake' } } }
