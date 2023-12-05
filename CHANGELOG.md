@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v7.0.1](https://github.com/voxpupuli/puppet-logrotate/tree/v7.0.1) (2023-12-05)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-logrotate/compare/v7.0.0...v7.0.1)
+
+**Fixed bugs:**
+
+- Use default systemd timer for EL9 logrotate [\#216](https://github.com/voxpupuli/puppet-logrotate/pull/216) ([treydock](https://github.com/treydock))
+
 ## [v7.0.0](https://github.com/voxpupuli/puppet-logrotate/tree/v7.0.0) (2023-08-02)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-logrotate/compare/v6.1.0...v7.0.0)
