@@ -9,6 +9,20 @@ describe 'logrotate' do
         let(:facts) do
           facts
         end
+        let(:cron_ensure) do
+          if facts[:os]['family'] == 'RedHat' && facts[:os]['release']['major'].to_i >= 9
+            'absent'
+          else
+            'present'
+          end
+        end
+        let(:hourly_dir_ensure) do
+          if cron_ensure == 'present'
+            'directory'
+          else
+            'absent'
+          end
+        end
 
         context 'logrotate class without any parameters' do
           it { is_expected.to compile.with_all_deps }
@@ -42,7 +56,7 @@ describe 'logrotate' do
           else
             it do
               is_expected.to contain_file('/etc/logrotate.d/hourly').with(
-                'ensure' => 'directory',
+                'ensure' => hourly_dir_ensure,
                 'owner'  => 'root',
                 'group'  => 'root',
                 'mode'   => '0755'
@@ -51,7 +65,7 @@ describe 'logrotate' do
 
             it do
               is_expected.to contain_file('/etc/cron.hourly/logrotate').with(
-                'ensure' => 'present',
+                'ensure' => cron_ensure,
                 'owner'  => 'root',
                 'group'  => 'root',
                 'mode'   => '0700'
@@ -66,12 +80,25 @@ describe 'logrotate' do
                                                                    'group'  => 'root',
                                                                    'mode'   => '0755')
 
-              is_expected.to contain_file('/etc/cron.daily/logrotate').with('ensure' => 'present',
+              is_expected.to contain_file('/etc/cron.daily/logrotate').with('ensure' => cron_ensure,
                                                                             'owner'  => 'root',
                                                                             'group'  => 'root',
                                                                             'mode'   => '0700')
 
               is_expected.to contain_class('logrotate::defaults')
+            end
+
+            if facts[:os]['family'] == 'RedHat' && facts[:os]['release']['major'].to_i >= 9
+              it do
+                is_expected.to contain_service('logrotate.timer').with(
+                  'ensure' => 'running',
+                  'enable' => true
+                )
+              end
+            else
+              it do
+                is_expected.not_to contain_service('logrotate.timer')
+              end
             end
           end
         end

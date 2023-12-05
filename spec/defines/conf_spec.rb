@@ -3,7 +3,16 @@
 require 'spec_helper'
 
 describe 'logrotate::conf' do
-  _, facts = on_supported_os.first
+  _, facts = on_supported_os(
+    {
+      supported_os: [
+        {
+          'operatingsystem' => 'RedHat',
+          'operatingsystemrelease' => ['8'],
+        }
+      ]
+    }
+  ).first
   let(:facts) { facts }
 
   shared_examples 'error raised' do |param, _os|

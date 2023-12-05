@@ -17,6 +17,20 @@ class logrotate::config {
     }
   }
 
+  if $logrotate::manage_systemd_timer {
+    if $logrotate::ensure_systemd_timer == 'present' {
+      service { 'logrotate.timer':
+        ensure => 'running',
+        enable => true,
+      }
+    } else {
+      service { 'logrotate.timer':
+        ensure => 'stopped',
+        enable => false,
+      }
+    }
+  }
+
   if $logrotate::config {
     logrotate::conf { $logrotate::logrotate_conf:
       * => $logrotate::config,
