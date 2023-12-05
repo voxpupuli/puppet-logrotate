@@ -43,6 +43,8 @@ The following parameters are available in the `logrotate` class:
 * [`manage_cron_hourly`](#-logrotate--manage_cron_hourly)
 * [`ensure_cron_daily`](#-logrotate--ensure_cron_daily)
 * [`ensure_cron_hourly`](#-logrotate--ensure_cron_hourly)
+* [`manage_systemd_timer`](#-logrotate--manage_systemd_timer)
+* [`ensure_systemd_timer`](#-logrotate--ensure_systemd_timer)
 * [`create_base_rules`](#-logrotate--create_base_rules)
 * [`purge_configdir`](#-logrotate--purge_configdir)
 * [`package`](#-logrotate--package)
@@ -111,6 +113,22 @@ Data type: `Enum[present,absent]`
 
 
 Default value: `'present'`
+
+##### <a name="-logrotate--manage_systemd_timer"></a>`manage_systemd_timer`
+
+Data type: `Boolean`
+
+
+
+Default value: `false`
+
+##### <a name="-logrotate--ensure_systemd_timer"></a>`ensure_systemd_timer`
+
+Data type: `Enum[present,absent]`
+
+
+
+Default value: `'absent'`
 
 ##### <a name="-logrotate--create_base_rules"></a>`create_base_rules`
 
