@@ -4,7 +4,16 @@ require 'spec_helper'
 require 'shared_examples'
 
 describe 'logrotate::rule' do
-  _, facts = on_supported_os.first
+  _, facts = on_supported_os(
+    {
+      supported_os: [
+        {
+          'operatingsystem' => 'RedHat',
+          'operatingsystemrelease' => ['8'],
+        }
+      ]
+    }
+  ).first
   let(:facts) { facts }
 
   context 'ensure => absent' do
