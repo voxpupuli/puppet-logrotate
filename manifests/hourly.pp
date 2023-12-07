@@ -29,6 +29,7 @@ class logrotate::hourly (
     owner  => $logrotate::root_user,
     group  => $logrotate::root_group,
     mode   => $logrotate::rules_configdir_mode,
+    force  => true,
   }
 
   if $logrotate::manage_cron_hourly {
