@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 shared_context 'config file' do |base_params = {}|
   let(:space_prefix) { '' }
 
@@ -35,6 +37,7 @@ shared_context 'config file' do |base_params = {}|
           with_content(%r{^#{space_prefix}no(t|)#{param}$})
       }
     end
+
     context "#{param} => true" do
       let(:params) { base_params.merge(param.to_sym => true) }
 

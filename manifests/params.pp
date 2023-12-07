@@ -9,7 +9,7 @@ class logrotate::params {
       $root_group    = 'wheel'
       $logrotate_bin = '/usr/local/sbin/logrotate'
       $conf_params = {
-        su_group => undef,
+        su_group => 'wheel',
       }
       $base_rules = {}
       $rule_default = {
@@ -104,10 +104,12 @@ class logrotate::params {
       $configdir     = '/etc'
       $root_group    = 'root'
       $logrotate_bin = '/usr/sbin/logrotate'
+
+      $wtmp_missingok = versioncmp($facts['os']['release']['major'],'8') >= 0
       $base_rules = {
         'wtmp' => {
           path        => '/var/log/wtmp',
-          missingok   => false,
+          missingok   => $wtmp_missingok,
           create_mode => '0664',
           minsize     => '1M',
         },

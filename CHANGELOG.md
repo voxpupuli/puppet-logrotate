@@ -4,6 +4,47 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v7.0.1](https://github.com/voxpupuli/puppet-logrotate/tree/v7.0.1) (2023-12-05)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-logrotate/compare/v7.0.0...v7.0.1)
+
+**Fixed bugs:**
+
+- Use default systemd timer for EL9 logrotate [\#216](https://github.com/voxpupuli/puppet-logrotate/pull/216) ([treydock](https://github.com/treydock))
+
+## [v7.0.0](https://github.com/voxpupuli/puppet-logrotate/tree/v7.0.0) (2023-08-02)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-logrotate/compare/v6.1.0...v7.0.0)
+
+**Breaking changes:**
+
+- Drop Eol Debian 9 Support [\#206](https://github.com/voxpupuli/puppet-logrotate/pull/206) ([traylenator](https://github.com/traylenator))
+
+**Implemented enhancements:**
+
+- Add Puppet 8 support [\#209](https://github.com/voxpupuli/puppet-logrotate/pull/209) ([bastelfreak](https://github.com/bastelfreak))
+- puppetlabs/stdlib: Allow 9.x [\#208](https://github.com/voxpupuli/puppet-logrotate/pull/208) ([bastelfreak](https://github.com/bastelfreak))
+
+**Merged pull requests:**
+
+- convert stdlib merge to + operator [\#207](https://github.com/voxpupuli/puppet-logrotate/pull/207) ([robertc99](https://github.com/robertc99))
+
+## [v6.1.0](https://github.com/voxpupuli/puppet-logrotate/tree/v6.1.0) (2022-07-20)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-logrotate/compare/v6.0.0...v6.1.0)
+
+**Implemented enhancements:**
+
+- Update defaults to match RHEL8/9 [\#195](https://github.com/voxpupuli/puppet-logrotate/pull/195) ([jcpunk](https://github.com/jcpunk))
+
+**Fixed bugs:**
+
+- Fix FreeBSD onwer/group [\#188](https://github.com/voxpupuli/puppet-logrotate/pull/188) ([kapouik](https://github.com/kapouik))
+
+**Merged pull requests:**
+
+- Drop old unused beaker nodesets [\#198](https://github.com/voxpupuli/puppet-logrotate/pull/198) ([ekohl](https://github.com/ekohl))
+
 ## [v6.0.0](https://github.com/voxpupuli/puppet-logrotate/tree/v6.0.0) (2021-09-28)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-logrotate/compare/v5.0.0...v6.0.0)
