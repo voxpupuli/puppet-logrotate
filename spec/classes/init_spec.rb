@@ -9,20 +9,6 @@ describe 'logrotate' do
         let(:facts) do
           facts
         end
-        let(:cron_ensure) do
-          if facts[:os]['family'] == 'RedHat' && facts[:os]['release']['major'].to_i >= 9
-            'absent'
-          else
-            'present'
-          end
-        end
-        let(:hourly_dir_ensure) do
-          if cron_ensure == 'present'
-            'directory'
-          else
-            'absent'
-          end
-        end
 
         context 'logrotate class without any parameters' do
           it { is_expected.to compile.with_all_deps }
@@ -54,23 +40,6 @@ describe 'logrotate' do
               is_expected.to contain_class('logrotate::defaults')
             end
           else
-            it do
-              is_expected.to contain_file('/etc/logrotate.d/hourly').with(
-                'ensure' => hourly_dir_ensure,
-                'owner'  => 'root',
-                'group'  => 'root',
-                'mode'   => '0755'
-              )
-            end
-
-            it do
-              is_expected.to contain_file('/etc/cron.hourly/logrotate').with(
-                'ensure' => cron_ensure,
-                'owner'  => 'root',
-                'group'  => 'root',
-                'mode'   => '0700'
-              )
-            end
 
             it do
               is_expected.to contain_package('logrotate').with_ensure('present')
@@ -79,11 +48,6 @@ describe 'logrotate' do
                                                                    'owner'  => 'root',
                                                                    'group'  => 'root',
                                                                    'mode'   => '0755')
-
-              is_expected.to contain_file('/etc/cron.daily/logrotate').with('ensure' => cron_ensure,
-                                                                            'owner'  => 'root',
-                                                                            'group'  => 'root',
-                                                                            'mode'   => '0700')
 
               is_expected.to contain_class('logrotate::defaults')
             end
@@ -94,10 +58,56 @@ describe 'logrotate' do
                   'ensure' => 'running',
                   'enable' => true
                 )
+
+                is_expected.to contain_systemd__unit_file('logrotate-hourly.timer').with(
+                  'ensure' => 'present',
+                  'enable' => true,
+                  'active' => true
+                )
+
+                is_expected.to contain_systemd__manage_dropin('hourly-timer.conf').with(
+                  'ensure' => 'present',
+                  'unit'   => 'logrotate-hourly.timer'
+                )
+
+                is_expected.to contain_systemd__unit_file('logrotate-hourly.service').with_ensure('present').without_enable.without_active
+
+                is_expected.to contain_systemd__manage_dropin('hourly-service.conf').with(
+                  'ensure' => 'present',
+                  'unit'   => 'logrotate-hourly.service'
+                )
               end
             else
+
+              it do
+                is_expected.to contain_file('/etc/cron.hourly/logrotate').with(
+                  'ensure' => 'present',
+                  'owner'  => 'root',
+                  'group'  => 'root',
+                  'mode'   => '0700'
+                )
+
+                is_expected.to contain_file('/etc/cron.daily/logrotate').with('ensure' => 'present',
+                                                                              'owner' => 'root',
+                                                                              'group' => 'root',
+                                                                              'mode' => '0700')
+              end
+
+              it do
+                is_expected.to contain_file('/etc/logrotate.d/hourly').with(
+                  'ensure' => 'directory',
+                  'owner'  => 'root',
+                  'group'  => 'root',
+                  'mode'   => '0755'
+                )
+              end
+
               it do
                 is_expected.not_to contain_service('logrotate.timer')
+                is_expected.not_to contain_systemd__unit_file('logrotate-hourly.timer')
+                is_expected.not_to contain_systemd__unit_file('logrotate-hourly.service')
+                is_expected.not_to contain_systemd__unit_file('logrotate-hourly.timer')
+                is_expected.not_to contain_systemd__unit_file('logrotate-hourly.service')
               end
             end
           end
@@ -169,9 +179,9 @@ describe 'logrotate' do
 
           case facts[:operatingsystem]
           when 'FreeBSD'
-            it { is_expected.to contain_file('/usr/local/etc/logrotate.d/hourly').with_ensure('absent') }
+            it { is_expected.to contain_file('/usr/local/etc/logrotate.d/hourly').with_ensure('directory') }
           else
-            it { is_expected.to contain_file('/etc/logrotate.d/hourly').with_ensure('absent') }
+            it { is_expected.to contain_file('/etc/logrotate.d/hourly').with_ensure('directory') }
             it { is_expected.to contain_file('/etc/cron.hourly/logrotate').with_ensure('absent') }
           end
         end

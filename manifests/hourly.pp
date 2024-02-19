@@ -19,13 +19,8 @@ class logrotate::hourly (
 ) {
   assert_private()
 
-  $dir_ensure = $logrotate::ensure_cron_hourly ? {
-    'absent'  => $logrotate::ensure_cron_hourly,
-    'present' => 'directory'
-  }
-
   file { "${logrotate::rules_configdir}/hourly":
-    ensure => $dir_ensure,
+    ensure => 'directory',
     owner  => $logrotate::root_user,
     group  => $logrotate::root_group,
     mode   => $logrotate::rules_configdir_mode,
@@ -36,6 +31,57 @@ class logrotate::hourly (
     logrotate::cron { 'hourly':
       ensure  => $logrotate::ensure_cron_hourly,
       require => File["${logrotate::rules_configdir}/hourly"],
+    }
+  }
+
+  # Make copies of the rpm provided unit and timers
+  if $logrotate::manage_systemd_timer {
+    systemd::manage_dropin { 'hourly-service.conf':
+      ensure        => $logrotate::ensure_systemd_timer,
+      unit          => 'logrotate-hourly.service',
+      unit_entry    => {
+        'Description' => [
+          '',
+          'Extra service to run hourly logrotates only',
+        ],
+      },
+      service_entry => {
+        'ExecStart'   => ['', "/usr/sbin/logrotate ${logrotate::rules_configdir}/hourly"],
+      },
+      before        => Systemd::Unit_file['logrotate-hourly.service'],
+    }
+
+    systemd::unit_file { 'logrotate-hourly.service':
+      ensure => $logrotate::ensure_systemd_timer,
+      source => 'file:///lib/systemd/system/logrotate.service',
+      before => Systemd::Unit_file['logrotate-hourly.timer'],
+    }
+
+    systemd::manage_dropin { 'hourly-timer.conf':
+      ensure      => $logrotate::ensure_systemd_timer,
+      unit        => 'logrotate-hourly.timer',
+      unit_entry  => {
+        'Description' => [
+          '',
+          'Extra timer to run hourly logrotates only',
+        ],
+      },
+      timer_entry => {
+        'OnCalendar'   => ['', 'hourly'],
+      },
+      before      => Systemd::Unit_file['logrotate-hourly.timer'],
+    }
+
+    $_timer = $logrotate::ensure_systemd_timer ? {
+      'present' => true,
+      default  => false,
+    }
+
+    systemd::unit_file { 'logrotate-hourly.timer':
+      ensure => $logrotate::ensure_systemd_timer,
+      source => 'file:///lib/systemd/system/logrotate.timer',
+      active => $_timer,
+      enable => $_timer,
     }
   }
 }
