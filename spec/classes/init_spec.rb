@@ -74,7 +74,24 @@ describe 'logrotate' do
 
                 is_expected.to contain_systemd__manage_dropin('hourly-service.conf').with(
                   'ensure' => 'present',
-                  'unit'   => 'logrotate-hourly.service'
+                  'unit' => 'logrotate-hourly.service',
+                  'service_entry' => {
+                    'ExecStart' => [
+                      '',
+                      '/usr/bin/flock --wait 21600 /run/lock/logrotate.service /usr/sbin/logrotate /etc/logrotate.d/hourly'
+                    ]
+                  }
+                )
+
+                is_expected.to contain_systemd__manage_dropin('logrotate-flock.conf').with(
+                  'ensure' => 'present',
+                  'unit' => 'logrotate.service',
+                  'service_entry' => {
+                    'ExecStart' => [
+                      '',
+                      '/usr/bin/flock --wait 21600 /run/lock/logrotate.service /usr/sbin/logrotate /etc/logrotate.conf'
+                    ]
+                  }
                 )
               end
             else
@@ -108,6 +125,7 @@ describe 'logrotate' do
                 is_expected.not_to contain_systemd__unit_file('logrotate-hourly.service')
                 is_expected.not_to contain_systemd__unit_file('logrotate-hourly.timer')
                 is_expected.not_to contain_systemd__unit_file('logrotate-hourly.service')
+                is_expected.not_to contain_systemd__manage_dropin('logrotate-flock.conf')
               end
             end
           end
