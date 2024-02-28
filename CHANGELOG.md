@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v7.0.2](https://github.com/voxpupuli/puppet-logrotate/tree/v7.0.2) (2024-02-28)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-logrotate/compare/v7.0.1...v7.0.2)
+
+**Fixed bugs:**
+
+- Support hourly logrotate directory on EL9 again. [\#221](https://github.com/voxpupuli/puppet-logrotate/pull/221) ([traylenator](https://github.com/traylenator))
+- Remove the managed hourly directory if the class is disabled [\#192](https://github.com/voxpupuli/puppet-logrotate/pull/192) ([flynet70](https://github.com/flynet70))
+
 ## [v7.0.1](https://github.com/voxpupuli/puppet-logrotate/tree/v7.0.1) (2023-12-05)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-logrotate/compare/v7.0.0...v7.0.1)
