@@ -6,20 +6,20 @@ describe 'logrotate' do
   let(:pre_condition) { 'class { "logrotate": }' }
 
   context 'no osfamily' do
-    let(:facts) { { os: { family: 'fake' } } }
+    let(:facts) { { 'os' => { 'family' => 'fake' } } }
 
     it {
       is_expected.to contain_logrotate__conf('/etc/logrotate.conf')
     }
   end
 
-  on_supported_os.each do |os, facts|
-    context os, if: facts[:osfamily] == 'Debian' do
-      let(:facts) { facts }
+  on_supported_os.each do |os, os_facts|
+    context os, if: os_facts['os']['family'] == 'Debian' do
+      let(:facts) { os_facts }
 
       it { is_expected.to compile.with_all_deps }
 
-      if facts[:operatingsystem] == 'Ubuntu'
+      if os_facts['os']['name'] == 'Ubuntu'
         it {
           is_expected.to contain_logrotate__conf('/etc/logrotate.conf').with(
             'su_user' => 'root',
@@ -56,8 +56,8 @@ describe 'logrotate' do
       }
     end
 
-    context os, if: facts[:osfamily] == 'RedHat' do
-      let(:facts) { facts }
+    context os, if: os_facts['os']['family'] == 'RedHat' do
+      let(:facts) { os_facts }
 
       it {
         is_expected.to contain_logrotate__conf('/etc/logrotate.conf')
@@ -67,7 +67,7 @@ describe 'logrotate' do
         is_expected.to contain_logrotate__rule('wtmp').with(
           'path' => '/var/log/wtmp',
           'create_mode' => '0664',
-          'missingok' => facts[:operatingsystemmajrelease].to_i >= 8,
+          'missingok' => facts['os']['release']['major'].to_i >= 8,
           'minsize' => '1M',
           'create' => true,
           'create_owner' => 'root',
@@ -91,7 +91,7 @@ describe 'logrotate' do
       }
     end
 
-    context os, if: facts[:osfamily] == 'Suse' do
+    context os, if: os_facts['os']['family'] == 'Suse' do
       it {
         is_expected.to contain_logrotate__conf('/etc/logrotate.conf')
       }
@@ -113,8 +113,8 @@ describe 'logrotate' do
       }
     end
 
-    context os, if: facts[:osfamily] == 'FreeBSD' do
-      let(:facts) { facts }
+    context os, if: os_facts['os']['family'] == 'FreeBSD' do
+      let(:facts) { os_facts }
 
       it {
         is_expected.to contain_logrotate__conf('/usr/local/etc/logrotate.conf')

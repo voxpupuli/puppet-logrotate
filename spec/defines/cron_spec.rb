@@ -6,17 +6,17 @@ describe 'logrotate::cron' do
   context 'supported operating systems' do
     let(:pre_condition) { 'class { "logrotate": }' }
 
-    on_supported_os.each do |os, facts|
+    on_supported_os.each do |os, os_facts|
       context "on #{os}" do
         let(:facts) do
-          facts
+          os_facts
         end
 
         context 'With default params' do
           let(:title) { 'test' }
           let(:params) { { ensure: 'present' } }
 
-          if facts[:osfamily] == 'FreeBSD'
+          if os_facts['os']['family'] == 'FreeBSD'
             it {
               is_expected.to contain_file('/usr/local/bin/logrotate.test.sh').
                 with_ensure('present').
@@ -36,7 +36,7 @@ describe 'logrotate::cron' do
           let(:title) { 'test' }
           let(:params) { { ensure: 'present' } }
 
-          if facts[:osfamily] == 'FreeBSD'
+          if os_facts['os']['family'] == 'FreeBSD'
             it {
               is_expected.to contain_file('/usr/local/bin/logrotate.test.sh').
                 with_ensure('present').
@@ -56,7 +56,7 @@ describe 'logrotate::cron' do
     # Test FreeBSD separately as it is only partially supported by the module and not in the list of supported os.
     # When FreeBSD is added to the list of supported systems, these tests can be removed as they are already part of the test set above.
     context 'on FreeBDS' do
-      let(:facts) { { os: { family: 'FreeBSD' } } }
+      let(:facts) { { 'os' => { 'family' => 'FreeBSD' } } }
 
       context 'With default params' do
         let(:title) { 'test' }
