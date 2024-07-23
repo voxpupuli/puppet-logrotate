@@ -90,6 +90,13 @@
       ]
     },
     {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "11",
+        "12"
+      ]
+    },
+    {
       "operatingsystem": "FreeBSD",
       "operatingsystemrelease": [
         "12",
