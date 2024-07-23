@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v7.1.0](https://github.com/voxpupuli/puppet-logrotate/tree/v7.1.0) (2024-07-23)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-logrotate/compare/v7.0.2...v7.1.0)
+
+**Implemented enhancements:**
+
+- Add Debian 11 & 12 support [\#234](https://github.com/voxpupuli/puppet-logrotate/pull/234) ([bastelfreak](https://github.com/bastelfreak))
+- Add AlmaLinux/Rocky 8 & 9 support [\#233](https://github.com/voxpupuli/puppet-logrotate/pull/233) ([bastelfreak](https://github.com/bastelfreak))
+- OracleLinux: Add 8 & 9 support [\#230](https://github.com/voxpupuli/puppet-logrotate/pull/230) ([bastelfreak](https://github.com/bastelfreak))
+- update puppet-systemd upper bound to 8.0.0 [\#226](https://github.com/voxpupuli/puppet-logrotate/pull/226) ([TheMeier](https://github.com/TheMeier))
+- Remove legacy top-scope syntax [\#215](https://github.com/voxpupuli/puppet-logrotate/pull/215) ([smortex](https://github.com/smortex))
+
 ## [v7.0.2](https://github.com/voxpupuli/puppet-logrotate/tree/v7.0.2) (2024-02-28)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-logrotate/compare/v7.0.1...v7.0.2)
