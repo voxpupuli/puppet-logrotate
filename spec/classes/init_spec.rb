@@ -4,10 +4,10 @@ require 'spec_helper'
 
 describe 'logrotate' do
   context 'supported operating systems' do
-    on_supported_os.each do |os, facts|
+    on_supported_os.each do |os, os_facts|
       context "on #{os}" do
         let(:facts) do
-          facts
+          os_facts
         end
 
         context 'logrotate class without any parameters' do
@@ -18,7 +18,7 @@ describe 'logrotate' do
             it { is_expected.to contain_class("logrotate::#{classs}") }
           end
 
-          case facts[:operatingsystem]
+          case os_facts['os']['name']
           when 'FreeBSD'
             it do
               is_expected.to contain_file('/usr/local/etc/logrotate.d/hourly').with(
@@ -52,7 +52,7 @@ describe 'logrotate' do
               is_expected.to contain_class('logrotate::defaults')
             end
 
-            if facts[:os]['family'] == 'RedHat' && facts[:os]['release']['major'].to_i >= 9
+            if os_facts['os']['family'] == 'RedHat' && os_facts['os']['release']['major'].to_i >= 9
               it do
                 is_expected.to contain_service('logrotate.timer').with(
                   'ensure' => 'running',
@@ -142,7 +142,7 @@ describe 'logrotate' do
         context 'logrotate class with purge_configdir set to true' do
           let(:params) { { purge_configdir: true } }
 
-          case facts[:operatingsystem]
+          case os_facts['os']['name']
           when 'FreeBSD'
             it do
               is_expected.to contain_file('/usr/local/etc/logrotate.d').with('ensure'  => 'directory',
@@ -176,7 +176,7 @@ describe 'logrotate' do
         context 'with config => { prerotate => "/usr/bin/test", rotate_every => "daily" }' do
           let(:params) { { config: { prerotate: '/usr/bin/test', rotate_every: 'daily' } } }
 
-          case facts[:operatingsystem]
+          case os_facts['os']['name']
           when 'FreeBSD'
             it {
               is_expected.to contain_logrotate__conf('/usr/local/etc/logrotate.conf').
@@ -195,7 +195,7 @@ describe 'logrotate' do
         context 'with ensure => absent' do
           let(:params) { { ensure_cron_hourly: 'absent' } }
 
-          case facts[:operatingsystem]
+          case os_facts['os']['name']
           when 'FreeBSD'
             it { is_expected.to contain_file('/usr/local/etc/logrotate.d/hourly').with_ensure('directory') }
           else
