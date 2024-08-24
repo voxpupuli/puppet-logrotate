@@ -28,6 +28,7 @@ class logrotate (
   String $root_group                         = $logrotate::params::root_group,
   Array[String[1]] $logrotate_args           = [],
   Boolean $cron_always_output                = false,
+  Boolean $manage_cron_subdirectories        = true,
 ) inherits logrotate::params {
   contain logrotate::install
   contain logrotate::config
