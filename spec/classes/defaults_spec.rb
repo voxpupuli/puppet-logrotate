@@ -18,19 +18,8 @@ describe 'logrotate' do
       let(:facts) { os_facts }
 
       it { is_expected.to compile.with_all_deps }
+      it { is_expected.to contain_logrotate__conf('/etc/logrotate.conf') }
 
-      if os_facts['os']['name'] == 'Ubuntu'
-        it {
-          is_expected.to contain_logrotate__conf('/etc/logrotate.conf').with(
-            'su_user' => 'root',
-            'su_group' => 'syslog'
-          )
-        }
-      else
-        it {
-          is_expected.to contain_logrotate__conf('/etc/logrotate.conf')
-        }
-      end
       it {
         is_expected.to contain_logrotate__rule('wtmp').with(
           'rotate_every' => 'monthly',
@@ -54,6 +43,27 @@ describe 'logrotate' do
           'missingok' => true
         )
       }
+    end
+
+    context os, if: os_facts['os']['name'] == 'Ubuntu' do
+      let(:facts) { os_facts }
+
+      if os_facts['os']['release']['full'] == '18.04'
+        it {
+          is_expected.to contain_logrotate__conf('/etc/logrotate.conf').with(
+            'su_user' => 'root',
+            'su_group' => 'syslog'
+          )
+        }
+      end
+      if os_facts['os']['release']['full'] == '22.04'
+        it {
+          is_expected.to contain_logrotate__conf('/etc/logrotate.conf').with(
+            'su_user' => 'root',
+            'su_group' => 'adm'
+          )
+        }
+      end
     end
 
     context os, if: os_facts['os']['family'] == 'RedHat' do
