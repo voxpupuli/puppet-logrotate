@@ -48,15 +48,14 @@ describe 'logrotate' do
     context os, if: os_facts['os']['name'] == 'Ubuntu' do
       let(:facts) { os_facts }
 
-      if os_facts['os']['release']['full'] == '18.04'
+      if os_facts['os']['release']['full'].to_i <= 18
         it {
           is_expected.to contain_logrotate__conf('/etc/logrotate.conf').with(
             'su_user' => 'root',
             'su_group' => 'syslog'
           )
         }
-      end
-      if os_facts['os']['release']['full'] == '22.04'
+      else
         it {
           is_expected.to contain_logrotate__conf('/etc/logrotate.conf').with(
             'su_user' => 'root',
