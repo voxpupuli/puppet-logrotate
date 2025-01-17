@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v8.0.0](https://github.com/voxpupuli/puppet-logrotate/tree/v8.0.0) (2025-01-17)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-logrotate/compare/v7.1.0...v8.0.0)
+
+**Breaking changes:**
+
+- Drop EoL CentOS 8 support [\#243](https://github.com/voxpupuli/puppet-logrotate/pull/243) ([bastelfreak](https://github.com/bastelfreak))
+- Drop EoL EL7 support [\#242](https://github.com/voxpupuli/puppet-logrotate/pull/242) ([bastelfreak](https://github.com/bastelfreak))
+- Drop EoL Ubuntu 18.04 support [\#241](https://github.com/voxpupuli/puppet-logrotate/pull/241) ([bastelfreak](https://github.com/bastelfreak))
+
+**Implemented enhancements:**
+
+- Add Ubuntu 20.04, 22.04, 24.04 support [\#240](https://github.com/voxpupuli/puppet-logrotate/pull/240) ([alexskr](https://github.com/alexskr))
+
+**Merged pull requests:**
+
+- puppet/systemd: allow 8.x [\#239](https://github.com/voxpupuli/puppet-logrotate/pull/239) ([jay7x](https://github.com/jay7x))
+
 ## [v7.1.0](https://github.com/voxpupuli/puppet-logrotate/tree/v7.1.0) (2024-07-23)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-logrotate/compare/v7.0.2...v7.1.0)
