@@ -30,10 +30,17 @@ class logrotate::params {
         'Ubuntu' => 'root',
         default  => undef,
       }
+
+      $ubuntu_default_su_group = $facts['os']['release']['full'] ? {
+        '18.04' => 'syslog',
+        default => 'adm',
+      }
+
       $default_su_group = $facts['os']['name'] ? {
-        'Ubuntu'  => 'syslog',
+        'Ubuntu'  => $ubuntu_default_su_group,
         default   => undef
       }
+
       $conf_params = {
         su       => $default_su,
         su_user  => $default_su_user,
