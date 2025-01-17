@@ -53,7 +53,7 @@ describe 'logrotate' do
             end
 
             if (os_facts['os']['family'] == 'RedHat' && os_facts['os']['release']['major'].to_i >= 9) ||
-               (os_facts['os']['name']   == 'Ubuntu' && os_facts['os']['release']['major'].to_i >= 20)
+               (os_facts['os']['name']   == 'Ubuntu')
               it do
                 is_expected.to contain_service('logrotate.timer').with(
                   'ensure' => 'running',

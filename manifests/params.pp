@@ -31,13 +31,8 @@ class logrotate::params {
         default  => undef,
       }
 
-      $ubuntu_default_su_group = $facts['os']['release']['full'] ? {
-        '18.04' => 'syslog',
-        default => 'adm',
-      }
-
       $default_su_group = $facts['os']['name'] ? {
-        'Ubuntu'  => $ubuntu_default_su_group,
+        'Ubuntu'  => 'adm',
         default   => undef
       }
 
