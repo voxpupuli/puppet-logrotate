@@ -46,6 +46,24 @@ define logrotate::cron (
     }
   }
 
+  if $logrotate::manage_cron_subdirectories {
+    case $facts['os']['family'] {
+      'FreeBSD': {}
+      default: {
+        $cron_dir = "/etc/cron.${name}"
+        ensure_resources('file', { $cron_dir => {
+              ensure => directory,
+              owner => $logrotate::root_user,
+              group => $logrotate::root_group,
+        } })
+
+        File <<| name == $script_path |>> {
+          require => File[$cron_dir]
+        }
+      }
+    }
+  }
+
   file { $script_path:
     ensure  => $ensure,
     owner   => $logrotate::root_user,

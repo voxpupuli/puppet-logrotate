@@ -204,6 +204,28 @@ describe 'logrotate' do
             it { is_expected.to contain_file('/etc/cron.hourly/logrotate').with_ensure('absent') }
           end
         end
+
+        context 'with logrotate rule' do
+          let(:params) {{
+            manage_cron_hourly: true,
+            rules: {
+              nginx: {
+                path: ['/var/log/nginx/*.log'],
+                rotate_every: 'hour',
+              }
+            }
+          }}
+
+          case os_facts['os']['name']
+          when 'FreeBSD'
+            it { is_expected.to contain_file('/usr/local/etc/logrotate.d/hourly').with_ensure('directory') }
+          else
+            it { is_expected.to contain_file('/etc/logrotate.d/hourly').with_ensure('directory') }
+            it { is_expected.to contain_file('/etc/logrotate.d/hourly/nginx').with_ensure('present').with_content(%r{/var/log/nginx/\*.log\s\{\n\s+hourly\n\}}) }
+            it { is_expected.to contain_file('/etc/cron.hourly').with_ensure('directory') }
+            it { is_expected.to contain_logrotate__rule('nginx') }
+          end
+        end
       end
     end
   end
