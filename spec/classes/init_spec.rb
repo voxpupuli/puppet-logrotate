@@ -204,6 +204,31 @@ describe 'logrotate' do
             it { is_expected.to contain_file('/etc/cron.hourly/logrotate').with_ensure('absent') }
           end
         end
+
+        context 'with ensure_systemd_timer_hourly => absent' do
+          let(:params) do
+            {
+              manage_systemd_timer: true,
+              ensure_systemd_timer: 'present',
+              ensure_systemd_timer_hourly: 'absent',
+            }
+          end
+
+          case os_facts['os']['name']
+          when 'FreeBSD'
+            it { is_expected.to contain_file('/usr/local/etc/logrotate.d/hourly').with_ensure('directory') }
+          else
+            it { is_expected.to contain_file('/etc/logrotate.d/hourly').with_ensure('directory') }
+
+            it do
+              is_expected.to contain_systemd__manage_dropin('hourly-service.conf').with_ensure('absent')
+              is_expected.to contain_systemd__manage_dropin('logrotate-flock.conf').with_ensure('absent')
+              is_expected.to contain_systemd__unit_file('logrotate-hourly.service').with_ensure('absent')
+              is_expected.to contain_systemd__manage_dropin('hourly-timer.conf').with_ensure('absent')
+              is_expected.to contain_systemd__unit_file('logrotate-hourly.timer').with_ensure('absent')
+            end
+          end
+        end
       end
     end
   end
