@@ -39,7 +39,7 @@ class logrotate::hourly (
     $_lockfile = '/run/lock/logrotate.service'
     $_timeout  = 21600
     systemd::manage_dropin { 'hourly-service.conf':
-      ensure        => $logrotate::ensure_systemd_timer,
+      ensure        => $logrotate::ensure_systemd_timer_hourly,
       unit          => 'logrotate-hourly.service',
       unit_entry    => {
         'Description' => [
@@ -55,7 +55,7 @@ class logrotate::hourly (
 
     # Once logrotate >= 3.21.1 replace flock with the `--wait-for-state-lock` option.
     systemd::manage_dropin { 'logrotate-flock.conf':
-      ensure        => $logrotate::ensure_systemd_timer,
+      ensure        => $logrotate::ensure_systemd_timer_hourly,
       unit          => 'logrotate.service',
       service_entry => {
         'ExecStart'   => ['', "/usr/bin/flock --wait ${_timeout} ${_lockfile} /usr/sbin/logrotate /etc/logrotate.conf"],
@@ -63,13 +63,13 @@ class logrotate::hourly (
     }
 
     systemd::unit_file { 'logrotate-hourly.service':
-      ensure => $logrotate::ensure_systemd_timer,
+      ensure => $logrotate::ensure_systemd_timer_hourly,
       source => 'file:///lib/systemd/system/logrotate.service',
       before => Systemd::Unit_file['logrotate-hourly.timer'],
     }
 
     systemd::manage_dropin { 'hourly-timer.conf':
-      ensure      => $logrotate::ensure_systemd_timer,
+      ensure      => $logrotate::ensure_systemd_timer_hourly,
       unit        => 'logrotate-hourly.timer',
       unit_entry  => {
         'Description' => [
@@ -83,13 +83,13 @@ class logrotate::hourly (
       before      => Systemd::Unit_file['logrotate-hourly.timer'],
     }
 
-    $_timer = $logrotate::ensure_systemd_timer ? {
+    $_timer = $logrotate::ensure_systemd_timer_hourly ? {
       'present' => true,
       default  => false,
     }
 
     systemd::unit_file { 'logrotate-hourly.timer':
-      ensure => $logrotate::ensure_systemd_timer,
+      ensure => $logrotate::ensure_systemd_timer_hourly,
       source => 'file:///lib/systemd/system/logrotate.timer',
       active => $_timer,
       enable => $_timer,
