@@ -53,6 +53,7 @@ class logrotate::hourly (
       before        => Systemd::Unit_file['logrotate-hourly.service'],
     }
 
+    # Ensure our separate systemd units do not run concurrently.
     # Once logrotate >= 3.21.1 replace flock with the `--wait-for-state-lock` option.
     systemd::manage_dropin { 'logrotate-flock.conf':
       ensure        => $logrotate::ensure_systemd_timer_hourly,
