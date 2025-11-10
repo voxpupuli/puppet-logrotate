@@ -6,32 +6,37 @@
 
 ### Classes
 
-* [`logrotate`](#logrotate)
-* [`logrotate::config`](#logrotate--config): logrotate config
-* [`logrotate::defaults`](#logrotate--defaults): apply defaults
-* [`logrotate::hourly`](#logrotate--hourly): Internal: Configure a host for hourly logrotate jobs.  ensure - The desired state of hourly logrotate support.  Valid values are          'ab
-* [`logrotate::install`](#logrotate--install): make sure logrotate is installed
-* [`logrotate::params`](#logrotate--params): == Class: logrotate::params  Params class for logrotate module
-* [`logrotate::rules`](#logrotate--rules): apply user-defined rules
+#### Public Classes
+
+* [`logrotate`](#logrotate): Install and configure logrotate
+
+#### Private Classes
+
+* `logrotate::config`: Configure logrotate
+* `logrotate::defaults`: Apply module defaults
+* `logrotate::hourly`: Configure a host for hourly logrotate jobs.
+* `logrotate::install`: Make sure logrotate is installed
+* `logrotate::params`: Logrotate module default configuration settings/Params class
+* `logrotate::rules`: Apply user-defined rules
 
 ### Defined types
 
-* [`logrotate::conf`](#logrotate--conf): Internal: Install and configure logrotate defaults file, usually   /etc/logrotate.conf  see logrotate::Conf for description of options.  Exam
-* [`logrotate::cron`](#logrotate--cron)
-* [`logrotate::rule`](#logrotate--rule): Public: Configure logrotate to rotate a logfile.  namevar         - The String name of the rule. path            - The path String to the log
+* [`logrotate::conf`](#logrotate--conf): Install and configure logrotate defaults file (usually /etc/logrotate.conf)
+* [`logrotate::cron`](#logrotate--cron): Manage logrotate cron entries
+* [`logrotate::rule`](#logrotate--rule): Configure logrotate to rotate a logfile.
 
 ### Data types
 
-* [`Logrotate::Commands`](#Logrotate--Commands)
-* [`Logrotate::Every`](#Logrotate--Every)
-* [`Logrotate::Path`](#Logrotate--Path)
-* [`Logrotate::Size`](#Logrotate--Size)
+* [`Logrotate::Commands`](#Logrotate--Commands): Data type for commands
+* [`Logrotate::Every`](#Logrotate--Every): Valid configuration values for rotation (every hour/day/week/month etc.)
+* [`Logrotate::Path`](#Logrotate--Path): File path valid in logrotate config files
+* [`Logrotate::Size`](#Logrotate--Size): Filesize valid in logrotate config files
 
 ## Classes
 
 ### <a name="logrotate"></a>`logrotate`
 
-The logrotate class.
+Install and configure logrotate
 
 #### Parameters
 
@@ -70,7 +75,7 @@ The following parameters are available in the `logrotate` class:
 
 Data type: `String`
 
-
+Desired installation state for the logrotate package
 
 Default value: `present`
 
@@ -78,7 +83,7 @@ Default value: `present`
 
 Data type: `Boolean`
 
-
+Manage logrotate daily cron file
 
 Default value: `true`
 
@@ -86,7 +91,7 @@ Default value: `true`
 
 Data type: `Boolean`
 
-
+Manage logrotate hourly cron file
 
 Default value: `true`
 
@@ -94,7 +99,7 @@ Default value: `true`
 
 Data type: `Enum[present,absent]`
 
-
+Ensure logrotate daily cron file is present/absent
 
 Default value: `'present'`
 
@@ -102,7 +107,7 @@ Default value: `'present'`
 
 Data type: `Enum[present,absent]`
 
-
+Ensure logrotate hourly cron file is present/absent
 
 Default value: `'present'`
 
@@ -110,7 +115,7 @@ Default value: `'present'`
 
 Data type: `Boolean`
 
-
+Manage logrotate systemd timer
 
 Default value: `false`
 
@@ -118,7 +123,7 @@ Default value: `false`
 
 Data type: `Enum[present,absent]`
 
-
+Ensure logrotate systemd timer is present/absent
 
 Default value: `'absent'`
 
@@ -126,7 +131,7 @@ Default value: `'absent'`
 
 Data type: `Enum[present,absent]`
 
-
+Ensure logrotate systemd hourly timer is present/absent
 
 Default value: `'absent'`
 
@@ -134,7 +139,7 @@ Default value: `'absent'`
 
 Data type: `Boolean`
 
-
+Create base rules (for example btmp, wtmp)
 
 Default value: `true`
 
@@ -142,7 +147,7 @@ Default value: `true`
 
 Data type: `Boolean`
 
-
+Purge logrotate files not managed by the module.
 
 Default value: `false`
 
@@ -150,7 +155,7 @@ Default value: `false`
 
 Data type: `String`
 
-
+Logrotate package name.
 
 Default value: `'logrotate'`
 
@@ -158,7 +163,7 @@ Default value: `'logrotate'`
 
 Data type: `Hash`
 
-
+Hash of logrotate logrotate::rule rules
 
 Default value: `{}`
 
@@ -166,7 +171,7 @@ Default value: `{}`
 
 Data type: `Optional[Hash]`
 
-
+Hash of default config values for logrotate
 
 Default value: `undef`
 
@@ -174,7 +179,7 @@ Default value: `undef`
 
 Data type: `Integer[0,23]`
 
-
+Hour at which daily logrotate cron is executed
 
 Default value: `$logrotate::params::cron_daily_hour`
 
@@ -182,7 +187,7 @@ Default value: `$logrotate::params::cron_daily_hour`
 
 Data type: `Integer[0,59]`
 
-
+Minute at which daily logrotate cron is executed
 
 Default value: `$logrotate::params::cron_daily_minute`
 
@@ -190,7 +195,7 @@ Default value: `$logrotate::params::cron_daily_minute`
 
 Data type: `Integer[0,59]`
 
-
+Minute at which hourly logrotate cron is executed
 
 Default value: `$logrotate::params::cron_hourly_minute`
 
@@ -198,7 +203,7 @@ Default value: `$logrotate::params::cron_hourly_minute`
 
 Data type: `Stdlib::Filemode`
 
-
+Cron file permissions in numeric mode
 
 Default value: `$logrotate::params::cron_file_mode`
 
@@ -206,7 +211,7 @@ Default value: `$logrotate::params::cron_file_mode`
 
 Data type: `String`
 
-
+Path of config dir
 
 Default value: `$logrotate::params::configdir`
 
@@ -214,7 +219,7 @@ Default value: `$logrotate::params::configdir`
 
 Data type: `String`
 
-
+Path of logrotate binary
 
 Default value: `$logrotate::params::logrotate_bin`
 
@@ -222,7 +227,7 @@ Default value: `$logrotate::params::logrotate_bin`
 
 Data type: `String`
 
-
+Path of logrotate.conf
 
 Default value: `$logrotate::params::logrotate_conf`
 
@@ -230,7 +235,7 @@ Default value: `$logrotate::params::logrotate_conf`
 
 Data type: `Stdlib::Filemode`
 
-
+Path of `logrotate.conf`
 
 Default value: `$logrotate::params::logrotate_conf_mode`
 
@@ -238,7 +243,7 @@ Default value: `$logrotate::params::logrotate_conf_mode`
 
 Data type: `Boolean`
 
-
+Whether to manage logrtotate package
 
 Default value: `$logrotate::params::manage_package`
 
@@ -246,7 +251,7 @@ Default value: `$logrotate::params::manage_package`
 
 Data type: `String`
 
-
+Path in which logrotate rules are created.
 
 Default value: `$logrotate::params::rules_configdir`
 
@@ -254,7 +259,7 @@ Default value: `$logrotate::params::rules_configdir`
 
 Data type: `Stdlib::Filemode`
 
-
+Logrotate rules folder permissions in numeric mode.
 
 Default value: `$logrotate::params::rules_configdir_mode`
 
@@ -262,7 +267,7 @@ Default value: `$logrotate::params::rules_configdir_mode`
 
 Data type: `String`
 
-
+Name of root user.
 
 Default value: `$logrotate::params::root_user`
 
@@ -270,7 +275,7 @@ Default value: `$logrotate::params::root_user`
 
 Data type: `String`
 
-
+Name of root group.
 
 Default value: `$logrotate::params::root_group`
 
@@ -278,7 +283,7 @@ Default value: `$logrotate::params::root_group`
 
 Data type: `Array[String[1]]`
 
-
+Arguments passed to logrotate.
 
 Default value: `[]`
 
@@ -286,110 +291,37 @@ Default value: `[]`
 
 Data type: `Boolean`
 
-
+Do not discard cron output when there is no error.
 
 Default value: `false`
-
-### <a name="logrotate--config"></a>`logrotate::config`
-
-logrotate config
-
-### <a name="logrotate--defaults"></a>`logrotate::defaults`
-
-apply defaults
-
-#### Parameters
-
-The following parameters are available in the `logrotate::defaults` class:
-
-* [`create_base_rules`](#-logrotate--defaults--create_base_rules)
-* [`rules`](#-logrotate--defaults--rules)
-* [`rule_default`](#-logrotate--defaults--rule_default)
-
-##### <a name="-logrotate--defaults--create_base_rules"></a>`create_base_rules`
-
-Data type: `Any`
-
-
-
-Default value: `$logrotate::create_base_rules`
-
-##### <a name="-logrotate--defaults--rules"></a>`rules`
-
-Data type: `Any`
-
-
-
-Default value: `$logrotate::params::base_rules`
-
-##### <a name="-logrotate--defaults--rule_default"></a>`rule_default`
-
-Data type: `Any`
-
-
-
-Default value: `$logrotate::params::rule_default`
-
-### <a name="logrotate--hourly"></a>`logrotate::hourly`
-
-Internal: Configure a host for hourly logrotate jobs.
-
-ensure - The desired state of hourly logrotate support.  Valid values are
-         'absent' and 'present' (default: 'present').
-
-Examples
-
-  # Set up hourly logrotate jobs
-  class { 'logrotate':
-    manage_cron_hourly => true,
-  }
-
-  # Remove hourly logrotate job support
-  class { 'logrotate':
-    manage_cron_hourly => true,
-    ensure_cron_hourly => absent,
-  }
-
-### <a name="logrotate--install"></a>`logrotate::install`
-
-make sure logrotate is installed
-
-### <a name="logrotate--params"></a>`logrotate::params`
-
-== Class: logrotate::params
-
-Params class for logrotate module
-
-### <a name="logrotate--rules"></a>`logrotate::rules`
-
-apply user-defined rules
-
-#### Parameters
-
-The following parameters are available in the `logrotate::rules` class:
-
-* [`rules`](#-logrotate--rules--rules)
-
-##### <a name="-logrotate--rules--rules"></a>`rules`
-
-Data type: `Any`
-
-
-
-Default value: `$logrotate::rules`
 
 ## Defined types
 
 ### <a name="logrotate--conf"></a>`logrotate::conf`
 
-Internal: Install and configure logrotate defaults file, usually
-  /etc/logrotate.conf
+Install and configure logrotate defaults file (usually /etc/logrotate.conf)
 
-see logrotate::Conf for description of options.
+#### Examples
 
-Examples
+##### Configure `/etc/logrotate.conf` with defaults + configure shred
 
-  logrotate::conf{'/etc/logrotate.conf':}
+```puppet
+logrotate::conf {
+   shred => true,
+ }
+```
+
+##### Configure `/etc/logrotate.conf` to use zstd with non-default level
+
+```puppet
+logrotate::conf {
+  compress        => true,
+  compresscmd     => '/usr/bin/zstd',
+  compressext     => '.zst',
+  compressoptions => '--compress -19',
+  uncompresscmd   => '/usr/bin/unzstd',
+}
+```
 
 #### Parameters
 
@@ -407,10 +339,6 @@ The following parameters are available in the `logrotate::conf` defined type:
 * [`create_mode`](#-logrotate--conf--create_mode)
 * [`create_owner`](#-logrotate--conf--create_owner)
 * [`create_group`](#-logrotate--conf--create_group)
-* [`createolddir`](#-logrotate--conf--createolddir)
-* [`createolddir_mode`](#-logrotate--conf--createolddir_mode)
-* [`createolddir_owner`](#-logrotate--conf--createolddir_owner)
-* [`createolddir_group`](#-logrotate--conf--createolddir_group)
 * [`dateext`](#-logrotate--conf--dateext)
 * [`dateformat`](#-logrotate--conf--dateformat)
 * [`dateyesterday`](#-logrotate--conf--dateyesterday)
@@ -439,12 +367,16 @@ The following parameters are available in the `logrotate::conf` defined type:
 * [`su_user`](#-logrotate--conf--su_user)
 * [`su_group`](#-logrotate--conf--su_group)
 * [`uncompresscmd`](#-logrotate--conf--uncompresscmd)
+* [`createolddir`](#-logrotate--conf--createolddir)
+* [`createolddir_mode`](#-logrotate--conf--createolddir_mode)
+* [`createolddir_owner`](#-logrotate--conf--createolddir_owner)
+* [`createolddir_group`](#-logrotate--conf--createolddir_group)
 
 ##### <a name="-logrotate--conf--path"></a>`path`
 
 Data type: `Stdlib::Unixpath`
 
-
+Path of the logrotate.conf file to manage.
 
 Default value: `$name`
 
@@ -452,7 +384,7 @@ Default value: `$name`
 
 Data type: `Enum['absent','present']`
 
-
+Desired state for the logrotate.conf file.
 
 Default value: `'present'`
 
@@ -460,7 +392,7 @@ Default value: `'present'`
 
 Data type: `Optional[Boolean]`
 
-
+A Boolean value specifying whether the rotated logs should be compressed.
 
 Default value: `undef`
 
@@ -468,7 +400,7 @@ Default value: `undef`
 
 Data type: `Optional[String]`
 
-
+The command String that should be executed to compress the rotated logs.
 
 Default value: `undef`
 
@@ -476,7 +408,8 @@ Default value: `undef`
 
 Data type: `Optional[String]`
 
-
+The extention String to be appended to the rotated log files after they have
+been compressed.
 
 Default value: `undef`
 
@@ -484,7 +417,8 @@ Default value: `undef`
 
 Data type: `Optional[String]`
 
-
+A String of command line options to be passed to the compression program
+specified in `compresscmd`.
 
 Default value: `undef`
 
@@ -492,7 +426,8 @@ Default value: `undef`
 
 Data type: `Optional[Boolean]`
 
-
+A Boolean specifying whether logrotate should just take a copy of the log
+files and not touch the original.
 
 Default value: `undef`
 
@@ -500,7 +435,8 @@ Default value: `undef`
 
 Data type: `Optional[Boolean]`
 
-
+A Boolean specifying whether logrotate should truncate the original log file
+after taking a copy.
 
 Default value: `undef`
 
@@ -508,7 +444,8 @@ Default value: `undef`
 
 Data type: `Boolean`
 
-
+A Boolean specifying whether logrotate should create new log files
+immediately after rotation.
 
 Default value: `true`
 
@@ -516,7 +453,8 @@ Default value: `true`
 
 Data type: `Optional[String]`
 
-
+An octal mode String logrotate should apply to the newly created log files
+if create => true.
 
 Default value: `undef`
 
@@ -524,7 +462,8 @@ Default value: `undef`
 
 Data type: `Optional[String]`
 
-
+A username String that logrotate should set the owner of the newly created
+log files to if create => true.
 
 Default value: `undef`
 
@@ -532,7 +471,262 @@ Default value: `undef`
 
 Data type: `Optional[String]`
 
+A String group name that logrotate should apply to the newly created log
+files if create => true.
 
+Default value: `undef`
+
+##### <a name="-logrotate--conf--dateext"></a>`dateext`
+
+Data type: `Optional[Boolean]`
+
+A Boolean specifying whether rotated log files should be archived by adding
+a date extension rather just a number.
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--dateformat"></a>`dateformat`
+
+Data type: `Optional[String]`
+
+The format String to be used for `dateext` . Valid specifiers are '%Y',
+'%m', '%d' and '%s'.
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--dateyesterday"></a>`dateyesterday`
+
+Data type: `Optional[Boolean]`
+
+A Boolean specifying whether to use yesterday's date instead of today's date
+to create the `dateext` extension.
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--delaycompress"></a>`delaycompress`
+
+Data type: `Optional[Boolean]`
+
+A Boolean specifying whether compression of the rotated log file should be
+delayed until the next logrotate run.
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--extension"></a>`extension`
+
+Data type: `Optional[String]`
+
+Log files with this extension String are allowed to keep it after rotation.
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--ifempty"></a>`ifempty`
+
+Data type: `Optional[Boolean]`
+
+A Boolean specifying whether the log file should be rotated even if it is
+empty.
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--mail"></a>`mail`
+
+Data type: `Optional[Variant[String,Boolean]]`
+
+The email address String that logs that are about to be rotated out of
+existence are emailed to.
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--mail_when"></a>`mail_when`
+
+Data type: `Optional[Enum['mailfirst', 'maillast']]`
+
+When mail is configured, enable mailfirst (email the just rotated file
+rather than the about to expire file) and/or maillast (email the about to
+expire file rather than the just rotated file) behaviours.
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--maxage"></a>`maxage`
+
+Data type: `Optional[Integer]`
+
+The Integer maximum number of days that a rotated log file can stay on the
+system.
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--minsize"></a>`minsize`
+
+Data type: `Optional[Logrotate::Size]`
+
+The String minimum size a log file must be to be rotated, but not before the
+scheduled rotation time. The default units are bytes, append k, M or G for
+kilobytes, megabytes and gigabytes respectively.
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--maxsize"></a>`maxsize`
+
+Data type: `Optional[Logrotate::Size]`
+
+The String maximum size a log file may be to be rotated; When maxsize is
+used, both the size and timestamp of a log file are considered for rotation.
+The default units are bytes, append k, M or G for kilobytes, megabytes and
+gigabytes respectively.
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--missingok"></a>`missingok`
+
+Data type: `Optional[Boolean]`
+
+A Boolean specifying whether logrotate should ignore missing log files or
+issue an error.
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--olddir"></a>`olddir`
+
+Data type: `Optional[Variant[Boolean,String]]`
+
+A String path to a directory that rotated logs should be moved to.
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--postrotate"></a>`postrotate`
+
+Data type: `Optional[String]`
+
+A command String or an Array of Strings that should be executed by /bin/sh
+after the log file is rotated optional).
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--prerotate"></a>`prerotate`
+
+Data type: `Optional[String]`
+
+A command String or an Array of Strings that should be executed by /bin/sh
+before the log file is rotated and only if it will be rotated.
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--firstaction"></a>`firstaction`
+
+Data type: `Optional[String]`
+
+A command String or an Array of Strings that should be executed by /bin/sh
+once before all log files that match the wildcard pattern are rotated.
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--lastaction"></a>`lastaction`
+
+Data type: `Optional[String]`
+
+A command String or an Array of Strings that should be executed by /bin/sh
+once after all the log files that match the wildcard pattern are rotated.
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--rotate"></a>`rotate`
+
+Data type: `Integer`
+
+The Integer number of rotated log files to keep on disk.
+
+Default value: `4`
+
+##### <a name="-logrotate--conf--rotate_every"></a>`rotate_every`
+
+Data type: `Logrotate::Every`
+
+How often the log files should be rotated as a String. Valid values are
+'day', 'week', 'month' and 'year'.
+
+Default value: `'weekly'`
+
+##### <a name="-logrotate--conf--size"></a>`size`
+
+Data type: `Optional[Logrotate::Size]`
+
+The String size a log file has to reach before it will be rotated. The
+default units are bytes, append k, M or G for kilobytes, megabytes or
+gigabytes respectively.
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--sharedscripts"></a>`sharedscripts`
+
+Data type: `Optional[Boolean]`
+
+A Boolean specifying whether logrotate should run the postrotate and
+prerotate scripts for each matching file or just once.
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--shred"></a>`shred`
+
+Data type: `Optional[Boolean]`
+
+A Boolean specifying whether logs should be deleted with shred instead of
+unlink.
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--shredcycles"></a>`shredcycles`
+
+Data type: `Optional[Integer]`
+
+The Integer number of times shred should overwrite log files before
+unlinking them.
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--start"></a>`start`
+
+Data type: `Optional[Integer]`
+
+The Integer number to be used as the base for the extensions appended to the
+rotated log files.
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--su"></a>`su`
+
+Data type: `Boolean`
+
+A Boolean specifying whether logrotate should rotate under the specific
+su_user and su_group instead of the default. First available in logrotate
+3.8.0.
+
+Default value: `false`
+
+##### <a name="-logrotate--conf--su_user"></a>`su_user`
+
+Data type: `String`
+
+A String username that logrotate should use to rotate a log file set instead
+of using the default if su => true.
+
+Default value: `'root'`
+
+##### <a name="-logrotate--conf--su_group"></a>`su_group`
+
+Data type: `String`
+
+A String group name that logrotate should use to rotate a log file set
+instead of using the default if su => true.
+
+Default value: `'root'`
+
+##### <a name="-logrotate--conf--uncompresscmd"></a>`uncompresscmd`
+
+Data type: `Optional[String]`
+
+The String command to be used to uncompress log files.
 
 Default value: `undef`
 
@@ -568,233 +762,9 @@ Data type: `Optional[String]`
 
 Default value: `undef`
 
-##### <a name="-logrotate--conf--dateext"></a>`dateext`
-
-Data type: `Optional[Boolean]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--conf--dateformat"></a>`dateformat`
-
-Data type: `Optional[String]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--conf--dateyesterday"></a>`dateyesterday`
-
-Data type: `Optional[Boolean]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--conf--delaycompress"></a>`delaycompress`
-
-Data type: `Optional[Boolean]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--conf--extension"></a>`extension`
-
-Data type: `Optional[String]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--conf--ifempty"></a>`ifempty`
-
-Data type: `Optional[Boolean]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--conf--mail"></a>`mail`
-
-Data type: `Optional[Variant[String,Boolean]]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--conf--mail_when"></a>`mail_when`
-
-Data type: `Optional[Enum['mailfirst', 'maillast']]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--conf--maxage"></a>`maxage`
-
-Data type: `Optional[Integer]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--conf--minsize"></a>`minsize`
-
-Data type: `Optional[Logrotate::Size]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--conf--maxsize"></a>`maxsize`
-
-Data type: `Optional[Logrotate::Size]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--conf--missingok"></a>`missingok`
-
-Data type: `Optional[Boolean]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--conf--olddir"></a>`olddir`
-
-Data type: `Optional[Variant[Boolean,String]]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--conf--postrotate"></a>`postrotate`
-
-Data type: `Optional[String]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--conf--prerotate"></a>`prerotate`
-
-Data type: `Optional[String]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--conf--firstaction"></a>`firstaction`
-
-Data type: `Optional[String]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--conf--lastaction"></a>`lastaction`
-
-Data type: `Optional[String]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--conf--rotate"></a>`rotate`
-
-Data type: `Integer`
-
-
-
-Default value: `4`
-
-##### <a name="-logrotate--conf--rotate_every"></a>`rotate_every`
-
-Data type: `Logrotate::Every`
-
-
-
-Default value: `'weekly'`
-
-##### <a name="-logrotate--conf--size"></a>`size`
-
-Data type: `Optional[Logrotate::Size]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--conf--sharedscripts"></a>`sharedscripts`
-
-Data type: `Optional[Boolean]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--conf--shred"></a>`shred`
-
-Data type: `Optional[Boolean]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--conf--shredcycles"></a>`shredcycles`
-
-Data type: `Optional[Integer]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--conf--start"></a>`start`
-
-Data type: `Optional[Integer]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--conf--su"></a>`su`
-
-Data type: `Boolean`
-
-
-
-Default value: `false`
-
-##### <a name="-logrotate--conf--su_user"></a>`su_user`
-
-Data type: `String`
-
-
-
-Default value: `'root'`
-
-##### <a name="-logrotate--conf--su_group"></a>`su_group`
-
-Data type: `String`
-
-
-
-Default value: `'root'`
-
-##### <a name="-logrotate--conf--uncompresscmd"></a>`uncompresscmd`
-
-Data type: `Optional[String]`
-
-
-
-Default value: `undef`
-
 ### <a name="logrotate--cron"></a>`logrotate::cron`
 
-The logrotate::cron class.
+Manage logrotate cron entries
 
 #### Parameters
 
@@ -812,149 +782,43 @@ Default value: `'present'`
 
 ### <a name="logrotate--rule"></a>`logrotate::rule`
 
-Public: Configure logrotate to rotate a logfile.
+Configure logrotate to rotate a logfile.
 
-namevar         - The String name of the rule.
-path            - The path String to the logfile(s) to be rotated.
-ensure          - The desired state of the logrotate rule as a String.  Valid
-                  values are 'absent' and 'present' (default: 'present').
-compress        - A Boolean value specifying whether the rotated logs should
-                  be compressed (optional).
-compresscmd     - The command String that should be executed to compress the
-                  rotated logs (optional).
-compressext     - The extention String to be appended to the rotated log files
-                  after they have been compressed (optional).
-compressoptions - A String of command line options to be passed to the
-                  compression program specified in `compresscmd` (optional).
-copy            - A Boolean specifying whether logrotate should just take a
-                  copy of the log file and not touch the original (optional).
-copytruncate    - A Boolean specifying whether logrotate should truncate the
-                  original log file after taking a copy (optional).
-create          - A Boolean specifying whether logrotate should create a new
-                  log file immediately after rotation (optional).
-create_mode     - An octal mode String logrotate should apply to the newly
-                  created log file if create => true (optional).
-create_owner    - A username String that logrotate should set the owner of the
-                  newly created log file to if create => true (optional).
-create_group    - A String group name that logrotate should apply to the newly
-                  created log file if create => true (optional).
-createolddir    - A Boolean specifying whether logrotate should create the
-                  olddir directory if it does not exist (optional).
-createolddir_mode - An octal mode String logrotate should apply to the
-                  olddir directory if createolddir => true (optional).
-createolddir_owner - A username String that logrotate should set the owner
-                  of the olddir directory to if createolddir => true (optional).
-createolddir_group - A String group name that logrotate should apply to the
-                  olddir directory if createolddir => true (optional).
-dateext         - A Boolean specifying whether rotated log files should be
-                  archived by adding a date extension rather just a number
-                  (optional).
-dateformat      - The format String to be used for `dateext` (optional).
-                  Valid specifiers are '%Y', '%m', '%d' and '%s'.
-dateyesterday   - A Boolean specifying whether to use yesterday's date instead
-                  of today's date to create the `dateext` extension (optional).
-delaycompress   - A Boolean specifying whether compression of the rotated
-                  log file should be delayed until the next logrotate run
-                  (optional).
-extension       - Log files with this extension String are allowed to keep it
-                  after rotation (optional).
-ifempty         - A Boolean specifying whether the log file should be rotated
-                  even if it is empty (optional).
-mail            - The email address String that logs that are about to be
-                  rotated out of existence are emailed to (optional).
-mailfirst       - A Boolean that when used with `mail` has logrotate email the
-                  just rotated file rather than the about to expire file
-                  (optional).
-maillast        - A Boolean that when used with `mail` has logrotate email the
-                  about to expire file rather than the just rotated file
-                  (optional).
-maxage          - The Integer maximum number of days that a rotated log file
-                  can stay on the system (optional).
-minsize         - The String minimum size a log file must be to be rotated,
-                  but not before the scheduled rotation time (optional).
-                  The default units are bytes, append k, M or G for kilobytes,
-                  megabytes and gigabytes respectively.
-maxsize         - The String maximum size a log file may be to be rotated;
-                  When maxsize is used, both the size and timestamp of a log
-                  file are considered for rotation.
-                  The default units are bytes, append k, M or G for kilobytes,
-                  megabytes and gigabytes respectively.
-missingok       - A Boolean specifying whether logrotate should ignore missing
-                  log files or issue an error (optional).
-olddir          - A String path to a directory that rotated logs should be
-                  moved to (optional).
-postrotate      - A command String or an Array of Strings that should be
-                  executed by /bin/sh after the log file is rotated
-                  optional).
-prerotate       - A command String or an Array of Strings that should be
-                  executed by /bin/sh before the log file is rotated and
-                  only if it will be rotated (optional).
-firstaction     - A command String or an Array of Strings that should be
-                  executed by /bin/sh once before all log files that match
-                  the wildcard pattern are rotated (optional).
-lastaction      - A command String or an Array of Strings that should be
-                  executed by /bin/sh once after all the log files that match
-                  the wildcard pattern are rotated (optional).
-rotate          - The Integer number of rotated log files to keep on disk
-                  (optional).
-rotate_every    - How often the log files should be rotated as a String.
-                  Valid values are 'day', 'week', 'month' and 'year'
-                  (optional).
-size            - The String size a log file has to reach before it will be
-                  rotated (optional).  The default units are bytes, append k,
-                  M or G for kilobytes, megabytes or gigabytes respectively.
-sharedscripts   - A Boolean specifying whether logrotate should run the
-                  postrotate and prerotate scripts for each matching file or
-                  just once (optional).
-shred           - A Boolean specifying whether logs should be deleted with
-                  shred instead of unlink (optional).
-shredcycles     - The Integer number of times shred should overwrite log files
-                  before unlinking them (optional).
-start           - The Integer number to be used as the base for the extensions
-                  appended to the rotated log files (optional).
-su              - A Boolean specifying whether logrotate should rotate under
-                  the specific su_user and su_group instead of the default.
-                  First available in logrotate 3.8.0.
-su_user         - A String username that logrotate should use to rotate a
-                  log file set instead of using the default if
-                  su => true (optional)
-su_group        - A String group name that logrotate should use to rotate a
-                  log file set instead of using the default if
-                  su => true (optional).
-uncompresscmd   - The String command to be used to uncompress log files
-                  (optional).
-custom_cfg      - Array of custom lines to be appended to the rules
+#### Examples
 
-Examples
+##### Rotate /var/log/syslog daily and keep 7 days worth of compressed logs.
 
-  # Rotate /var/log/syslog daily and keep 7 days worth of compressed logs.
-  logrotate::rule { 'messages':
-    path         => '/var/log/messages',
-    copytruncate => true,
-    missingok    => true,
-    rotate_every => 'day',
-    rotate       => 7,
-    compress     => true,
-    ifempty      => true,
-  }
+```puppet
+logrotate::rule { 'messages':
+  path         => '/var/log/messages',
+  copytruncate => true,
+  missingok    => true,
+  rotate_every => 'day',
+  rotate       => 7,
+  compress     => true,
+  ifempty      => true,
+}
+```
 
-  # Rotate /var/log/nginx/access_log weekly and keep 3 weeks of logs
-  logrotate::rule { 'nginx_access_log':
-    path         => '/var/log/nginx/access_log',
-    missingok    => true,
-    rotate_every => 'week',
-    rotate       => 3,
-    postrotate   => '/etc/init.d/nginx restart',
-  }
+##### Rotate /var/log/nginx/access_log weekly and keep 3 weeks of logs
+
+```puppet
+logrotate::rule { 'nginx_access_log':
+  path         => '/var/log/nginx/access_log',
+  missingok    => true,
+  rotate_every => 'week',
+  rotate       => 3,
+  postrotate   => '/etc/init.d/nginx restart',
+}
+```
 
 #### Parameters
 
 The following parameters are available in the `logrotate::rule` defined type:
 
 * [`rulename`](#-logrotate--rule--rulename)
-* [`ensure`](#-logrotate--rule--ensure)
-* [`custom_cfg`](#-logrotate--rule--custom_cfg)
 * [`path`](#-logrotate--rule--path)
+* [`ensure`](#-logrotate--rule--ensure)
 * [`compress`](#-logrotate--rule--compress)
 * [`compresscmd`](#-logrotate--rule--compresscmd)
 * [`compressext`](#-logrotate--rule--compressext)
@@ -965,10 +829,6 @@ The following parameters are available in the `logrotate::rule` defined type:
 * [`create_mode`](#-logrotate--rule--create_mode)
 * [`create_owner`](#-logrotate--rule--create_owner)
 * [`create_group`](#-logrotate--rule--create_group)
-* [`createolddir`](#-logrotate--rule--createolddir)
-* [`createolddir_mode`](#-logrotate--rule--createolddir_mode)
-* [`createolddir_owner`](#-logrotate--rule--createolddir_owner)
-* [`createolddir_group`](#-logrotate--rule--createolddir_group)
 * [`dateext`](#-logrotate--rule--dateext)
 * [`dateformat`](#-logrotate--rule--dateformat)
 * [`dateyesterday`](#-logrotate--rule--dateyesterday)
@@ -997,44 +857,42 @@ The following parameters are available in the `logrotate::rule` defined type:
 * [`su_user`](#-logrotate--rule--su_user)
 * [`su_group`](#-logrotate--rule--su_group)
 * [`uncompresscmd`](#-logrotate--rule--uncompresscmd)
+* [`custom_cfg`](#-logrotate--rule--custom_cfg)
+* [`createolddir`](#-logrotate--rule--createolddir)
+* [`createolddir_mode`](#-logrotate--rule--createolddir_mode)
+* [`createolddir_owner`](#-logrotate--rule--createolddir_owner)
+* [`createolddir_group`](#-logrotate--rule--createolddir_group)
 
 ##### <a name="-logrotate--rule--rulename"></a>`rulename`
 
 Data type: `Pattern[/^[a-zA-Z0-9\._-]+$/]`
 
-
+The String name of the rule.
 
 Default value: `$title`
-
-##### <a name="-logrotate--rule--ensure"></a>`ensure`
-
-Data type: `Enum['present','absent']`
-
-
-
-Default value: `'present'`
-
-##### <a name="-logrotate--rule--custom_cfg"></a>`custom_cfg`
-
-Data type: `Array[String[1]]`
-
-
-
-Default value: `[]`
 
 ##### <a name="-logrotate--rule--path"></a>`path`
 
 Data type: `Optional[Logrotate::Path]`
 
-
+The path String to the logfile(s) to be rotated.
 
 Default value: `undef`
+
+##### <a name="-logrotate--rule--ensure"></a>`ensure`
+
+Data type: `Enum['present','absent']`
+
+The desired state of the logrotate rule as a String. Valid values are
+'absent' and 'present' (default: 'present').
+
+Default value: `'present'`
 
 ##### <a name="-logrotate--rule--compress"></a>`compress`
 
 Data type: `Optional[Boolean]`
 
-
+A Boolean value specifying whether the rotated logs should be compressed.
 
 Default value: `undef`
 
@@ -1042,7 +900,7 @@ Default value: `undef`
 
 Data type: `Optional[String]`
 
-
+The command String that should be executed to compress the rotated logs.
 
 Default value: `undef`
 
@@ -1050,7 +908,8 @@ Default value: `undef`
 
 Data type: `Optional[String]`
 
-
+The extention String to be appended to the rotated log files after they have
+been compressed.
 
 Default value: `undef`
 
@@ -1058,7 +917,8 @@ Default value: `undef`
 
 Data type: `Optional[String]`
 
-
+A String of command line options to be passed to the compression program
+specified in `compresscmd`.
 
 Default value: `undef`
 
@@ -1066,7 +926,8 @@ Default value: `undef`
 
 Data type: `Optional[Boolean]`
 
-
+A Boolean specifying whether logrotate should just take a copy of the log
+file and not touch the original.
 
 Default value: `undef`
 
@@ -1074,7 +935,8 @@ Default value: `undef`
 
 Data type: `Optional[Boolean]`
 
-
+A Boolean specifying whether logrotate should truncate the original log file
+after taking a copy.
 
 Default value: `undef`
 
@@ -1082,7 +944,8 @@ Default value: `undef`
 
 Data type: `Optional[Boolean]`
 
-
+A Boolean specifying whether logrotate should create a new log file
+immediately after rotation.
 
 Default value: `undef`
 
@@ -1090,7 +953,8 @@ Default value: `undef`
 
 Data type: `Optional[String]`
 
-
+An octal mode String logrotate should apply to the newly created log file if
+create => true.
 
 Default value: `undef`
 
@@ -1098,7 +962,8 @@ Default value: `undef`
 
 Data type: `Optional[String]`
 
-
+A username String that logrotate should set the owner of the newly created
+log file to if create => true.
 
 Default value: `undef`
 
@@ -1106,9 +971,272 @@ Default value: `undef`
 
 Data type: `Optional[String]`
 
-
+A String group name that logrotate should apply to the newly created log
+file if create => true.
 
 Default value: `undef`
+
+##### <a name="-logrotate--rule--dateext"></a>`dateext`
+
+Data type: `Optional[Boolean]`
+
+A Boolean specifying whether rotated log files should be archived by adding
+a date extension rather just a number.
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--dateformat"></a>`dateformat`
+
+Data type: `Optional[String]`
+
+The format String to be used for `dateext` . Valid specifiers are '%Y',
+'%m', '%d' and '%s'.
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--dateyesterday"></a>`dateyesterday`
+
+Data type: `Optional[Boolean]`
+
+A Boolean specifying whether to use yesterday's date instead of today's date
+to create the `dateext` extension.
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--delaycompress"></a>`delaycompress`
+
+Data type: `Optional[Boolean]`
+
+A Boolean specifying whether compression of the rotated log file should be
+delayed until the next logrotate run.
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--extension"></a>`extension`
+
+Data type: `Optional[String]`
+
+Log files with this extension String are allowed to keep it after rotation.
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--ifempty"></a>`ifempty`
+
+Data type: `Optional[Boolean]`
+
+A Boolean specifying whether the log file should be rotated even if it is
+empty.
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--mail"></a>`mail`
+
+Data type: `Optional[Variant[String,Boolean]]`
+
+The email address String that logs that are about to be rotated out of
+existence are emailed to.
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--mail_when"></a>`mail_when`
+
+Data type: `Optional[Enum['mailfirst','maillast']]`
+
+When mail is configured, enable mailfirst (email the just rotated file
+rather than the about to expire file) and/or maillast (email the about to
+expire file rather than the just rotated file) behaviours.
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--maxage"></a>`maxage`
+
+Data type: `Optional[Integer]`
+
+The Integer maximum number of days that a rotated log file can stay on the
+system.
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--minsize"></a>`minsize`
+
+Data type: `Optional[Logrotate::Size]`
+
+The String minimum size a log file must be to be rotated, but not before the
+scheduled rotation time. The default units are bytes, append k, M or G for
+kilobytes, megabytes and gigabytes respectively.
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--maxsize"></a>`maxsize`
+
+Data type: `Optional[Logrotate::Size]`
+
+The String maximum size a log file may be to be rotated; When maxsize is
+used, both the size and timestamp of a log file are considered for rotation.
+The default units are bytes, append k, M or G for kilobytes, megabytes and
+gigabytes respectively.
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--missingok"></a>`missingok`
+
+Data type: `Optional[Boolean]`
+
+A Boolean specifying whether logrotate should ignore missing log files or
+issue an error.
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--olddir"></a>`olddir`
+
+Data type: `Optional[Variant[Boolean,String]]`
+
+A String path to a directory that rotated logs should be moved to.
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--postrotate"></a>`postrotate`
+
+Data type: `Optional[Logrotate::Commands]`
+
+A command String or an Array of Strings that should be executed by /bin/sh
+after the log file is rotated optional).
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--prerotate"></a>`prerotate`
+
+Data type: `Optional[Logrotate::Commands]`
+
+A command String or an Array of Strings that should be executed by /bin/sh
+before the log file is rotated and only if it will be rotated.
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--firstaction"></a>`firstaction`
+
+Data type: `Optional[Logrotate::Commands]`
+
+A command String or an Array of Strings that should be executed by /bin/sh
+once before all log files that match the wildcard pattern are rotated.
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--lastaction"></a>`lastaction`
+
+Data type: `Optional[Logrotate::Commands]`
+
+A command String or an Array of Strings that should be executed by /bin/sh
+once after all the log files that match the wildcard pattern are rotated.
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--rotate"></a>`rotate`
+
+Data type: `Optional[Integer]`
+
+The Integer number of rotated log files to keep on disk.
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--rotate_every"></a>`rotate_every`
+
+Data type: `Optional[Logrotate::Every]`
+
+How often the log files should be rotated as a String. Valid values are
+'day', 'week', 'month' and 'year'.
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--size"></a>`size`
+
+Data type: `Optional[Logrotate::Size]`
+
+The String size a log file has to reach before it will be rotated. The
+default units are bytes, append k, M or G for kilobytes, megabytes or
+gigabytes respectively.
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--sharedscripts"></a>`sharedscripts`
+
+Data type: `Optional[Boolean]`
+
+A Boolean specifying whether logrotate should run the postrotate and
+prerotate scripts for each matching file or just once.
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--shred"></a>`shred`
+
+Data type: `Optional[Boolean]`
+
+A Boolean specifying whether logs should be deleted with shred instead of
+unlink.
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--shredcycles"></a>`shredcycles`
+
+Data type: `Optional[Integer]`
+
+The Integer number of times shred should overwrite log files before
+unlinking them.
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--start"></a>`start`
+
+Data type: `Optional[Integer]`
+
+The Integer number to be used as the base for the extensions appended to the
+rotated log files.
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--su"></a>`su`
+
+Data type: `Boolean`
+
+A Boolean specifying whether logrotate should rotate under the specific
+su_user and su_group instead of the default. First available in logrotate
+3.8.0.
+
+Default value: `false`
+
+##### <a name="-logrotate--rule--su_user"></a>`su_user`
+
+Data type: `String`
+
+A String username that logrotate should use to rotate a log file set instead
+of using the default if su => true.
+
+Default value: `'root'`
+
+##### <a name="-logrotate--rule--su_group"></a>`su_group`
+
+Data type: `String`
+
+A String group name that logrotate should use to rotate a log file set
+instead of using the default if su => true.
+
+Default value: `'root'`
+
+##### <a name="-logrotate--rule--uncompresscmd"></a>`uncompresscmd`
+
+Data type: `Optional[String]`
+
+The String command to be used to uncompress log files.
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--custom_cfg"></a>`custom_cfg`
+
+Data type: `Array[String[1]]`
+
+Array of custom lines to be appended to the rules.
+
+Default value: `[]`
 
 ##### <a name="-logrotate--rule--createolddir"></a>`createolddir`
 
@@ -1142,253 +1270,29 @@ Data type: `Optional[String]`
 
 Default value: `undef`
 
-##### <a name="-logrotate--rule--dateext"></a>`dateext`
-
-Data type: `Optional[Boolean]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--rule--dateformat"></a>`dateformat`
-
-Data type: `Optional[String]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--rule--dateyesterday"></a>`dateyesterday`
-
-Data type: `Optional[Boolean]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--rule--delaycompress"></a>`delaycompress`
-
-Data type: `Optional[Boolean]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--rule--extension"></a>`extension`
-
-Data type: `Optional[String]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--rule--ifempty"></a>`ifempty`
-
-Data type: `Optional[Boolean]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--rule--mail"></a>`mail`
-
-Data type: `Optional[Variant[String,Boolean]]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--rule--mail_when"></a>`mail_when`
-
-Data type: `Optional[Enum['mailfirst','maillast']]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--rule--maxage"></a>`maxage`
-
-Data type: `Optional[Integer]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--rule--minsize"></a>`minsize`
-
-Data type: `Optional[Logrotate::Size]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--rule--maxsize"></a>`maxsize`
-
-Data type: `Optional[Logrotate::Size]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--rule--missingok"></a>`missingok`
-
-Data type: `Optional[Boolean]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--rule--olddir"></a>`olddir`
-
-Data type: `Optional[Variant[Boolean,String]]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--rule--postrotate"></a>`postrotate`
-
-Data type: `Optional[Logrotate::Commands]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--rule--prerotate"></a>`prerotate`
-
-Data type: `Optional[Logrotate::Commands]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--rule--firstaction"></a>`firstaction`
-
-Data type: `Optional[Logrotate::Commands]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--rule--lastaction"></a>`lastaction`
-
-Data type: `Optional[Logrotate::Commands]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--rule--rotate"></a>`rotate`
-
-Data type: `Optional[Integer]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--rule--rotate_every"></a>`rotate_every`
-
-Data type: `Optional[Logrotate::Every]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--rule--size"></a>`size`
-
-Data type: `Optional[Logrotate::Size]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--rule--sharedscripts"></a>`sharedscripts`
-
-Data type: `Optional[Boolean]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--rule--shred"></a>`shred`
-
-Data type: `Optional[Boolean]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--rule--shredcycles"></a>`shredcycles`
-
-Data type: `Optional[Integer]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--rule--start"></a>`start`
-
-Data type: `Optional[Integer]`
-
-
-
-Default value: `undef`
-
-##### <a name="-logrotate--rule--su"></a>`su`
-
-Data type: `Boolean`
-
-
-
-Default value: `false`
-
-##### <a name="-logrotate--rule--su_user"></a>`su_user`
-
-Data type: `String`
-
-
-
-Default value: `'root'`
-
-##### <a name="-logrotate--rule--su_group"></a>`su_group`
-
-Data type: `String`
-
-
-
-Default value: `'root'`
-
-##### <a name="-logrotate--rule--uncompresscmd"></a>`uncompresscmd`
-
-Data type: `Optional[String]`
-
-
-
-Default value: `undef`
-
 ## Data types
 
 ### <a name="Logrotate--Commands"></a>`Logrotate::Commands`
 
-The Logrotate::Commands data type.
+Data type for commands
 
 Alias of `Variant[String, Array[String]]`
 
 ### <a name="Logrotate--Every"></a>`Logrotate::Every`
 
-The Logrotate::Every data type.
+Valid configuration values for rotation (every hour/day/week/month etc.)
 
 Alias of `Pattern['^hour(|ly)$', '^da(|il)y$', '^week(|ly)( [0-7])?$', '^month(|ly)$', '^year(|ly)$']`
 
 ### <a name="Logrotate--Path"></a>`Logrotate::Path`
 
-The Logrotate::Path data type.
+File path valid in logrotate config files
 
 Alias of `Variant[Stdlib::UnixPath, Array[Stdlib::UnixPath]]`
 
 ### <a name="Logrotate--Size"></a>`Logrotate::Size`
 
-The Logrotate::Size data type.
+Filesize valid in logrotate config files
 
 Alias of `Variant[Integer, Pattern[/^\d+[kMG]?$/]]`
 

@@ -1,4 +1,6 @@
-# make sure logrotate is installed
+# @api private
+# @summary Make sure logrotate is installed
+#
 class logrotate::install {
   assert_private()
 

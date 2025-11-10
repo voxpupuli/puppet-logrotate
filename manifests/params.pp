@@ -1,6 +1,5 @@
-# == Class: logrotate::params
-#
-# Params class for logrotate module
+# @api private
+# @summary Logrotate module default configuration settings/Params class
 #
 class logrotate::params {
   case $facts['os']['family'] {

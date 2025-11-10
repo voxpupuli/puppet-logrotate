@@ -1,4 +1,4 @@
-#
+# @summary Manage logrotate cron entries
 define logrotate::cron (
   $ensure = 'present'
 ) {

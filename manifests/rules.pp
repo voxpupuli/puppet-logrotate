@@ -1,4 +1,6 @@
-# apply user-defined rules
+# @summary Apply user-defined rules
+# @api private
+#
 class logrotate::rules ($rules = $logrotate::rules) {
   assert_private()
 
