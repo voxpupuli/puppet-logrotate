@@ -447,6 +447,34 @@ describe 'logrotate::rule' do
       }
     end
 
+    context 'and rotate_every => weekly 0' do
+      let(:params) { { path: '/var/log/foo.log', rotate_every: 'weekly 0' } }
+
+      it {
+        is_expected.to contain_file('/etc/logrotate.d/test').
+          with_content(%r{^  weekly 0$})
+      }
+
+      it {
+        is_expected.to contain_file('/etc/logrotate.d/hourly/test').
+          with_ensure('absent')
+      }
+    end
+
+    context 'and rotate_every => weekly 7' do
+      let(:params) { { path: '/var/log/foo.log', rotate_every: 'weekly 7' } }
+
+      it {
+        is_expected.to contain_file('/etc/logrotate.d/test').
+          with_content(%r{^  weekly 7$})
+      }
+
+      it {
+        is_expected.to contain_file('/etc/logrotate.d/hourly/test').
+          with_ensure('absent')
+      }
+    end
+
     context 'and rotate_every => month' do
       let(:params) { { path: '/var/log/foo.log', rotate_every: 'month' } }
 

@@ -195,9 +195,9 @@ define logrotate::rule (
   }
   if $rotate_every {
     $_rotate_every = $rotate_every ? {
-      /ly$/   => $rotate_every,
-      'day'   => 'daily',
-      default => "${rotate_every}ly"
+      /ly( [0-7])?$/   => $rotate_every,
+      'day'            => 'daily',
+      default          => "${rotate_every}ly"
     }
   }
 
