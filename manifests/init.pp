@@ -1,7 +1,6 @@
 #
 class logrotate (
   String $ensure                             = present,
-  Boolean $hieramerge                        = false,
   Boolean $manage_cron_daily                 = true,
   Boolean $manage_cron_hourly                = true,
   Enum[present,absent] $ensure_cron_daily    = 'present',
