@@ -38,7 +38,6 @@ The logrotate class.
 The following parameters are available in the `logrotate` class:
 
 * [`ensure`](#-logrotate--ensure)
-* [`hieramerge`](#-logrotate--hieramerge)
 * [`manage_cron_daily`](#-logrotate--manage_cron_daily)
 * [`manage_cron_hourly`](#-logrotate--manage_cron_hourly)
 * [`ensure_cron_daily`](#-logrotate--ensure_cron_daily)
@@ -74,14 +73,6 @@ Data type: `String`
 
 
 Default value: `present`
-
-##### <a name="-logrotate--hieramerge"></a>`hieramerge`
-
-Data type: `Boolean`
-
-
-
-Default value: `false`
 
 ##### <a name="-logrotate--manage_cron_daily"></a>`manage_cron_daily`
 
