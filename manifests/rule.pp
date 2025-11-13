@@ -24,6 +24,14 @@
 #                   newly created log file to if create => true (optional).
 # create_group    - A String group name that logrotate should apply to the newly
 #                   created log file if create => true (optional).
+# createolddir    - A Boolean specifying whether logrotate should create the
+#                   olddir directory if it does not exist (optional).
+# createolddir_mode - An octal mode String logrotate should apply to the
+#                   olddir directory if createolddir => true (optional).
+# createolddir_owner - A username String that logrotate should set the owner
+#                   of the olddir directory to if createolddir => true (optional).
+# createolddir_group - A String group name that logrotate should apply to the
+#                   olddir directory if createolddir => true (optional).
 # dateext         - A Boolean specifying whether rotated log files should be
 #                   archived by adding a date extension rather just a number
 #                   (optional).
@@ -139,6 +147,10 @@ define logrotate::rule (
   Optional[String] $create_mode                     = undef,
   Optional[String] $create_owner                    = undef,
   Optional[String] $create_group                    = undef,
+  Optional[Boolean] $createolddir                   = undef,
+  Optional[String] $createolddir_mode               = undef,
+  Optional[String] $createolddir_owner              = undef,
+  Optional[String] $createolddir_group              = undef,
   Optional[Boolean] $dateext                        = undef,
   Optional[String] $dateformat                      = undef,
   Optional[Boolean] $dateyesterday                  = undef,
@@ -211,6 +223,18 @@ define logrotate::rule (
 
   if ($create_mode != undef) and ($create != true) {
     fail("Logrotate::Rule[${rulename}]: create_mode requires create")
+  }
+
+  if ($createolddir_group != undef) and ($createolddir_owner == undef) {
+    fail("Logrotate::Rule[${rulename}]: createolddir_group requires createolddir_owner")
+  }
+
+  if ($createolddir_owner != undef) and ($createolddir_mode == undef) {
+    fail("Logrotate::Rule[${rulename}]: createolddir_owner requires createolddir_mode")
+  }
+
+  if ($createolddir_mode != undef) and ($createolddir != true) {
+    fail("Logrotate::Rule[${rulename}]: createolddir_mode requires createolddir")
   }
 
   #############################################################################
