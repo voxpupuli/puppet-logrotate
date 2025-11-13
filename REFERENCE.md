@@ -416,6 +416,10 @@ The following parameters are available in the `logrotate::conf` defined type:
 * [`create_mode`](#-logrotate--conf--create_mode)
 * [`create_owner`](#-logrotate--conf--create_owner)
 * [`create_group`](#-logrotate--conf--create_group)
+* [`createolddir`](#-logrotate--conf--createolddir)
+* [`createolddir_mode`](#-logrotate--conf--createolddir_mode)
+* [`createolddir_owner`](#-logrotate--conf--createolddir_owner)
+* [`createolddir_group`](#-logrotate--conf--createolddir_group)
 * [`dateext`](#-logrotate--conf--dateext)
 * [`dateformat`](#-logrotate--conf--dateformat)
 * [`dateyesterday`](#-logrotate--conf--dateyesterday)
@@ -534,6 +538,38 @@ Data type: `Optional[String]`
 Default value: `undef`
 
 ##### <a name="-logrotate--conf--create_group"></a>`create_group`
+
+Data type: `Optional[String]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--createolddir"></a>`createolddir`
+
+Data type: `Optional[Boolean]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--createolddir_mode"></a>`createolddir_mode`
+
+Data type: `Optional[String]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--createolddir_owner"></a>`createolddir_owner`
+
+Data type: `Optional[String]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--createolddir_group"></a>`createolddir_group`
 
 Data type: `Optional[String]`
 
@@ -811,6 +847,14 @@ create_owner    - A username String that logrotate should set the owner of the
                   newly created log file to if create => true (optional).
 create_group    - A String group name that logrotate should apply to the newly
                   created log file if create => true (optional).
+createolddir    - A Boolean specifying whether logrotate should create the
+                  olddir directory if it does not exist (optional).
+createolddir_mode - An octal mode String logrotate should apply to the
+                  olddir directory if createolddir => true (optional).
+createolddir_owner - A username String that logrotate should set the owner
+                  of the olddir directory to if createolddir => true (optional).
+createolddir_group - A String group name that logrotate should apply to the
+                  olddir directory if createolddir => true (optional).
 dateext         - A Boolean specifying whether rotated log files should be
                   archived by adding a date extension rather just a number
                   (optional).
@@ -930,6 +974,10 @@ The following parameters are available in the `logrotate::rule` defined type:
 * [`create_mode`](#-logrotate--rule--create_mode)
 * [`create_owner`](#-logrotate--rule--create_owner)
 * [`create_group`](#-logrotate--rule--create_group)
+* [`createolddir`](#-logrotate--rule--createolddir)
+* [`createolddir_mode`](#-logrotate--rule--createolddir_mode)
+* [`createolddir_owner`](#-logrotate--rule--createolddir_owner)
+* [`createolddir_group`](#-logrotate--rule--createolddir_group)
 * [`dateext`](#-logrotate--rule--dateext)
 * [`dateformat`](#-logrotate--rule--dateformat)
 * [`dateyesterday`](#-logrotate--rule--dateyesterday)
@@ -1064,6 +1112,38 @@ Data type: `Optional[String]`
 Default value: `undef`
 
 ##### <a name="-logrotate--rule--create_group"></a>`create_group`
+
+Data type: `Optional[String]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--createolddir"></a>`createolddir`
+
+Data type: `Optional[Boolean]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--createolddir_mode"></a>`createolddir_mode`
+
+Data type: `Optional[String]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--createolddir_owner"></a>`createolddir_owner`
+
+Data type: `Optional[String]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--rule--createolddir_group"></a>`createolddir_group`
 
 Data type: `Optional[String]`
 

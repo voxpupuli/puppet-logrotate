@@ -20,6 +20,10 @@ define logrotate::conf (
   Optional[String] $create_mode                      = undef,
   Optional[String] $create_owner                     = undef,
   Optional[String] $create_group                     = undef,
+  Optional[Boolean] $createolddir                    = undef,
+  Optional[String] $createolddir_mode                = undef,
+  Optional[String] $createolddir_owner               = undef,
+  Optional[String] $createolddir_group               = undef,
   Optional[Boolean] $dateext                         = undef,
   Optional[String] $dateformat                       = undef,
   Optional[Boolean] $dateyesterday                   = undef,
@@ -79,6 +83,18 @@ define logrotate::conf (
 
   if $create_mode and !$create {
     fail("Logrotate::Conf[${name}]: create_mode requires create")
+  }
+
+  if $createolddir_group and !$createolddir_owner {
+    fail("Logrotate::Conf[${name}]: createolddir_group requires createolddir_owner")
+  }
+
+  if $createolddir_owner and !$createolddir_mode {
+    fail("Logrotate::Conf[${name}]: createolddir_owner requires createolddir_mode")
+  }
+
+  if $createolddir_mode and !$createolddir {
+    fail("Logrotate::Conf[${name}]: createolddir_mode requires createolddir")
   }
 
   #

@@ -309,6 +309,74 @@ describe 'logrotate::rule' do
     end
 
     ###########################################################################
+    # CREATEOLDDIR
+    context 'and createolddir => true' do
+      let(:params) { { path: '/var/log/foo.log', createolddir: true } }
+
+      it {
+        is_expected.to contain_file('/etc/logrotate.d/test').
+          with_content(%r{^  createolddir$})
+      }
+    end
+
+    context 'and createolddir => false' do
+      let(:params) { { path: '/var/log/foo.log', createolddir: false } }
+
+      it {
+        is_expected.to contain_file('/etc/logrotate.d/test').
+          with_content(%r{^  nocreateolddir$})
+      }
+    end
+
+    context 'and createolddir => true, createolddir_mode => 0755' do
+      let(:params) do
+        {
+          path: '/var/log/foo.log',
+          createolddir: true,
+          createolddir_mode: '0755'
+        }
+      end
+
+      it {
+        is_expected.to contain_file('/etc/logrotate.d/test').
+          with_content(%r{^  createolddir 0755$})
+      }
+    end
+
+    context 'and createolddir => true, createolddir_mode => 0755, createolddir_owner => httpd' do
+      let(:params) do
+        {
+          path: '/var/log/foo.log',
+          createolddir: true,
+          createolddir_mode: '0755',
+          createolddir_owner: 'httpd'
+        }
+      end
+
+      it {
+        is_expected.to contain_file('/etc/logrotate.d/test').
+          with_content(%r{^  createolddir 0755 httpd$})
+      }
+    end
+
+    context 'and createolddir => true, createolddir_mode => 0755, createolddir_owner => httpd, createolddir_group => www' do
+      let(:params) do
+        {
+          path: '/var/log/foo.log',
+          createolddir: true,
+          createolddir_mode: '0755',
+          createolddir_owner: 'httpd',
+          createolddir_group: 'www'
+        }
+      end
+
+      it {
+        is_expected.to contain_file('/etc/logrotate.d/test').
+          with_content(%r{^  createolddir 0755 httpd www$})
+      }
+    end
+
+    ###########################################################################
     # POSTROTATE
     context 'and postrotate => /bin/true' do
       let(:params) do

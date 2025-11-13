@@ -17,6 +17,14 @@
     opts << 'nocreate'
   end
 
+  if @createolddir
+    opts << ['createolddir', @createolddir_mode, @createolddir_owner, @createolddir_group].reject { |r|
+      r == nil
+    }.join(' ')
+  elsif @createolddir == false
+    opts << 'nocreateolddir'
+  end
+
   %w(compress copy copytruncate delaycompress
   dateext missingok sharedscripts shred dateyesterday).each do |bool_opt|
     if (scope.to_hash.has_key?(bool_opt) && scope.to_hash[bool_opt] != nil)

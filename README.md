@@ -99,6 +99,14 @@ missingok       - A Boolean specifying whether logrotate should ignore missing
                   log files or issue an error (optional).
 olddir          - A String path to a directory that rotated logs should be
                   moved to (optional).
+createolddir    - A Boolean specifying whether logrotate should create the
+                  olddir directory if it does not exist (optional).
+createolddir_mode - An octal mode String logrotate should apply to the
+                  olddir directory if createolddir => true (optional).
+createolddir_owner - A username String that logrotate should set the owner
+                  of the olddir directory to if createolddir => true (optional).
+createolddir_group - A String group name that logrotate should apply to the
+                  olddir directory if createolddir => true (optional).
 postrotate      - A command String that should be executed by /bin/sh after
                   the log file is rotated (optional).
 prerotate       - A command String that should be executed by /bin/sh before
