@@ -116,6 +116,9 @@ rotate_every    - How often the log files should be rotated as a String.
                   Valid values are 'hour', 'day', 'week', 'month' and 'year'
                   (optional).  Please note, older versions of logrotate do not
                   support yearly log rotation.
+                  For weekly rotation, you can optionally specify a weekday
+                  (0-7) after 'weekly', e.g., 'weekly 0' for Sunday,
+                  'weekly 7' for every 7 days regardless of weekday.
 size            - The String size a log file has to reach before it will be
                   rotated (optional).  The default units are bytes, append k,
                   M or G for kilobytes, megabytes or gigabytes respectively.
@@ -214,6 +217,12 @@ logrotate::rule { 'servicelogs':
   rotate       => 5,
   rotate_every => 'day',
   postrotate   => '/usr/bin/kill -HUP `cat /run/syslogd.pid`',
+}
+
+logrotate::rule { 'weeklylogs':
+  path         => '/var/log/weekly.log',
+  rotate       => 4,
+  rotate_every => 'weekly 0',  # Rotate every Sunday
 }
 
 logrotate::rule { 'apache':

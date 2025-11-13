@@ -1307,7 +1307,7 @@ Alias of `Variant[String, Array[String]]`
 
 The Logrotate::Every data type.
 
-Alias of `Pattern['^hour(|ly)$', '^da(|il)y$', '^week(|ly)$', '^month(|ly)$', '^year(|ly)$']`
+Alias of `Pattern['^hour(|ly)$', '^da(|il)y$', '^week(|ly)( [0-7])?$', '^month(|ly)$', '^year(|ly)$']`
 
 ### <a name="Logrotate--Path"></a>`Logrotate::Path`
 
