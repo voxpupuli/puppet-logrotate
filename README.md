@@ -174,6 +174,56 @@ class { 'logrotate':
 }
 ```
 
+Here are the available parameters for the `logrotate` class:
+
+```puppet
+ensure              - The desired state of the logrotate package as a String.
+                      Valid values are 'present', 'absent', 'latest'
+                      (default: 'present').
+manage_cron_daily   - A Boolean specifying whether to manage the daily cron
+                      job for logrotate (default: true).
+manage_cron_hourly  - A Boolean specifying whether to manage the hourly cron
+                      job for logrotate (default: true).
+ensure_cron_daily   - The desired state of the daily cron job as a String.
+                      Valid values are 'present' and 'absent'
+                      (default: 'present').
+ensure_cron_hourly  - The desired state of the hourly cron job as a String.
+                      Valid values are 'present' and 'absent'
+                      (default: 'present').
+manage_systemd_timer - A Boolean specifying whether to manage logrotate using
+                      systemd timers instead of cron (default: false).
+ensure_systemd_timer - The desired state of the systemd timer as a String.
+                      Valid values are 'present' and 'absent'
+                      (default: 'absent').
+ensure_systemd_timer_hourly - The desired state of the hourly systemd timer
+                      as a String. Valid values are 'present' and 'absent'
+                      (default: 'absent').
+create_base_rules   - A Boolean specifying whether to create base/default
+                      logrotate rules (default: true).
+purge_configdir     - A Boolean specifying whether to purge unmanaged files
+                      from the logrotate configuration directory
+                      (default: false).
+package             - The name String of the logrotate package to install
+                      (default: 'logrotate').
+rules               - A Hash of logrotate::rule resources to create
+                      (default: {}).
+config              - An optional Hash of default rotation options to be
+                      added to /etc/logrotate.conf. See logrotate::rule
+                      parameters for available options (default: undef).
+cron_daily_hour     - The Integer hour (0-23) when the daily cron job should
+                      run (default: platform-specific).
+cron_daily_minute   - The Integer minute (0-59) when the daily cron job
+                      should run (default: platform-specific).
+cron_hourly_minute  - The Integer minute (0-59) when the hourly cron job
+                      should run (default: platform-specific).
+logrotate_conf      - The path String to the main logrotate configuration
+                      file (default: '/etc/logrotate.conf').
+logrotate_args      - An Array of Strings containing additional command-line
+                      arguments to pass to logrotate (default: []).
+cron_always_output  - A Boolean specifying whether cron should always produce
+                      output, even when there are no errors (default: false).
+```
+
 ### Additional startup arguments
 
 With parameter `logrotate_args` you can specify additional startup arguments for logrotate. Configuration file is always added as the last argument for logrotate.
