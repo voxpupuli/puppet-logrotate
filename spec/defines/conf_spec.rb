@@ -459,6 +459,19 @@ describe 'logrotate::conf' do
     }
   end
 
+  context '=> /usr/local/etc/logrotate.conf' do
+    let(:title) { '/usr/local/etc/logrotate.conf' }
+
+    it {
+      is_expected.to contain_file('/usr/local/etc/logrotate.conf').with(
+        'owner' => 'root',
+        'group' => 'root',
+        'ensure' => 'present',
+        'mode' => '0644'
+      ).with_content(%r{\ninclude /etc/logrotate.d\n})
+    }
+  end
+
   context 'with a non-path title' do
     let(:title) { 'foo bar' }
 

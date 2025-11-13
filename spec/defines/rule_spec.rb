@@ -833,5 +833,71 @@ describe 'logrotate::rule' do
     it do
       is_expected.to contain_file('/etc/logrotate.d/btmp').without_content(%r{/ifempty/})
     end
+
+    it do
+      is_expected.to contain_file('/etc/logrotate.d/foo').with(
+        'owner' => 'root',
+        'group' => 'root',
+        'ensure' => 'present',
+        'mode' => '0644'
+      )
+    end
+  end
+
+  context 'hourly rules' do
+    let(:title) { 'btmp' }
+    let(:params) do
+      {
+        path: '/var/log/btmp',
+        rotate_every: 'hourly'
+      }
+    end
+
+    it do
+      is_expected.to contain_file('/etc/logrotate.d/hourly/btmp').with(
+        'owner' => 'root',
+        'group' => 'root',
+        'ensure' => 'present',
+        'mode' => '0644'
+      )
+    end
+  end
+
+  context 'hourly rules with title wtmp' do
+    let(:title) { 'wtmp' }
+    let(:params) do
+      {
+        path: '/var/log/wtmp',
+        rotate_every: 'hourly'
+      }
+    end
+
+    it do
+      is_expected.to contain_file('/etc/logrotate.d/hourly/wtmp').with(
+        'owner' => 'root',
+        'group' => 'root',
+        'ensure' => 'present',
+        'mode' => '0644'
+      )
+    end
+  end
+
+  context 'hourly rules with generic name' do
+    let(:title) { 'foo' }
+    let(:params) do
+      {
+        path: '/var/log/foo.log',
+        rotate_every: 'hourly'
+      }
+    end
+
+    it do
+      is_expected.to contain_file('/etc/logrotate.d/hourly/foo').with(
+        'owner' => 'root',
+        'group' => 'root',
+        'ensure' => 'present',
+        'mode' => '0644'
+      )
+    end
   end
 end
