@@ -1,3 +1,88 @@
+# @summary Install and configure logrotate
+#
+# @param ensure
+#   Desired installation state for the logrotate package
+#
+# @param manage_cron_daily
+#   Manage logrotate daily cron file
+#
+# @param manage_cron_hourly
+#   Manage logrotate hourly cron file
+#
+# @param ensure_cron_daily
+#   Ensure logrotate daily cron file is present/absent
+#
+# @param ensure_cron_hourly
+#   Ensure logrotate hourly cron file is present/absent
+#
+# @param manage_systemd_timer
+#   Manage logrotate systemd timer
+#
+# @param ensure_systemd_timer
+#   Ensure logrotate systemd timer is present/absent
+#
+# @param ensure_systemd_timer_hourly
+#   Ensure logrotate systemd hourly timer is present/absent
+#
+# @param create_base_rules
+#   Create base rules (for example btmp, wtmp)
+#
+# @param purge_configdir
+#   Purge logrotate files not managed by the module.
+#
+# @param package
+#   Logrotate package name.
+#
+# @param rules
+#   Hash of logrotate logrotate::rule rules
+#
+# @param config
+#   Hash of default config values for logrotate
+#
+# @param cron_daily_hour
+#   Hour at which daily logrotate cron is executed
+#
+# @param cron_daily_minute
+#   Minute at which daily logrotate cron is executed
+#
+# @param cron_hourly_minute
+#   Minute at which hourly logrotate cron is executed
+#
+# @param cron_file_mode
+#   Cron file permissions in numeric mode
+#
+# @param configdir
+#   Path of config dir
+#
+# @param logrotate_bin
+#   Path of logrotate binary
+#
+# @param logrotate_conf
+#   Path of logrotate.conf
+#
+# @param logrotate_conf_mode
+#   Path of `logrotate.conf`
+#
+# @param manage_package
+#   Whether to manage logrtotate package
+#
+# @param rules_configdir
+#    Path in which logrotate rules are created.
+#
+# @param rules_configdir_mode
+#   Logrotate rules folder permissions in numeric mode.
+#
+# @param root_user
+#   Name of root user.
+#
+# @param root_group
+#   Name of root group.
+#
+# @param logrotate_args
+#   Arguments passed to logrotate.
+#
+# @param cron_always_output
+#   Do not discard cron output when there is no error.
 #
 class logrotate (
   String $ensure                             = present,

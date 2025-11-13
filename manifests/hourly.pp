@@ -1,16 +1,12 @@
-# Internal: Configure a host for hourly logrotate jobs.
+# @api private
+# @summary Configure a host for hourly logrotate jobs.
 #
-# ensure - The desired state of hourly logrotate support.  Valid values are
-#          'absent' and 'present' (default: 'present').
-#
-# Examples
-#
-#   # Set up hourly logrotate jobs
+# @example Set up hourly logrotate jobs
 #   class { 'logrotate':
 #     manage_cron_hourly => true,
 #   }
 #
-#   # Remove hourly logrotate job support
+# @example Remove hourly logrotate job support
 #   class { 'logrotate':
 #     manage_cron_hourly => true,
 #     ensure_cron_hourly => absent,

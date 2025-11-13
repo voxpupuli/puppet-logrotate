@@ -1,4 +1,5 @@
-# apply defaults
+# @api private
+# @summary Apply module defaults
 #
 class logrotate::defaults (
   $create_base_rules = $logrotate::create_base_rules,

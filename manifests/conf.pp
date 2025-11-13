@@ -1,11 +1,176 @@
-# Internal: Install and configure logrotate defaults file, usually
-#   /etc/logrotate.conf
+# @summary Install and configure logrotate defaults file (usually /etc/logrotate.conf)
 #
-# see logrotate::Conf for description of options.
+# @param path
+#   Path of the logrotate.conf file to manage.
 #
-# Examples
+# @param ensure
+#   Desired state for the logrotate.conf file.
 #
-#   logrotate::conf{'/etc/logrotate.conf':}
+# @param compress
+#   A Boolean value specifying whether the rotated logs should be compressed.
+#
+# @param compresscmd
+#   The command String that should be executed to compress the rotated logs.
+#
+# @param compressext
+#   The extention String to be appended to the rotated log files after they have
+#   been compressed.
+#
+# @param compressoptions
+#   A String of command line options to be passed to the compression program
+#   specified in `compresscmd`.
+#
+# @param copy
+#   A Boolean specifying whether logrotate should just take a copy of the log
+#   files and not touch the original.
+#
+# @param copytruncate
+#   A Boolean specifying whether logrotate should truncate the original log file
+#   after taking a copy.
+#
+# @param create
+#   A Boolean specifying whether logrotate should create new log files
+#   immediately after rotation.
+#
+# @param create_mode
+#   An octal mode String logrotate should apply to the newly created log files
+#   if create => true.
+#
+# @param create_owner
+#   A username String that logrotate should set the owner of the newly created
+#   log files to if create => true.
+#
+# @param create_group
+#   A String group name that logrotate should apply to the newly created log
+#   files if create => true.
+#
+# @param dateext
+#   A Boolean specifying whether rotated log files should be archived by adding
+#   a date extension rather just a number.
+#
+# @param dateformat
+#   The format String to be used for `dateext` . Valid specifiers are '%Y',
+#   '%m', '%d' and '%s'.
+#
+# @param dateyesterday
+#   A Boolean specifying whether to use yesterday's date instead of today's date
+#   to create the `dateext` extension.
+#
+# @param delaycompress
+#   A Boolean specifying whether compression of the rotated log file should be
+#   delayed until the next logrotate run.
+#
+# @param extension
+#   Log files with this extension String are allowed to keep it after rotation.
+#
+# @param ifempty
+#   A Boolean specifying whether the log file should be rotated even if it is
+#   empty.
+#
+# @param mail
+#   The email address String that logs that are about to be rotated out of
+#   existence are emailed to.
+#
+# @param mail_when
+#   When mail is configured, enable mailfirst (email the just rotated file
+#   rather than the about to expire file) and/or maillast (email the about to
+#   expire file rather than the just rotated file) behaviours.
+#
+# @param maxage
+#   The Integer maximum number of days that a rotated log file can stay on the
+#   system.
+#
+# @param minsize
+#   The String minimum size a log file must be to be rotated, but not before the
+#   scheduled rotation time. The default units are bytes, append k, M or G for
+#   kilobytes, megabytes and gigabytes respectively.
+#
+# @param maxsize
+#   The String maximum size a log file may be to be rotated; When maxsize is
+#   used, both the size and timestamp of a log file are considered for rotation.
+#   The default units are bytes, append k, M or G for kilobytes, megabytes and
+#   gigabytes respectively.
+#
+# @param missingok
+#   A Boolean specifying whether logrotate should ignore missing log files or
+#   issue an error.
+#
+# @param olddir
+#   A String path to a directory that rotated logs should be moved to.
+#
+# @param postrotate
+#   A command String or an Array of Strings that should be executed by /bin/sh
+#   after the log file is rotated optional).
+#
+# @param prerotate
+#   A command String or an Array of Strings that should be executed by /bin/sh
+#   before the log file is rotated and only if it will be rotated.
+#
+# @param firstaction
+#   A command String or an Array of Strings that should be executed by /bin/sh
+#   once before all log files that match the wildcard pattern are rotated.
+#
+# @param lastaction
+#   A command String or an Array of Strings that should be executed by /bin/sh
+#   once after all the log files that match the wildcard pattern are rotated.
+#
+# @param rotate
+#   The Integer number of rotated log files to keep on disk.
+#
+# @param rotate_every
+#   How often the log files should be rotated as a String. Valid values are
+#   'day', 'week', 'month' and 'year'.
+#
+# @param size
+#   The String size a log file has to reach before it will be rotated. The
+#   default units are bytes, append k, M or G for kilobytes, megabytes or
+#   gigabytes respectively.
+#
+# @param sharedscripts
+#   A Boolean specifying whether logrotate should run the postrotate and
+#   prerotate scripts for each matching file or just once.
+#
+# @param shred
+#   A Boolean specifying whether logs should be deleted with shred instead of
+#   unlink.
+#
+# @param shredcycles
+#   The Integer number of times shred should overwrite log files before
+#   unlinking them.
+#
+# @param start
+#   The Integer number to be used as the base for the extensions appended to the
+#   rotated log files.
+#
+# @param su
+#   A Boolean specifying whether logrotate should rotate under the specific
+#   su_user and su_group instead of the default. First available in logrotate
+#   3.8.0.
+#
+# @param su_user
+#   A String username that logrotate should use to rotate a log file set instead
+#   of using the default if su => true.
+#
+# @param su_group
+#   A String group name that logrotate should use to rotate a log file set
+#   instead of using the default if su => true.
+#
+# @param uncompresscmd
+#   The String command to be used to uncompress log files.
+#
+# @example Configure `/etc/logrotate.conf` with defaults + configure shred
+#   logrotate::conf {
+#      shred => true,
+#    }
+#
+# @example Configure `/etc/logrotate.conf` to use zstd with non-default level
+#   logrotate::conf {
+#     compress        => true,
+#     compresscmd     => '/usr/bin/zstd',
+#     compressext     => '.zst',
+#     compressoptions => '--compress -19',
+#     uncompresscmd   => '/usr/bin/unzstd',
+#   }
 #
 define logrotate::conf (
   Stdlib::Unixpath $path                             = $name,

@@ -1,4 +1,5 @@
-# logrotate config
+# @summary Configure logrotate
+# @api private
 class logrotate::config {
   assert_private()
 
