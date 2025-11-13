@@ -1,7 +1,7 @@
 # Logrotate module for Puppet
 
 [![License](https://img.shields.io/github/license/voxpupuli/puppet-logrotate.svg)](https://github.com/voxpupuli/puppet-logrotate/blob/master/LICENSE)
-[![Build Status](https://travis-ci.org/voxpupuli/puppet-logrotate.png?branch=master)](https://travis-ci.org/voxpupuli/puppet-logrotate)
+[![Build Status](https://github.com/voxpupuli/puppet-logrotate/actions/workflows/ci.yml/badge.svg)](https://github.com/voxpupuli/puppet-logrotate/actions/workflows/ci.yml)
 [![Puppet Forge](https://img.shields.io/puppetforge/v/puppet/logrotate.svg)](https://forge.puppetlabs.com/puppet/logrotate)
 [![Puppet Forge - downloads](https://img.shields.io/puppetforge/dt/puppet/logrotate.svg)](https://forge.puppetlabs.com/puppet/logrotate)
 [![Puppet Forge - endorsement](https://img.shields.io/puppetforge/e/puppet/logrotate.svg)](https://forge.puppetlabs.com/puppet/logrotate)
