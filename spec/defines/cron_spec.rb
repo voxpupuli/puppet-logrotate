@@ -92,6 +92,65 @@ describe 'logrotate::cron' do
             with_content(%r{(else\n    echo "\${OUTPUT}"\nfi)})
         }
       end
+
+      context 'With title daily (FreeBSD cron resource test)' do
+        let(:pre_condition) { 'class { "logrotate": manage_cron_daily => false }' }
+        let(:title) { 'daily' }
+        let(:params) { { ensure: 'present' } }
+
+        it {
+          is_expected.to contain_cron('logrotate_daily').with(
+            'minute' => 0,
+            'hour' => 1,
+            'command' => '/usr/local/bin/logrotate.daily.sh',
+            'user' => 'root'
+          )
+        }
+
+        it {
+          is_expected.to contain_file('/usr/local/bin/logrotate.daily.sh').
+            with_ensure('present').
+            with_content(%r{(/usr/local/sbin/logrotate /usr/local/etc/logrotate.conf 2>&1)})
+        }
+      end
+
+      context 'With title hourly (FreeBSD cron resource test)' do
+        let(:pre_condition) { 'class { "logrotate": manage_cron_hourly => false }' }
+        let(:title) { 'hourly' }
+        let(:params) { { ensure: 'present' } }
+
+        it {
+          is_expected.to contain_cron('logrotate_hourly').with(
+            'minute' => 1,
+            'hour' => '*',
+            'command' => '/usr/local/bin/logrotate.hourly.sh',
+            'user' => 'root'
+          )
+        }
+
+        it {
+          is_expected.to contain_file('/usr/local/bin/logrotate.hourly.sh').
+            with_ensure('present').
+            with_content(%r{(/usr/local/sbin/logrotate /usr/local/etc/logrotate.d/hourly 2>&1)})
+        }
+      end
+
+      context 'With custom title test (FreeBSD cron resource test)' do
+        let(:pre_condition) { 'class { "logrotate": }' }
+        let(:title) { 'test' }
+        let(:params) { { ensure: 'present' } }
+
+        it {
+          is_expected.to contain_cron('logrotate_test').with(
+            'user' => 'root'
+          )
+        }
+
+        it {
+          is_expected.to contain_file('/usr/local/bin/logrotate.test.sh').
+            with_ensure('present')
+        }
+      end
     end
   end
 end

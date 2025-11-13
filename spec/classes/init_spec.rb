@@ -111,6 +111,9 @@ describe 'logrotate' do
                                                                               'mode' => '0700')
               end
 
+              it { is_expected.to contain_logrotate__cron('daily').with_ensure('present') }
+              it { is_expected.to contain_logrotate__cron('hourly').with_ensure('present') }
+
               it do
                 is_expected.to contain_file('/etc/logrotate.d/hourly').with(
                   'ensure' => 'directory',
