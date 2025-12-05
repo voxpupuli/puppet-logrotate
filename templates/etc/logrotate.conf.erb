@@ -45,6 +45,10 @@
     opts << "#{key} #{value}" if value != nil
   end
 
+  Array(@include).compact.each do |path|
+    opts << "include #{path}"
+  end
+
   opts.sort!
 -%>
 

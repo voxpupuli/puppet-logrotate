@@ -194,6 +194,7 @@ define logrotate::conf (
   Optional[Boolean] $dateyesterday                   = undef,
   Optional[Boolean] $delaycompress                   = undef,
   Optional[String] $extension                        = undef,
+  Optional[Variant[String,Array[String[1]]]] $include = undef,
   Optional[Boolean] $ifempty                         = undef,
   Optional[Variant[String,Boolean]] $mail            = undef,
   Optional[Enum['mailfirst', 'maillast']] $mail_when = undef,
