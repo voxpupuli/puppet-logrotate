@@ -371,6 +371,7 @@ The following parameters are available in the `logrotate::conf` defined type:
 * [`createolddir_mode`](#-logrotate--conf--createolddir_mode)
 * [`createolddir_owner`](#-logrotate--conf--createolddir_owner)
 * [`createolddir_group`](#-logrotate--conf--createolddir_group)
+* [`include`](#-logrotate--conf--include)
 
 ##### <a name="-logrotate--conf--path"></a>`path`
 
@@ -757,6 +758,14 @@ Default value: `undef`
 ##### <a name="-logrotate--conf--createolddir_group"></a>`createolddir_group`
 
 Data type: `Optional[String]`
+
+
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--include"></a>`include`
+
+Data type: `Optional[Variant[String,Array[String[1]]]]`
 
 
 

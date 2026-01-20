@@ -323,6 +323,35 @@ describe 'logrotate::conf' do
       }
     end
 
+    # INCLUDE
+    context 'include' do
+      context '=> /etc/logrotate.d/extra' do
+        let(:params) { { include: '/etc/logrotate.d/extra' } }
+
+        it {
+          is_expected.to contain_file('/etc/logrotate.conf').
+            with_content(%r{^include /etc/logrotate\.d/extra$})
+        }
+      end
+
+      context '=> ["/etc/logrotate.d/extra", "/etc/logrotate.d/custom"]' do
+        let(:params) { { include: ['/etc/logrotate.d/extra', '/etc/logrotate.d/custom'] } }
+
+        it {
+          is_expected.to contain_file('/etc/logrotate.conf').
+            with_content(%r{^include /etc/logrotate\.d/custom$}).
+            with_content(%r{^include /etc/logrotate\.d/extra$})
+        }
+      end
+
+      context 'missing by default' do
+        it {
+          is_expected.to contain_file('/etc/logrotate.conf').
+            without_content(%r{^include /etc/logrotate\.d/extra$})
+        }
+      end
+    end
+
     # MAIL / MAILFIRST / MAILLAST
     context 'mail' do
       context '=> test.example.com' do
