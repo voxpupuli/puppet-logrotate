@@ -1,5 +1,21 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 {
 	"name": "VoxBox",
-	"image": "ghcr.io/voxpupuli/voxbox:latest"
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+
+	// Forward SSH directory from host
+	"mounts": [
+		"type=bind,readonly,source=${localEnv:HOME}/.ssh,target=/root/.ssh"
+	],
+
+	// Use bash as default terminal
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"terminal.integrated.defaultProfile.linux": "bash"
+			}
+		}
+	}
 }
