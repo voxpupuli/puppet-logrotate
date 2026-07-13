@@ -45,6 +45,11 @@
     opts << "#{key} #{value}" if value != nil
   end
 
+  %w(tabooext taboopat).each do |key|
+    value = Array(scope.to_hash[key])
+    opts << "#{key} #{value.join(' ')}" if value != []
+  end
+
   Array(@include).compact.each do |path|
     opts << "include #{path}"
   end

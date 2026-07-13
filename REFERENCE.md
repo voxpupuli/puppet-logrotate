@@ -323,6 +323,22 @@ logrotate::conf {
 }
 ```
 
+##### ignore only *.foo files
+
+```puppet
+logrotate::conf {
+  tabooext => '.foo'
+}
+```
+
+##### add *.foo and *.bar to ignored files, but still ignore defaults (.rpmsave for example)
+
+```puppet
+logrotate::conf {
+  tabooext => ['+','.foo','.bar'],
+}
+```
+
 #### Parameters
 
 The following parameters are available in the `logrotate::conf` defined type:
@@ -366,6 +382,8 @@ The following parameters are available in the `logrotate::conf` defined type:
 * [`su`](#-logrotate--conf--su)
 * [`su_user`](#-logrotate--conf--su_user)
 * [`su_group`](#-logrotate--conf--su_group)
+* [`tabooext`](#-logrotate--conf--tabooext)
+* [`taboopat`](#-logrotate--conf--taboopat)
 * [`uncompresscmd`](#-logrotate--conf--uncompresscmd)
 * [`createolddir`](#-logrotate--conf--createolddir)
 * [`createolddir_mode`](#-logrotate--conf--createolddir_mode)
@@ -722,6 +740,26 @@ A String group name that logrotate should use to rotate a log file set
 instead of using the default if su => true.
 
 Default value: `'root'`
+
+##### <a name="-logrotate--conf--tabooext"></a>`tabooext`
+
+Data type: `Optional[Variant[String,Array[String[1]]]]`
+
+Ignore files whose names end with one of the taboo extensions
+If a + precedes the list of extensions, the current taboo
+extension list is augmented, otherwise it is replaced.
+
+Default value: `undef`
+
+##### <a name="-logrotate--conf--taboopat"></a>`taboopat`
+
+Data type: `Optional[Variant[String,Array[String[1]]]]`
+
+Ignore files whose names end with one of the taboo patterns
+If a + precedes the list of patterns, the current taboo pattern
+list is augmented, otherwise it is replaced.
+
+Default value: `undef`
 
 ##### <a name="-logrotate--conf--uncompresscmd"></a>`uncompresscmd`
 

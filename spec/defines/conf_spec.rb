@@ -457,6 +457,44 @@ describe 'logrotate::conf' do
       }
     end
 
+    # TABOOEXT
+    context 'tabooext => .foo' do
+      let(:params) { { tabooext: '.foo' } }
+
+      it {
+        is_expected.to contain_file('/etc/logrotate.conf')
+          .with_content(%r{^tabooext \.foo$})
+      }
+    end
+
+    context 'tabooext => [+,.foo,.bar]' do
+      let(:params) { { tabooext: ['+', '.foo', '.bar'] } }
+
+      it {
+        is_expected.to contain_file('/etc/logrotate.conf')
+          .with_content(%r{^tabooext \+ \.foo \.bar$})
+      }
+    end
+
+    # TABOOPAT
+    context 'taboopat => *foo*' do
+      let(:params) { { taboopat: '*foo*' } }
+
+      it {
+        is_expected.to contain_file('/etc/logrotate.conf')
+          .with_content(%r{^taboopat \*foo\*$})
+      }
+    end
+
+    context 'taboopat => [+,*foo*,*bar*]' do
+      let(:params) { { taboopat: ['+', '*foo*', '*bar*'] } }
+
+      it {
+        is_expected.to contain_file('/etc/logrotate.conf')
+          .with_content(%r{^taboopat \+ \*foo\* \*bar\*$})
+      }
+    end
+
     # Boolean Flag values
     %w[compress copy copytruncate create dateext delaycompress ifempty missingok sharedscripts shred dateyesterday].each do |param|
       it_behaves_like 'boolean flag', param, param != 'create'

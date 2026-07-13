@@ -155,6 +155,16 @@
 #   A String group name that logrotate should use to rotate a log file set
 #   instead of using the default if su => true.
 #
+# @param tabooext
+#   Ignore files whose names end with one of the taboo extensions
+#   If a + precedes the list of extensions, the current taboo
+#   extension list is augmented, otherwise it is replaced.
+#
+# @param taboopat
+#   Ignore files whose names end with one of the taboo patterns
+#   If a + precedes the list of patterns, the current taboo pattern
+#   list is augmented, otherwise it is replaced.
+#
 # @param uncompresscmd
 #   The String command to be used to uncompress log files.
 #
@@ -170,6 +180,16 @@
 #     compressext     => '.zst',
 #     compressoptions => '--compress -19',
 #     uncompresscmd   => '/usr/bin/unzstd',
+#   }
+#
+# @example ignore only *.foo files
+#   logrotate::conf {
+#     tabooext => '.foo'
+#   }
+#
+# @example add *.foo and *.bar to ignored files, but still ignore defaults (.rpmsave for example)
+#   logrotate::conf {
+#     tabooext => ['+','.foo','.bar'],
 #   }
 #
 define logrotate::conf (
@@ -217,6 +237,8 @@ define logrotate::conf (
   Boolean $su                                        = false,
   String $su_user                                    = 'root',
   String $su_group                                   = 'root',
+  Optional[Variant[String,Array[String[1]]]] $tabooext = undef,
+  Optional[Variant[String,Array[String[1]]]] $taboopat = undef,
   Optional[String] $uncompresscmd                    = undef
 ) {
   case $mail {
