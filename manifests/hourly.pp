@@ -16,11 +16,13 @@ class logrotate::hourly (
   assert_private()
 
   file { "${logrotate::rules_configdir}/hourly":
-    ensure => 'directory',
-    owner  => $logrotate::root_user,
-    group  => $logrotate::root_group,
-    mode   => $logrotate::rules_configdir_mode,
-    force  => true,
+    ensure  => 'directory',
+    owner   => $logrotate::root_user,
+    group   => $logrotate::root_group,
+    mode    => $logrotate::rules_configdir_mode,
+    purge   => $logrotate::purge_configdir,
+    recurse => $logrotate::purge_configdir,
+    force   => true,
   }
 
   if $logrotate::manage_cron_hourly {
