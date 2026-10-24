@@ -1342,4 +1342,3 @@ Alias of `Variant[Stdlib::UnixPath, Array[Stdlib::UnixPath]]`
 Filesize valid in logrotate config files
 
 Alias of `Variant[Integer, Pattern[/^\d+[kMG]?$/]]`
-
