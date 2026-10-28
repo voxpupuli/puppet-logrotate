@@ -4,6 +4,53 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v10.0.0](https://github.com/voxpupuli/puppet-logrotate/tree/v10.0.0) (2026-10-28)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-logrotate/compare/v9.0.0...v10.0.0)
+
+**Breaking changes:**
+
+- Drop support for EOL Debian 11 [\#295](https://github.com/voxpupuli/puppet-logrotate/pull/295) ([kenyon](https://github.com/kenyon))
+- Drop EOL Ubuntu 20.04 [\#276](https://github.com/voxpupuli/puppet-logrotate/pull/276) ([d1nuc0m](https://github.com/d1nuc0m))
+
+**Implemented enhancements:**
+
+- puppet/systemd: Allow 11.x [\#297](https://github.com/voxpupuli/puppet-logrotate/pull/297) ([bastelfreak](https://github.com/bastelfreak))
+- Allow puppetlabs/stdlib 10.x [\#294](https://github.com/voxpupuli/puppet-logrotate/pull/294) ([kenyon](https://github.com/kenyon))
+- Add Ubuntu 26.04 support [\#292](https://github.com/voxpupuli/puppet-logrotate/pull/292) ([bwitt](https://github.com/bwitt))
+- Allow puppet-systemd 10.x [\#290](https://github.com/voxpupuli/puppet-logrotate/pull/290) ([bwitt](https://github.com/bwitt))
+- Update requirements to allow OpenVox 9 [\#289](https://github.com/voxpupuli/puppet-logrotate/pull/289) ([sebastianrakel](https://github.com/sebastianrakel))
+- Add `tabooext` and `taboopat` parameters to `logrotate.conf` [\#286](https://github.com/voxpupuli/puppet-logrotate/pull/286) ([teluq-pbrideau](https://github.com/teluq-pbrideau))
+- logrotate: config: add `include` option [\#279](https://github.com/voxpupuli/puppet-logrotate/pull/279) ([damonbreeden](https://github.com/damonbreeden))
+- Add support for `createolddir` [\#271](https://github.com/voxpupuli/puppet-logrotate/pull/271) ([bwitt](https://github.com/bwitt))
+- Add support for weekly \<number\> [\#269](https://github.com/voxpupuli/puppet-logrotate/pull/269) ([bwitt](https://github.com/bwitt))
+
+**Fixed bugs:**
+
+- Logrotate::Rule Manage Olddir location [\#42](https://github.com/voxpupuli/puppet-logrotate/issues/42)
+
+**Closed issues:**
+
+- Support Ubuntu 26.04 [\#291](https://github.com/voxpupuli/puppet-logrotate/issues/291)
+- Missing docs [\#275](https://github.com/voxpupuli/puppet-logrotate/issues/275)
+- Test coverage is 70% and a few untouched resources exist [\#272](https://github.com/voxpupuli/puppet-logrotate/issues/272)
+- Remove unused param `hieramerge` [\#267](https://github.com/voxpupuli/puppet-logrotate/issues/267)
+- Ubuntu 20.04 is EOL [\#266](https://github.com/voxpupuli/puppet-logrotate/issues/266)
+- Support for optional "weekday" missing from "rotate\_every" [\#203](https://github.com/voxpupuli/puppet-logrotate/issues/203)
+- module compulsorily generate time interval option which conflict with size option [\#180](https://github.com/voxpupuli/puppet-logrotate/issues/180)
+- Do not use "hourly" directive on logrotate \< v3.8.5 [\#153](https://github.com/voxpupuli/puppet-logrotate/issues/153)
+- Deprecated `su_owner` parameter referenced in `README.md` [\#149](https://github.com/voxpupuli/puppet-logrotate/issues/149)
+- Add global options to documentation [\#99](https://github.com/voxpupuli/puppet-logrotate/issues/99)
+
+**Merged pull requests:**
+
+- Add `purge_configdir` to hourly [\#284](https://github.com/voxpupuli/puppet-logrotate/pull/284) ([elfranne](https://github.com/elfranne))
+- docs: fix build badge [\#277](https://github.com/voxpupuli/puppet-logrotate/pull/277) ([d1nuc0m](https://github.com/d1nuc0m))
+- Add test coverage [\#273](https://github.com/voxpupuli/puppet-logrotate/pull/273) ([bwitt](https://github.com/bwitt))
+- Remove unused `hieramerge` param [\#270](https://github.com/voxpupuli/puppet-logrotate/pull/270) ([bwitt](https://github.com/bwitt))
+- README: replace deprecated `su_owner` with `su_user` [\#268](https://github.com/voxpupuli/puppet-logrotate/pull/268) ([kenyon](https://github.com/kenyon))
+- docs: document with Puppet Strings [\#263](https://github.com/voxpupuli/puppet-logrotate/pull/263) ([d1nuc0m](https://github.com/d1nuc0m))
+
 ## [v9.0.0](https://github.com/voxpupuli/puppet-logrotate/tree/v9.0.0) (2025-10-07)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-logrotate/compare/v8.0.0...v9.0.0)
